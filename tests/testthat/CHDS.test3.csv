@@ -1,0 +1,9 @@
+Social,Economic,Events,Admission
+High,High,Average,No
+Low,Low,High,No
+High,High,Low,No
+Low,Low,Average,NA
+High,Low,Average,No
+Low,Low,NA,No
+Low,Low,High,No
+High,High,NA,Yes

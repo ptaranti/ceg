@@ -1,0 +1,30 @@
+
+Package: ceg
+Title: Chain Event Graph (CEG)
+Date: 2015-31-12
+Version: 0.0.0.9100
+Authors@R: c(
+             person("Rodrigo", "Collazo", email = "rodrigocollazo@gmail.com", role = c("aut" , "cre")),
+             person("Pier", "Taranti", email = "ptaranti@gmail.com", role = c("aut"))
+             )
+Description: This package has functionalities that allow us to create and learn
+    Chain Event Graph (CEG) models using a Bayesian framework. It provides us with a
+    Hierarchical Agglomerative algorithm to search the CEG model space. The package
+    also includes several facilities for visualisations of the objects associated
+    with a CEG. The CEG class can represent a range of relational data types, and
+    supports arbitrary vertex, edge and graph attributes. A Chain Event Graph is a
+    tree-based graphical model that provides a powerful graphical interface through
+    which domain experts can easily translate a process into sequences of observed
+    events using plain language. CEGs have been a useful class of graphical model
+    especially to capture context-specific conditional independences.
+Depends:
+    R (>= 3.2.2),
+    stats,
+    Rgraphviz
+License: License: GPL (>= 2) - TO BE CONFIRMED
+LazyData: true
+RoxygenNote: 5.0.1
+Suggests:
+    testthat
+URL: https://www.r-project.org, http://www.another.url
+BugReports: https://pkgname.bugtracker.url, rodrigocollazo@gmail.com
