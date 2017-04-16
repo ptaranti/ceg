@@ -1,15 +1,8 @@
-# TODO(taranti) documentar
 
 
-#' Title
+#' Event.tree S4 object
 #'
 #'
-#'
-#'
-#' @return
-#' @export
-#'
-#' @examples
 setClass(
   "Event.tree",
   representation(

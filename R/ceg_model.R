@@ -185,7 +185,7 @@ setMethod(
 #'    \item $edge$weight (vector) - edge weight.
 #'    }
 #'
-#' @examples
+# @examples
 #'
 #' @seealso It uses \code{PositionVector}
 CegGraph <- function(event.tree, position, range.color = 1) {

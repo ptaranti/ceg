@@ -1,16 +1,12 @@
 
-# TODO(taranti) documentar
-
-
-#' Title
+#' Distribution.of.probability S4 Class
 #'
 #' @slot score numeric.
 #' @slot cluster list.
 #'
-#' @return
-#' @export
+# @export
 #'
-#' @examples
+# @examples
 setClass("Distribution.of.probability"
 #         ,
 #         representation(score = "numeric", cluster = "list")

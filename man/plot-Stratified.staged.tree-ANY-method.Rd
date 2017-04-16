@@ -3,13 +3,21 @@
 \docType{methods}
 \name{plot,Stratified.staged.tree,ANY-method}
 \alias{plot,Stratified.staged.tree,ANY-method}
-\title{Title}
+\title{Staged.tree Plotting}
 \usage{
 \S4method{plot}{Stratified.staged.tree,ANY}(x, y, ...)
 }
 \arguments{
 \item{Staged.tree}{}
 }
+\value{
+the plot and also a pdf version is saved in the working directory.
+}
 \description{
-Title
+Method to plot a Staged.tree S4 object. The current \code{ceg} package
+implementation depends on \code{Rgraphviz} package from Bioconductor for
+plotting.
+}
+\examples{
+plot(stratified.staged.tree)
 }

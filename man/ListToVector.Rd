@@ -2,7 +2,7 @@
 % Please edit documentation in R/lib_funtions.R
 \name{ListToVector}
 \alias{ListToVector}
-\title{change a list of vectors in a vector}
+\title{ListToVector}
 \usage{
 ListToVector(x, n)
 }
@@ -16,11 +16,4 @@ vector
 }
 \description{
 This function change a list of vectors in a vector.
-}
-\details{
-This function change a list of vectors in a vector.
-}
-\examples{
-
-
 }

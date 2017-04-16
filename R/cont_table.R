@@ -36,7 +36,7 @@ ContingencyTable <- function(data, event.tree) {
 #'       k associate with a particular variable in time-slice t_0 or t_k, k>=1.
 #  @export
 #'
-#' @examples
+# @examples
 
 ContingencyTableLevel <- function(level, data, event.tree) {
   if (level <= event.tree@num.variable) {

@@ -1,15 +1,8 @@
-# TODO(taranti) enforce Google's R style
-# TODO(taranti) documentar
-# TODO(Collazo) a classe prior distribution nao esta sendo usada.
-# A funcao PriorDistribution retorna um vetor e nao um objeto.
+# TODO(Collazo) a classe Prior.distribution nao esta sendo usada : A funcao PriorDistribution retorna um vetor e nao um objeto.
 
-#' Title
+#' Prior.distribution
 #'
 #'
-#' @return
-#' @export
-#'
-#' @examples
 setClass("Prior.distribution"
          #    representation(score = "numeric", cluster = "list"),
           # contains = "Model.search.algorithm"
@@ -26,28 +19,30 @@ setClass("Prior.distribution"
 #' the event tree.
 #'
 #' @param tree  "EventTree" a S4 object that represents an event tree.
-#' @param alpha  # TODO(taranti)  -- see function DCEG.AHC
+#' @param alpha  # TODO(Collazo)  -- see function DCEG.AHC
 #'
-#' @return  prior  It is a list of matrices. Each matrix is a collection of
+#' @return  prior is a list of matrices. Each matrix is a collection of
 #' vectors that correspond to a prior for each situation associated with
 #' a particular variable.
-# @export
+#
 #'
-#' @seealso \code{\link{prior.variable}}
+#' @seealso \code{\link{PriorVariable}}
 #'
-#' @examples
+# @examples
 PriorDistribution <- function(tree, alpha) {
   alpha.edge <- lapply(1:(tree@num.variable), function(x)
-    alpha.edge.internal(x, tree, alpha))
+    AlphaEdgeInternal(x, tree, alpha))
   prior <- lapply(1:(tree@num.variable),
-                  function(x) prior.variable(tree@num.situation[x],
+                  function(x) PriorVariable(tree@num.situation[x],
                                              alpha.edge[[x]]))
   return(prior)
 }
 
 
 
-#'   The function \code{prior.variable}  yields the prior distribution for each
+#'   PriorVariable
+#'
+#'   The function \code{PriorVariable}  yields the prior distribution for each
 #'   situation in the event tree associated with a particular variable.
 #'
 #' @param ref         "numeric"  - variable order
@@ -59,14 +54,14 @@ PriorDistribution <- function(tree, alpha) {
 #'
 # @export
 #'
-#' @examples
+# @examples
 #' @seealso  \code{\link{Prior.distribution}} and
 #'          \code{\link{alpha.edge.internal}}
 #'
-prior.variable <- function(ref, alpha.edge) {
+PriorVariable <- function(ref, alpha.edge) {
   if (ref < 1)
     return(c())
-  return(rbind(prior.variable(ref - 1, alpha.edge),
+  return(rbind(PriorVariable(ref - 1, alpha.edge),
                alpha.edge,
                deparse.level = 0))
 }
@@ -74,19 +69,21 @@ prior.variable <- function(ref, alpha.edge) {
 
 
 
-#' \code{alpha.edge.internal} yields the prior distribution for each situation
+#' AlphaEdgeInternal
+#'
+#' \code{AlphaEdgeInternal} yields the prior distribution for each situation
 #' in the event tree associated with a particular variable.
 #'
 #' @param level "numeric" controls the number of descendent situations
 #' @param tree  "EventTree" a S4 object that represents an event tree.
-#' @param alpha  # TODO(taranti)
+#' @param alpha  # TODO(Collazo)
 #'
-#' @return # TODO(taranti)
+#' @return # TODO(Collazo) descrever retorno, se necessario.
 # @export
 #'
-#' @examples
+# @examples
 #'
-alpha.edge.internal <- function(level, tree, alpha) {
+AlphaEdgeInternal <- function(level, tree, alpha) {
   if (level <= tree@num.variable) {
     variable <- level
     result <- rep(alpha / (tree@num.category[variable] * tree@num.situation[level]),

@@ -2,14 +2,15 @@
 % Please edit documentation in R/lib_funtions.R
 \name{TreeGraph}
 \alias{TreeGraph}
-\title{tree structure to be ploted in RGraphviz.}
+\title{TreeGraph
+#  TODO(Collazo) Retirar a marreta do parâmetro de entrada range.color.}
 \usage{
 TreeGraph(tree, solution = list(), name = c(), range.color = 1)
 }
 \arguments{
 \item{tree}{(list) - an S4 object \code{\link{EventTree}}
-TODO(taranti)   See files 2T.DCEG.ModelSearch.OAHC,
-TODO(taranti)  CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.}
+TODO(Collazo)   See files 2T.DCEG.ModelSearch.OAHC,
+TODO(Collazo)  CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.}
 
 \item{solution}{list with two components:
 \itemize{
@@ -40,16 +41,6 @@ list: \itemize{
  }
 }
 \description{
-tree structure to Event/Stage trees be ploted in \pkg{RGraphviz}.
-}
-\details{
-This function yields a data structure corresponding to an Event/Stage Tree to
-be plotted using the package \pkg{Rgraphviz}.
-}
-\examples{
-TODO(taranti)
-
-}
-\seealso{
-
+A function to produce the data structure needed to plot Event and Staged
+trees using \pkg{RGraphviz}.
 }

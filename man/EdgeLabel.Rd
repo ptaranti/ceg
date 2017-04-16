@@ -2,7 +2,7 @@
 % Please edit documentation in R/lib_funtions.R
 \name{EdgeLabel}
 \alias{EdgeLabel}
-\title{yields the edge labels.}
+\title{EdgeLabel}
 \usage{
 EdgeLabel(num.variable, num.situation, label)
 }
@@ -19,12 +19,6 @@ contains the event names associated with each variable.}
 vector - edge labels
 }
 \description{
-This function yields the edge labels.
-}
-\details{
-The edges are labeled accordingly the original data provided.
-TODO(taranti)  verify details.
-}
-\examples{
-
+This function yields the edge labels. The edges are labeled accordingly the
+original data provided.
 }

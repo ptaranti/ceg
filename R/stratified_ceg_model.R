@@ -1,41 +1,16 @@
-# TODO(taranti) enforce Google's R style
-# TODO(taranti) documentar
-
-
+# TODO(Collazo) permanece confusao com position e staged.tree
 
 #' The \code{Stratified.ceg.model} is a S4 class thar extends \code{\link{Ceg.model}}. Its
 #'  objects represents a CEG model derived from a Stratified.staged.tree.
 #'
 #' @include ceg_model.R
-#' @return a "Stratified.ceg.model" S4 object.
 #' @export
 #'
-#' @examples
 setClass("Stratified.ceg.model",
          representation( ),
           contains = "Ceg.model"
 )
 
-#' A simple "initialize" method. The real construction is performed by a
-#' specific constructor. # TODO(taranti)  O CONSTRUTOR NAO FOI IMPLEMENTADO
-#'
-#' @param Ceg.model
-#'
-#' @return
-#' @export
-#'
-#' @examples
-#' A simple "initialize" method. The real construction is performed by a
-#' specific constructor. # TODO(taranti)  O CONSTRUTOR FOI IMPLEMENTADO NA FUNCAO CEG
-#'
-#' @param stratified.staged.tree
-#' @param position
-#'
-#' @return Stratified.ceg.model
-#  @export
-#'
-#' @examples  \code{new("Stratified.ceg.model", stratified.stagedTree, position)}, however we recomend using
-#' a specific function to construct the object # TODO(taranti)   LISTAR A FUNCAO
 
 setMethod(
   f = "initialize",
@@ -53,17 +28,6 @@ setMethod(
 )
 
 
-
-
-
-
-
-
-
-
-
-
-
 #' @title StratifiedCegModel constructor.
 #'
 #' @description S3 function to friendly construct S4  StratifiedCegModel.
@@ -73,13 +37,13 @@ setMethod(
 #' @seealso
 #' \code{\link{StratifiedCegModel}}
 #'
-#' @param StratifiedStagedTree    S4 object    TODO(taranti)  describe
-#' @param stages                  list         TODO(taranti)  describe
+#' @param StratifiedStagedTree    S4 object    TODO(Collazo)  describe
+#' @param stages                  list         TODO(Collazo)  describe
 #'
 #' @return a StratifiedCegModel S4 object.
 #'
 #' @examples
-#' TODO(taranti)
+#' TODO(taranti) depois de resolvida a confusao entre stage.structure e position
 #'
 #' @export
 #'

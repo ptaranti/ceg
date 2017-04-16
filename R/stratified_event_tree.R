@@ -1,15 +1,12 @@
-# TODO(taranti) enforce Google's R style
-# TODO(taranti) documentar
 
 
-#' Title
+#' Stratified.event.tree S4 Class
+#'
+#' # TODO(Collazo) se considerar necessario, explicar o que é Stratified.event.tree
 #'
 #' @include event_tree.R
 #'
-#' @return an Stratified.event.tree S4 object
 #' @export
-#'
-#' @examples
 setClass(
   "Stratified.event.tree",
   representation(
@@ -20,30 +17,14 @@ setClass(
     num.slice = "numeric",
     path = "list", # TODO(Collazo) Confirmar remover Path
     hyper.stage = "list"),
-  contains ="Event.tree"
+  contains = "Event.tree"
   #prototype(  )
-
-  # TODO(taranti)  VALIDITY
-
-  # validity=function(object)
-  # {
-  # if((object@x < 0) || (object@y < 0)) {
-  # return("A negative number for one of the coordinates was given.")
-  # }
-  # return(TRUE)
-  # }
 )
 
-#' Title
-#'
-#' @param
-#' @return
-#' @export
-#'
-#' @examples
+
 setMethod(
-  f="initialize",
-  signature="Stratified.event.tree",
+  f = "initialize",
+  signature = "Stratified.event.tree",
   definition = function(.Object,
                         num.variable,
                         num.category,
@@ -67,36 +48,46 @@ setMethod(
 )
 
 
-
-
-
-#' Title
+#' Stratified.event.tree
 #'
-#' @param object An object
-#' @param data Numeric vector or data.frame
-#' @param Fun Function. Default function is \code{sum}
-#' @param ... Extra named arguments passed to FUN
-#' @rdname Stratified.event.tree
+#' Constructor method to Stratified.event.tree S4 objects. It accepts different
+#' sets for parameters types.
+#'
+#' @return a Stratified.event.tree S4 object
 #' @export
+#'
+#'
 setGeneric("Stratified.event.tree",
            function(x, ...) standardGeneric("Stratified.event.tree"),
            signature = "x")
 
-# @rdname Stratified.event.tree
+
+
+#' @rdname Stratified.event.tree
+#' @param Arguments (missing) \cr
+#'  A call to \code{Stratified.event.tree( )} with no parameters will return
+#'  an error message for missing argument.
+#'
 setMethod("Stratified.event.tree",
           signature("missing"),
           function(x) {
             stop("constructor S4 method Stratified.event.tree not implemented for missing argument")
           })
 
-# @rdname Stratified.event.tree
+#' @rdname Stratified.event.tree
+#' @param Arguments (ANY) \cr
+#' A call to \code{Stratified.event.tree(x, ...)}, x not being a data.frame or
+#' a list, will return an error message.
+#'
 setMethod("Stratified.event.tree",
           signature("ANY"),
           function(x, ...) {
             stop("constructor S4 method Stratified.event.tree not implemented for this argument")
           })
 
-# @rdname Stratified.event.tree
+#' @rdname Stratified.staged.tree
+#' @param Arguments (data.frame) , where data.frame is a well behavioured data set.\cr
+#'
 setMethod("Stratified.event.tree",
           signature("data.frame"),
           function(x = "data.frame") {
@@ -135,7 +126,18 @@ setMethod("Stratified.event.tree",
           })
 
 
-# @rdname Stratified.event.tree
+# TODO(Taranti) a nota nao esta aparecendo na documentacao
+#' @rdname Stratified.event.tree
+#' @param Arguments (list) , list of Variable S4 objects, in the expected order
+#' of plotting. \cr
+#' TODO(Collazo) VRF texto
+#' @note{ Consider a stratified.event.tree created using the folloing commands\cr
+#' \code{input <- list(Variable("age",list(Category("old"), Category("medium"),
+#' Category("new"))),Variable("state", list(Category("solid"),
+#' ("liquid"), Category("steam"))), Variable("costumer", list(Category("good"),
+#' Category("average"), Category("very bad"), Category("bad"))))} \cr
+#' \code{et.manual <- Stratified.event.tree(input)} \cr
+#'
 setMethod("Stratified.event.tree",
           signature("list"),
           function(x = "list") {
@@ -190,7 +192,7 @@ setMethod("Stratified.event.tree",
             })
 
             hyper.stage <- list()
-            path <-list()
+            path <- list()
 
             return(
               new(
@@ -208,6 +210,8 @@ setMethod("Stratified.event.tree",
 
 
 
+#' LabelStage
+#'
 #' This function identifies the edges arriving at the target level for paths
 #' that exist from the root node to each situation in the event tree that
 #' are in levels greater than the target level.
@@ -219,9 +223,9 @@ setMethod("Stratified.event.tree",
 #' @param    num.category
 #' @return   label   a vector
 #'
-#' @examples
-#'
-#' @seealso   \code{\link{truncated.path}}
+# @examples
+#
+#' @seealso   \code{\link{TruncatedPath}}
 LabelStage <-
   function(k, num.variable, num.situation, label.category, num.category) {
     if (k > num.variable) {
@@ -242,7 +246,7 @@ LabelStage <-
       # The levels of that variable are repeated in batch.
       label <-
         c(
-          label, truncated.path(
+          label, TruncatedPath(
             num.variable, k, var, num.category, num.situation, label.category
           )
         )
@@ -254,6 +258,8 @@ LabelStage <-
 
 
 
+#' TruncatedPath
+#'
 #' This function identifies the edges arriving at the target level for all
 #' paths that exist from the root node to each situation in the event tree.
 #'
@@ -264,18 +270,18 @@ LabelStage <-
 #' @param num.situation
 #' @param label.category
 #'
-#' @return
+# @return
 # @export
 #'
-#' @examples
-truncated.path <- function(ref,
+# @examples
+TruncatedPath <- function(ref,
                            k,
                            var,
                            num.category,
                            num.situation,
                            label.category) {
   if (ref < k + 2) return(c())
-  return(c(truncated.path(ref - 1, k, var, num.category,
+  return(c(TruncatedPath(ref - 1, k, var, num.category,
                           num.situation, label.category),
            rep(label.category[[var]],
                each = num.situation[ref] / num.situation[k + 1],
@@ -285,18 +291,19 @@ truncated.path <- function(ref,
 
 
 
-#' Title
+#' Stratified.event.tree Plotting
 #'
-#' @param event.tree a Event.tree S4 object.
+#' Method to plot a Stratified.event.tree S4 object. The current \code{ceg} package
+#' implementation depends on \code{Rgraphviz} package from Bioconductor for
+#' plotting.
+#'
+#' @param Stratified.event.tree
 #'
 #' @return the plot and also a pdf version is saved in the working directory.
-#  @export
+#' @export
 #'
 #' @examples
-#'
-#' @note The current CEG package implementation depends on \code{Rgraphviz}
-#' package from Bioconductor
-#'
+#' plot(stratified.event.tree)
 setMethod(
   f = "plot",
   signature = "Stratified.event.tree",
@@ -345,14 +352,14 @@ setMethod(
 )
 
 
-#' Title
+#' StratifiedEventTreeGraph
 #'
 #' @param event.tree  "Event.tree" S4 object
 #'
 #'  @return list contains a data structure to be used in a plot
 #   @export
 #'
-#' @examples
+# @examples
 StratifiedEventTreeGraph <- function(event.tree){
 
   ###Data format to draw an event/staged tree

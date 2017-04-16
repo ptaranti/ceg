@@ -1,8 +1,7 @@
-# TODO(taranti) enforce Google's R style
-# TODO(taranti) documentar
+# TODO(Taranti) desacoplar o codigo do inicialize, criar um construtor limpo.
 
 
-#' Title
+#' OAHC S4 Class
 #'
 #'  @include heuristic_model_search_algorithm.R
 #'
@@ -19,15 +18,6 @@ setClass("OAHC",
          contains = "Heuristic.model.search.algorithm"
 )
 
-
-#' Title
-#'
-#' @param OAHC
-#'
-#' @return
-#' @export
-#'
-#' @examples
 setMethod(
   f = "initialize",
   signature = "OAHC",
@@ -44,9 +34,8 @@ setMethod(
 )
 
 
-
-
-
+#'   OAHC Constructor
+#'
 #'   This function calculates the best stage configuration of a hyperstage
 #'   associated with a specific variable of time-slice t_0 or t_k, k>=1, using
 #'   the oahc algorithm (oahc - Optimised Agglomerative Hierarchical Clustering)
@@ -57,40 +46,36 @@ setMethod(
 #' @param contingency.table (list of matrices) - see function ContingencyTable
 #' @param tree  an object 'event.tree' (see function event.tree)
 #'
-#' @return
+#' @return a OAHC S4 object
 #' @export
 #'
-#' @examples
-
-
-# It is required the following functions: single.score - This function
-# calculates the score associated with a particular level. pairwise.score -
-# This function
-# calculates the score asscoiated with a pair of merged stages. single.reorder
-#  - This function reorders a vector that had an element changed. na.reorder -
-#  This function reorders a vector that had an element changed to NA.
-#  keep.lex.order - This function keep a lexicographical order of a vector
-#  that have had one element
-# changed.
+#' @seealso SingleScore,  PairwiseScore, SingleReorder, NaReorder, KeepLexOrder
+# It is required the following functions:
+# SingleScore - This function calculates the score associated with a particular level.
+# PairwiseScore - This function calculates the score asscoiated with a pair of merged stages.
+# SingleReorder - This function reorders a vector that had an element changed.
+# NaReorder - This function reorders a vector that had an element changed to NA.
+# KeepLexOrder - This function keep a lexicographical order of a vector that have had one element changed.
 OAHC <- function(level, prior.distribution, contingency.table, tree) {
   if (tree@num.situation[level] == 1)
     return(new(
       "OAHC",
-      score = single.score(tree@num.situation[level],
+      score = SingleScore(tree@num.situation[level],
                            prior.distribution[[level]],
                            contingency.table[[level]]),
       cluster = list(1)
     ))
+
   vec.score <-
     sapply(1:tree@num.situation[level], function(x)
-      single.score(x, prior.distribution[[level]], contingency.table[[level]]))
+      SingleScore(x, prior.distribution[[level]], contingency.table[[level]]))
   # To calculate the score asscociated with each stage of the finest partition.
   cluster <- lapply(1:tree@num.situation[level], function(x)
     x)
   # To create a list to track the clusters of situation that constitute stages.
   pair.score <- sapply(1:(tree@num.situation[level] - 1), function(x)
     sapply((x + 1):tree@num.situation[level], function(y)
-      pairwise.score(x, y, vec.score, prior.distribution[[level]],
+      PairwiseScore(x, y, vec.score, prior.distribution[[level]],
                      contingency.table[[level]])))
   # List of vectors. Each vector records the pairwise score for stages (i,j),
   # where i<j according to lexicographical order.
@@ -136,7 +121,7 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
     contingency.table[[level]][aux.2, ] <- aux.na
     pair.score[[aux.1]] <-
       sapply((aux.1 + 1):tree@num.situation[level], function(x)
-        pairwise.score(aux.1, x, vec.score, prior.distribution[[level]],
+        PairwiseScore(aux.1, x, vec.score, prior.distribution[[level]],
                        contingency.table[[level]]))
     #To update the score w.r.t. the first merged stage
     order.pair.score[[aux.1]] <-
@@ -193,7 +178,7 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
         aux.b <- aux.b - 1
         if (!is.na(count.na[i])) {
           pair.score[[i]][aux.a] <-
-            pairwise.score(i, aux.1, vec.score, prior.distribution[[level]],
+            PairwiseScore(i, aux.1, vec.score, prior.distribution[[level]],
                            contingency.table[[level]])
           #To update the score w.r.t. the first stage
           flag <- order.pair.score[[i]][1]
@@ -215,7 +200,7 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
             NA  #To update the score w.r.t. the second stage.
           flag.1 <- order.pair.score[[i]][1]
           order.pair.score[[i]] <-
-            na.reorder(aux.b, order.pair.score[[i]])
+            NaReorder(aux.b, order.pair.score[[i]])
           count.na[i] <- count.na[i] + 1
           if (flag == aux.b || flag.1 == aux.b) {
             # The second stage was but it is not the best score now.
@@ -237,7 +222,7 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
           pair.score[[i]][aux.b] <- NA
           flag <- order.pair.score[[i]][1]
           order.pair.score[[i]] <-
-            na.reorder(aux.b, order.pair.score[[i]])
+            NaReorder(aux.b, order.pair.score[[i]])
           count.na[i] <- count.na[i] + 1
           if (count.na[i] == tree@num.situation[level] - i) {
             pair.score[[i]] <- NA
@@ -274,6 +259,15 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
 
 
 
+#' SingleReorder
+#'
+#' This function reorders a vector that had an element changed.
+#'
+#' @param x
+#' @param order.score
+#' @param score
+#' @param na.count
+#'
 SingleReorder <- function(x, order.score, score, na.count) {
   const <- length(score) - na.count
   if (const == 1)
@@ -291,7 +285,7 @@ SingleReorder <- function(x, order.score, score, na.count) {
   if (ref != const) {
     order.score[(ref + 1):(const + 1)] <- order.score[ref:const]
     order.score[ref] <- x
-    order.score <- keep.lex.order(ref, order.score, score)
+    order.score <- KeepLexOrder(ref, order.score, score)
   } else {
     order.score[ref] <- x
   }
@@ -301,7 +295,17 @@ SingleReorder <- function(x, order.score, score, na.count) {
 
 
 
-keep.lex.order <- function(ref, order.vector, score.vector) {
+#' KeepLexOrder
+#'
+#' This function keep a lexicographical order of a vector
+#  that have had one element
+#'
+#' @param ref
+#' @param order.vector
+#' @param score.vector
+#'
+#'
+KeepLexOrder <- function(ref, order.vector, score.vector) {
   aux <- 0
   stop <- FALSE
   while (stop == FALSE) {
@@ -320,7 +324,18 @@ keep.lex.order <- function(ref, order.vector, score.vector) {
 }
 
 
-pairwise.score <- function(stage.1, stage.2, vec.score, prior.distribution,
+#' PairwiseScore
+#'
+#' This function calculates the score asscoiated with a pair of merged stages.
+#'
+#' @param stage.1
+#' @param stage.2
+#' @param vec.score
+#' @param prior.distribution
+#' @param contingency.table
+#'
+#'
+PairwiseScore <- function(stage.1, stage.2, vec.score, prior.distribution,
                            contingency.table) {
   if (is.na(vec.score[stage.1]) || is.na(vec.score[stage.2]))
     return(NA)
@@ -336,7 +351,15 @@ pairwise.score <- function(stage.1, stage.2, vec.score, prior.distribution,
 
 
 
-single.score <- function(stage, prior.distribution, contingency.table) {
+#' SingleScore
+#'
+#' This function calculates the score associated with a particular level.
+#'
+#' @param stage
+#' @param prior.distribution
+#' @param contingency.table
+#'
+SingleScore <- function(stage, prior.distribution, contingency.table) {
   alpha <- prior.distribution[stage,]
   N <- contingency.table[stage,]
   score <- sum(lgamma(alpha + N)) - sum(lgamma(alpha)) +
@@ -345,7 +368,14 @@ single.score <- function(stage, prior.distribution, contingency.table) {
 }
 
 
-na.reorder <- function(x, order.score) {
+#' NaReorder
+#'
+#' This function reorders a vector that had an element changed to NA.
+#'
+#' @param x
+#' @param order.score
+#'
+NaReorder <- function(x, order.score) {
   flag <- which(order.score == x)
   const <- length(order.score)
   if (flag == 1) {

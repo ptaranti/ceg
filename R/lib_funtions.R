@@ -1,22 +1,13 @@
-# TODO(taranti) documentar
-# TODO(taranti) enforce Google's R style
 
-#' @title
-#' Merge labels of multiple edges.
+#' MergeLabels
 #'
-#'
-#' @description
 #' Merge labels of multiple edges in order to plot them all.
 #'
-#' @details
-#' This function mitigates a limitation from Rgraphviz, since it is not
-#' possible to plot multiple edges between two nodes presenting the correct
-#' edge label for each one. The authors did not find a graphical package
-#' providing this capability. Contributions are wellcomed.
-#'
-#' This is a inner function, not intended to be exported to users.
-#'
-#' @seealso TODO(taranti)
+#' @note  This function mitigates a limitation from Rgraphviz, since it is not
+#' possible to plot multiple edges between two nodes presenting the correct edge
+#' label for each one.
+#' The authors did not find a graphical package providing this capability.
+#' Contributions are wellcomed.
 #'
 #' @param	edge.list	vector	list of positions that a children of a specific
 #' position v1.
@@ -24,17 +15,9 @@
 #' @param	level 	vector	labels of classes corrresponding to the variable
 #' associated with a position.
 #'
-#' @return	string	 merged labels associated with a specific position v1.
+#' @return	list	 merged labels associated with a specific position v1.
 #'
-#' @examples
-#' TODO(taranti)
-#'
-# @export
-#'
-# @include
-
-
-merge.label <- function(edge.list,edge,level){
+MergeLabels <- function(edge.list,edge,level){
   aux.merge <- which(edge.list == edge)
   aux <- length(aux.merge)
   aux.label <- level[aux.merge[1]]
@@ -47,35 +30,27 @@ merge.label <- function(edge.list,edge,level){
 }
 
 
-
-
-
-#' @title Simple ceg structure to be ploted in RGraphviz.
+#' CegGraphSimple
 #'
-#' @description
-#'  This function yields a data structure corresponding a simplified CEG to be
-#' plotted using the package Rgraphviz.
+#' Simple ceg structure to be ploted in RGraphviz. This function yields a data
+#' structure corresponding a simplified CEG to be plotted using the package
+#' Rgraphviz.
 #'
-#' @details
+#' @note
 #' This function mitigates a limitation from Rgraphviz, which does not support
 #' plotting multiple edges between two nodes presenting the correct
 #' edge label for each one. The decision was to merge all edges in one, and
-#' presenting all labels in this resulting edge.
-#'
+#' presenting all labels in this resulting edge.#'
 #' This approach is temporary and not ideal, since the ceg is no more a
 #' multi-graph. However, the authors did not find a graphical package
 #' which provides the needed plotting features.
 #' Contributions are wellcomed.
 #'
-#' This is a inner function, not intended to be exported to users.
-#'
-#' @seealso TODO(taranti)
-#'
 #' @param    tree           list       an object event.tree.
-#'  TODO(taranti)  Verify:: See files 2T.DCEG.ModelSearch.OAHC, CEG.IP.ModelSearch and
-#'  TODO(taranti)  Verify:: CEG.IP.ModelSearch.HS+AHC.
+#'  TODO(Collazo)  Verify:: See files 2T.DCEG.ModelSearch.OAHC, CEG.IP.ModelSearch and
+#'  TODO(Collazo)  Verify:: CEG.IP.ModelSearch.HS+AHC.
 #' @param    position       list       an object ceg.position.
-#' TODO(taranti)  Verify:: See file Position.Retrieve.
+#' TODO(Collazo)  Verify:: See file Position.Retrieve.
 #' @param    range.color    numeric    it chooses the color source.
 #'
 #' @return   list
@@ -91,15 +66,8 @@ merge.label <- function(edge.list,edge,level){
 #'    \item edge$label (vector) - position labels.
 #'    \item weight (vector) - edge weight.
 #'    }
-#' @examples
-#' TODO(taranti)
 #'
-#' @export
-#'
-# @include
-
 CegGraphSimple <- function(tree, position, range.color = 1) {
-
   node.vector <- c()
   node.variable <- c()
   node.color <- c()
@@ -108,7 +76,6 @@ CegGraphSimple <- function(tree, position, range.color = 1) {
   edge.weight <- c()
   count.color <- 2
   count.pos <- -1
-
 
   if (range.color == 1) {
     color <- palette()
@@ -148,7 +115,7 @@ CegGraphSimple <- function(tree, position, range.color = 1) {
       edge.list[[pos + 2]] <- list()
       aux.edge.var.list <- unique(edge.var.list[,pos - start.pos + 1])
       edge.label <- c(edge.label,sapply(1:length(aux.edge.var.list),
-                                      function(x) merge.label(
+                                      function(x) MergeLabels(
                                         edge.var.list[,pos - start.pos + 1],
                                         aux.edge.var.list[x],
                                         tree@label.category[[var]])))
@@ -197,22 +164,15 @@ CegGraphSimple <- function(tree, position, range.color = 1) {
 
 
 
-
-# TODO(Collazo) Retirar a marreta do parâmetro de entrada range.color.
-#' @title tree structure to be ploted in RGraphviz.
+#' TreeGraph
+#' #  TODO(Collazo) Retirar a marreta do parâmetro de entrada range.color.
 #'
-#' @description
-#' tree structure to Event/Stage trees be ploted in \pkg{RGraphviz}.
-#'
-#' @details
-#' This function yields a data structure corresponding to an Event/Stage Tree to
-#' be plotted using the package \pkg{Rgraphviz}.
-#'
-#' @seealso
+#' A function to produce the data structure needed to plot Event and Staged
+#' trees using \pkg{RGraphviz}.
 #'
 #' @param tree (list) - an S4 object \code{\link{EventTree}}
-#'   TODO(taranti)   See files 2T.DCEG.ModelSearch.OAHC,
-#'   TODO(taranti)  CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.
+#'   TODO(Collazo)   See files 2T.DCEG.ModelSearch.OAHC,
+#'   TODO(Collazo)  CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.
 #' @param solution  list with two components:
 #' \itemize{
 #' \item numeric - score associated with a level
@@ -238,11 +198,6 @@ CegGraphSimple <- function(tree, position, range.color = 1) {
 #'    }
 #'  }
 #'
-#' @examples
-#' TODO(taranti)
-#'
-#' @export
-#'
 # It is required the following function:
 # NodeSet - This function genereates the nodes of an event tree.
 # edge.list - This function genereates the list of edges of an event tree.
@@ -252,8 +207,8 @@ CegGraphSimple <- function(tree, position, range.color = 1) {
 # node.label - This function yields the node labels.
 # node.color - This function yields the node colors.
 # list.to.vector - This function change a list of vectors in a vector.
-
-
+#
+#
 TreeGraph <- function(tree, solution = list(), name = c(), range.color = 1){
   nodes <- NodeSet(tree)
   edgeList <- EdgeList(tree,nodes)
@@ -276,19 +231,15 @@ TreeGraph <- function(tree, solution = list(), name = c(), range.color = 1){
 
 
 
-
-
+#' NodeSet
+#'
 #' This function genereates the nodes of an event tree.
 #'
 #' @param tree an object event.tree. See files 2T.DCEG.ModelSearch.OAHC,
 #' CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.
 #'
 #' @return  vector
-#' @export
 #'
-#' @examples
-#'
-
 NodeSet <- function(tree) {
   tree
   num.node <- sum(tree@num.situation) + tree@num.situation[tree@num.variable] *
@@ -298,16 +249,10 @@ NodeSet <- function(tree) {
 }
 
 
-
-
-#' @title yields the node labels.
+#' NodeLabel
 #'
-#' @description
-#' This function yields the node labels.
-#'
-#' @details
-#' The nodes are labeled accordingly, do indicate diferente positions.
-#' TODO(taranti)  verify details.
+#' This function yields the node labels. The nodes are labeled accordingly, to
+#' indicate diferente positions.
 #'
 #' @param num.variable   numeric - number of variables.
 #' @param num.situation      vector - number of stages associated with each
@@ -319,10 +264,6 @@ NodeSet <- function(tree) {
 #'
 #' @return   vector - node labels
 #'
-#' @export
-#'
-#' @examples
-
 NodeLabel <- function(num.variable, num.situation, num.category, label) {
   result <- sapply(1:num.variable, function(x) rep(label[x], num.situation[x]))
   result <- ListToVector(result, num.variable)
@@ -334,22 +275,14 @@ NodeLabel <- function(num.variable, num.situation, num.category, label) {
 
 
 
-#' @title change a list of vectors in a vector
+#' ListToVector
 #'
-#' @description
-#' This function change a list of vectors in a vector.
-#'
-#' @details
 #' This function change a list of vectors in a vector.
 #'
 #' @param x list of vectors
 #' @param n numeric
 #'
 #' @return vector
-#' @export
-#'
-#' @examples
-#'
 #'
 ListToVector <- function(x, n) {
   if (n < 1)
@@ -361,14 +294,10 @@ ListToVector <- function(x, n) {
 
 
 
-#' @title yields the edge labels.
+#' EdgeLabel
 #'
-#' @description
-#' This function yields the edge labels.
-#'
-#' @details
-#' The edges are labeled accordingly the original data provided.
-#' TODO(taranti)  verify details.
+#' This function yields the edge labels. The edges are labeled accordingly the
+#' original data provided.
 #'
 #' @param num.variable numeric         - number of variables.
 #' @param num.situation    vector          - number of stages associated with
@@ -377,9 +306,6 @@ ListToVector <- function(x, n) {
 #' contains the event names associated with each variable.
 #'
 #' @return vector - edge labels
-#' @export
-#'
-#' @examples
 #'
 EdgeLabel <- function(num.variable, num.situation, label) {
   result <-
@@ -391,29 +317,17 @@ EdgeLabel <- function(num.variable, num.situation, label) {
 
 
 
-
-
-
-#' @title genereates the list of edges.
+#' EdgeList
 #'
-#' @description  function genereates the list of edges of an event tree.
+#' Function EdgeList genereates the list of edges of an event tree.
 #'
-#'
-#' @details function genereates the list of edges of an event tree.
-
-#'
-#' @param tree    an object event.tree. # TODO(taranti)  See files 2T.DCEG.ModelSearch.OAHC,
+#' @param tree    an object event.tree. # TODO(Collazo)  See files 2T.DCEG.ModelSearch.OAHC,
 #' CEG.IP.ModelSearch and TODO CEG.IP.ModelSearch.HS+AHC.
 #' @param node    (vector) - an object generated by the function node.list
 #'
 #' @return list of lists - each list component is a vector that represents the
 #' edges that emanate from a vertice.
-#' @export
 #'
-#' @examples
-#'
-#'
-
 EdgeList <- function(tree, node) {
   start.situation <- cumsum(tree@num.situation)
   max <- sum(tree@num.situation) +
@@ -428,17 +342,11 @@ EdgeList <- function(tree, node) {
 }
 
 
-#' @title edge situation
+#' EdgeSituation
 #'
-#' @description identifies the edges from a situation (node)
-#'
-#'
-#' @details
-#'  This function identifies the edges that emanate from a particular situation
-#' in an EventTree.
-#'
+#' EdgeSituation identifies the edges from a situation (node).
 #' This function identifies the edges that emanate from a particular situation
-#' in an event tree.
+#' in an EventTree.
 #'
 #' @param situation         numeric  - it identifies the target situation whose
 #'  emanating edges are our interesting.
@@ -449,10 +357,6 @@ EdgeList <- function(tree, node) {
 #'
 #' @return  list of lists - each list component is a vector that represents the
 #'  edges that emanate from a vertice.
-#' @export
-#'
-#' @examples
-#'
 #'
 EdgeSituation <- function(situation, start.situation, num.category) {
   max <- start.situation[length(start.situation)]
@@ -473,23 +377,17 @@ EdgeSituation <- function(situation, start.situation, num.category) {
 
 
 
-#' @title verifies data complience
+#' DataFrameChecker
 #'
-#' @description verifies data behaviour and removes NULL and void data
-#'
-#'
-#' @details
-#'  This function verifies data behaviour and removes NA and void data.
+#' DataFrameChecker verifies data behaviour and removes NULL and void data from
+#' a provided data.frame
 #'
 #' @param data.frame  a data frame to be used to create stratified event/staged
 #' trees
 #'
-#' @return  a data.frame with no void or NA values.
+#' @return data.frame with no void or NA values.
 #'
-#' @export
-#'
-#' @examples
-#' TODO(taranti)
+#' # TODO(Collazo)  dizer que quer usar o recurso, senao  taranti limpar o codigo.
 #'
 DataFrameChecker <- function(data.frame) {
   if (!is(data.frame, "data.frame")) {
@@ -509,14 +407,9 @@ DataFrameChecker <- function(data.frame) {
 }
 
 
-
-
-#' @title Remove void and NA values from dataframe.
+#' Z.NA.Keep
 #'
-#' @description
 #' Remove void and NA values from dataframe.
-#'
-#' @details
 #' The code is strongly based on the one provide by Jerry T. in
 #'  \link{http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame}.
 #'
@@ -524,22 +417,11 @@ DataFrameChecker <- function(data.frame) {
 #' \link{http://stackoverflow.com/a/30461945/2292993}.
 #'
 #'
-#' @param df  # TODO(taranti)
-#' @param col # TODO(taranti) TODO TODO
-#' @param n  # TODO(taranti)
+#' @param df
+#' @param col
+#' @param n
 #'
-#'
-#' @return describe.
-#'
-#' @examples
-#' TODO
-#'
-#' @export
-#'
-# @include
-#'
-#' @examples
-#' TODO
+#' @note credit: http://stackoverflow.com/a/30461945/2292993
 #'
 Z.NA.Keep <- function(df, col = NULL, n = 0) {
   if (!is.null(col)) {

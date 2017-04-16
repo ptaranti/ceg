@@ -1,16 +1,9 @@
-# TODO(taranti) enforce Google's R style
-# TODO(taranti) documentar
 
 
-
-#' Title
+#' Posterior.distribution
 #'
 #'
-#' @return
-#' @export
-#'
-#' @examples
-setClass("PosteriorDistribution"
+setClass("Posterior.distribution"
          #    representation(score = "numeric", cluster = "list"),
           # contains = "Model.search.algorithm"
 )

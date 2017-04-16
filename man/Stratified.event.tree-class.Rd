@@ -3,10 +3,7 @@
 \docType{class}
 \name{Stratified.event.tree-class}
 \alias{Stratified.event.tree-class}
-\title{Title}
-\value{
-an Stratified.event.tree S4 object
-}
+\title{Stratified.event.tree S4 Class}
 \description{
-Title
+# TODO(Collazo) se considerar necessario, explicar o que é Stratified.event.tree
 }

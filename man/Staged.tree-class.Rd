@@ -3,9 +3,9 @@
 \docType{class}
 \name{Staged.tree-class}
 \alias{Staged.tree-class}
-\title{Title # TODO(taranti)}
+\title{Staged.tree}
 \description{
-Title # TODO(taranti)
+#TODO(Collazo) quer descrever algo??? lembrar que estamos usando stratified staged tree
 }
 \section{Slots}{
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/lib_funtions.R
 \name{NodeSet}
 \alias{NodeSet}
-\title{This function genereates the nodes of an event tree.}
+\title{NodeSet}
 \usage{
 NodeSet(tree)
 }
@@ -15,7 +15,4 @@ vector
 }
 \description{
 This function genereates the nodes of an event tree.
-}
-\examples{
-
 }

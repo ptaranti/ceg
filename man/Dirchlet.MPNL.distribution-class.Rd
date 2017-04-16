@@ -3,9 +3,9 @@
 \docType{class}
 \name{Dirchlet.MPNL.distribution-class}
 \alias{Dirchlet.MPNL.distribution-class}
-\title{Title}
+\title{Dirchlet.MPNL.distribution}
 \description{
-Title
+Dirchlet.MPNL.distribution
 }
 \section{Slots}{
 

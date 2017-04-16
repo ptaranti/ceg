@@ -3,7 +3,7 @@
 \docType{class}
 \name{OAHC-class}
 \alias{OAHC-class}
-\title{Title}
+\title{OAHC S4 Class}
 \description{
 @include heuristic_model_search_algorithm.R
 }

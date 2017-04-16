@@ -3,7 +3,7 @@
 \docType{class}
 \name{Event.tree-class}
 \alias{Event.tree-class}
-\title{Title}
+\title{Event.tree S4 object}
 \description{
-Title
+Event.tree S4 object
 }

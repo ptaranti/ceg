@@ -2,7 +2,7 @@
 % Please edit documentation in R/lib_funtions.R
 \name{NodeLabel}
 \alias{NodeLabel}
-\title{yields the node labels.}
+\title{NodeLabel}
 \usage{
 NodeLabel(num.variable, num.situation, num.category, label)
 }
@@ -22,9 +22,6 @@ contains the event names associated with each variable.}
 vector - node labels
 }
 \description{
-This function yields the node labels.
-}
-\details{
-The nodes are labeled accordingly, do indicate diferente positions.
-TODO(taranti)  verify details.
+This function yields the node labels. The nodes are labeled accordingly, to
+indicate diferente positions.
 }

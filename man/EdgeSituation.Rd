@@ -2,7 +2,7 @@
 % Please edit documentation in R/lib_funtions.R
 \name{EdgeSituation}
 \alias{EdgeSituation}
-\title{edge situation}
+\title{EdgeSituation}
 \usage{
 EdgeSituation(situation, start.situation, num.category)
 }
@@ -21,16 +21,7 @@ list of lists - each list component is a vector that represents the
  edges that emanate from a vertice.
 }
 \description{
-identifies the edges from a situation (node)
-}
-\details{
+EdgeSituation identifies the edges from a situation (node).
 This function identifies the edges that emanate from a particular situation
 in an EventTree.
-
-This function identifies the edges that emanate from a particular situation
-in an event tree.
-}
-\examples{
-
-
 }

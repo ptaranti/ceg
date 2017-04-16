@@ -3,7 +3,7 @@
 \docType{class}
 \name{Exhaustive.model.search.algorithm-class}
 \alias{Exhaustive.model.search.algorithm-class}
-\title{Title}
+\title{Exhaustive.model.search.algorithm S4 Class}
 \description{
-Title
+Exhaustive.model.search.algorithm S4 Class
 }

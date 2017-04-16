@@ -3,9 +3,9 @@
 \docType{class}
 \name{Distribution.of.probability-class}
 \alias{Distribution.of.probability-class}
-\title{Title}
+\title{Distribution.of.probability S4 Class}
 \description{
-Title
+Distribution.of.probability S4 Class
 }
 \section{Slots}{
 

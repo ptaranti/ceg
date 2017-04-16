@@ -2,7 +2,7 @@
 % Please edit documentation in R/stratified_event_tree.R
 \name{StratifiedEventTreeGraph}
 \alias{StratifiedEventTreeGraph}
-\title{Title}
+\title{StratifiedEventTreeGraph}
 \usage{
 StratifiedEventTreeGraph(event.tree)
 }
@@ -12,5 +12,5 @@ StratifiedEventTreeGraph(event.tree)
  @return list contains a data structure to be used in a plot}
 }
 \description{
-Title
+StratifiedEventTreeGraph
 }

@@ -2,9 +2,7 @@
 % Please edit documentation in R/oahc.R
 \name{OAHC}
 \alias{OAHC}
-\title{This function calculates the best stage configuration of a hyperstage
-  associated with a specific variable of time-slice t_0 or t_k, k>=1, using
-  the oahc algorithm (oahc - Optimised Agglomerative Hierarchical Clustering)}
+\title{OAHC Constructor}
 \usage{
 OAHC(level, prior.distribution, contingency.table, tree)
 }
@@ -18,8 +16,14 @@ prior.distribution}
 
 \item{tree}{an object 'event.tree' (see function event.tree)}
 }
+\value{
+a OAHC S4 object
+}
 \description{
 This function calculates the best stage configuration of a hyperstage
   associated with a specific variable of time-slice t_0 or t_k, k>=1, using
   the oahc algorithm (oahc - Optimised Agglomerative Hierarchical Clustering)
+}
+\seealso{
+SingleScore,  PairwiseScore, SingleReorder, NaReorder, KeepLexOrder
 }

@@ -2,9 +2,7 @@
 % Please edit documentation in R/stratified_event_tree.R
 \name{LabelStage}
 \alias{LabelStage}
-\title{This function identifies the edges arriving at the target level for paths
-that exist from the root node to each situation in the event tree that
-are in levels greater than the target level.}
+\title{LabelStage}
 \usage{
 LabelStage(k, num.variable, num.situation, label.category, num.category)
 }
@@ -27,9 +25,6 @@ This function identifies the edges arriving at the target level for paths
 that exist from the root node to each situation in the event tree that
 are in levels greater than the target level.
 }
-\examples{
-
-}
 \seealso{
-\code{\link{truncated.path}}
+\code{\link{TruncatedPath}}
 }

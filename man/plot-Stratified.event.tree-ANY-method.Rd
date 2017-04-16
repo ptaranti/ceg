@@ -3,23 +3,21 @@
 \docType{methods}
 \name{plot,Stratified.event.tree,ANY-method}
 \alias{plot,Stratified.event.tree,ANY-method}
-\title{Title}
+\title{Stratified.event.tree Plotting}
 \usage{
 \S4method{plot}{Stratified.event.tree,ANY}(x, y, ...)
 }
 \arguments{
-\item{event.tree}{a Event.tree S4 object.}
+\item{Stratified.event.tree}{}
 }
 \value{
 the plot and also a pdf version is saved in the working directory.
 }
 \description{
-Title
-}
-\note{
-The current CEG package implementation depends on \code{Rgraphviz}
-package from Bioconductor
+Method to plot a Stratified.event.tree S4 object. The current \code{ceg} package
+implementation depends on \code{Rgraphviz} package from Bioconductor for
+plotting.
 }
 \examples{
-
+plot(stratified.event.tree)
 }

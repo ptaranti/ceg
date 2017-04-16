@@ -3,7 +3,7 @@
 \docType{class}
 \name{Heuristic.model.search.algorithm-class}
 \alias{Heuristic.model.search.algorithm-class}
-\title{Title}
+\title{Heuristic.model.search.algorithm}
 \description{
-Title
+Heuristic.model.search.algorithm
 }

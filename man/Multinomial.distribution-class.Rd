@@ -3,9 +3,9 @@
 \docType{class}
 \name{Multinomial.distribution-class}
 \alias{Multinomial.distribution-class}
-\title{Title}
+\title{Multinomial.distribution}
 \description{
-Title
+Multinomial.distribution
 }
 \section{Slots}{
 

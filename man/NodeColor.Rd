@@ -2,7 +2,7 @@
 % Please edit documentation in R/stratified_staged_tree.R
 \name{NodeColor}
 \alias{NodeColor}
-\title{This function yields the node colors.}
+\title{NodeColor}
 \usage{
 NodeColor(num.variable, num.situation, num.category, stage.structure,
   range.color)
@@ -20,7 +20,7 @@ NodeColor(num.variable, num.situation, num.category, stage.structure,
 \item  list of vectors - stage structure
 }}
 
-\item{range.color}{(numeric) - it chooses the color source.}
+\item{range.color}{(numeric) - it chooses the color source. #TODO(Collazo) esclarescer esse item}
 }
 \value{
 vector - node colors

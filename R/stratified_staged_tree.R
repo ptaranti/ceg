@@ -1,9 +1,8 @@
-# TODO(taranti) enforce Google's R style
 # TODO(collazo) invewrsao ordem do df  - para gerar erro:
 #   df <- read.csv("./R/CHDS.latentexample1.csv")
 #   df1 <- df[c(4,3,2,1)]
 #   st  <- Stratified.staged.tree(df1)
-# TODO(taranti) documentar
+
 
 
 
@@ -116,7 +115,6 @@ setMethod("Stratified.staged.tree",
 #'  The default variable order is as in the data.frame and the default alpha is
 #'  1L.
 #'
-# @rdname Stratified.staged.tree
 setMethod("Stratified.staged.tree",
           signature( x = "data.frame", y = "numeric", z = "numeric"),
           function(x = "data.frame", y = 1L, z = 0L ) {
@@ -125,9 +123,9 @@ setMethod("Stratified.staged.tree",
             variable.order <- z
 
             num.variable <- length(data.frame[1, ])
-            # TODO(taranti)  inserir validador de menor valor (maior ou igual a 1)
-            # TODO(taranti)  alterar variable.order para numeric, e converter para vetor depois, se é somente 1 numero.
-            # TODO(taranti)  aparentemente a implementacao esta errada - qualquer valor diferente de 0 apresenta erro.
+            # TODO(Collazo)  inserir validador de menor valor (maior ou igual a 1)
+            # TODO(Collazo)  alterar variable.order para numeric, e converter para vetor depois, se é somente 1 numero.
+            # TODO(Collaz)  aparentemente a implementacao esta errada - qualquer valor diferente de 0 apresenta erro.
             if (variable.order[1] != 0) {
               data.frame <- data.frame[variable.order]
             }
@@ -272,14 +270,19 @@ setMethod("Stratified.staged.tree",
 
 
 
-#' Title
+#' Staged.tree Plotting
+#'
+#' Method to plot a Staged.tree S4 object. The current \code{ceg} package
+#' implementation depends on \code{Rgraphviz} package from Bioconductor for
+#' plotting.
 #'
 #' @param Staged.tree
 #'
-#' @return
+#' @return the plot and also a pdf version is saved in the working directory.
 #' @export
 #'
 #' @examples
+#' plot(stratified.staged.tree)
 setMethod(
   f = "plot",
   signature = "Stratified.staged.tree",
@@ -327,46 +330,14 @@ setMethod(
 
 
 
-#' Title
+
+
+
+
+
+
+#' NodeColor
 #'
-#' @param staged.tree
-#' @param name
-#' @param range.color
-#'
-#' @return
-#' @export
-#'
-#' @examples
-staged.tree.graph <- function(staged.tree,name=c(), range.color = 1){
-  nodes <- NodeSet(staged.tree@eventTree)
-  edge.list <- EdgeList(staged.tree@eventTree,nodes)
-  node.label <- NodeLabel(staged.tree@eventTree@num.variable,
-                          staged.tree@eventTree@num.situation,
-                          staged.tree@eventTree@num.category,name)
-  edge.label <- EdgeLabel(staged.tree@eventTree@num.variable,
-                          staged.tree@eventTree@num.situation,
-                          staged.tree@eventTree@label.category)
-  node.color <- NodeColor(staged.tree@eventTree@num.variable,
-                          staged.tree@eventTree@num.situation,
-                          staged.tree@eventTree@num.category,
-                          staged.tree@stage.structure,range.color = 1)
-
-  graph <- list()
-  graph$node <- list()
-  graph$node$nodes <- nodes
-  graph$node$label <- node.label
-  graph$node$color <- node.color
-  graph$edge <- list()
-  graph$edge$edges <- edge.list
-  graph$edge$label <- edge.label
-  return(graph)
-}
-
-
-
-
-
-
 #' This function yields the node colors.
 #'
 #' @param num.variable  (numeric) - number of variables.
@@ -377,13 +348,12 @@ staged.tree.graph <- function(staged.tree,name=c(), range.color = 1){
 #'     \item  numeric - score associated with a level
 #'     \item  list of vectors - stage structure
 #'     }
-#' @param range.color  (numeric) - it chooses the color source.
+#' @param range.color  (numeric) - it chooses the color source. #TODO(Collazo) esclarescer esse item
 # ?????  1 - palette (8 colors) ??????  Any other value - colors(1) (501 colors)
 #'
 #' @return  vector - node colors
 #' @export
 #'
-#' @examples
 NodeColor <- function(num.variable,
                       num.situation,
                       num.category,

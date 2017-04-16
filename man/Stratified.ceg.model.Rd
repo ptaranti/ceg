@@ -7,9 +7,9 @@
 Stratified.ceg.model(Stratified.staged.tree, stages)
 }
 \arguments{
-\item{stages}{list         TODO(taranti)  describe}
+\item{stages}{list         TODO(Collazo)  describe}
 
-\item{StratifiedStagedTree}{S4 object    TODO(taranti)  describe}
+\item{StratifiedStagedTree}{S4 object    TODO(Collazo)  describe}
 }
 \value{
 a StratifiedCegModel S4 object.
@@ -21,7 +21,7 @@ S3 function to friendly construct S4  StratifiedCegModel.
 The \code{stratified.ceg.model} returns a S4 StratifiedCegModel.
 }
 \examples{
-TODO(taranti)
+TODO(taranti) depois de resolvida a confusao entre stage.structure e position
 
 }
 \seealso{

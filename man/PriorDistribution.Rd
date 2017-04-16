@@ -9,10 +9,10 @@ PriorDistribution(tree, alpha)
 \arguments{
 \item{tree}{"EventTree" a S4 object that represents an event tree.}
 
-\item{alpha}{# TODO(taranti)  -- see function DCEG.AHC}
+\item{alpha}{# TODO(Collazo)  -- see function DCEG.AHC}
 }
 \value{
-prior  It is a list of matrices. Each matrix is a collection of
+prior is a list of matrices. Each matrix is a collection of
 vectors that correspond to a prior for each situation associated with
 a particular variable.
 }
@@ -22,5 +22,5 @@ conservative and uniform assumptions for the hyperparameter 'alpha' over
 the event tree.
 }
 \seealso{
-\code{\link{prior.variable}}
+\code{\link{PriorVariable}}
 }

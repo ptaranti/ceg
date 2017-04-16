@@ -5,9 +5,6 @@
 \alias{Stratified.ceg.model-class}
 \title{The \code{Stratified.ceg.model} is a S4 class thar extends \code{\link{Ceg.model}}. Its
  objects represents a CEG model derived from a Stratified.staged.tree.}
-\value{
-a "Stratified.ceg.model" S4 object.
-}
 \description{
 The \code{Stratified.ceg.model} is a S4 class thar extends \code{\link{Ceg.model}}. Its
  objects represents a CEG model derived from a Stratified.staged.tree.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/lib_funtions.R
 \name{DataFrameChecker}
 \alias{DataFrameChecker}
-\title{verifies data complience}
+\title{DataFrameChecker}
 \usage{
 DataFrameChecker(data.frame)
 }
@@ -11,15 +11,11 @@ DataFrameChecker(data.frame)
 trees}
 }
 \value{
-a data.frame with no void or NA values.
+data.frame with no void or NA values.
+
+# TODO(Collazo)  dizer que quer usar o recurso, senao  taranti limpar o codigo.
 }
 \description{
-verifies data behaviour and removes NULL and void data
-}
-\details{
-This function verifies data behaviour and removes NA and void data.
-}
-\examples{
-TODO(taranti)
-
+DataFrameChecker verifies data behaviour and removes NULL and void data from
+a provided data.frame
 }

@@ -2,32 +2,20 @@
 % Please edit documentation in R/lib_funtions.R
 \name{Z.NA.Keep}
 \alias{Z.NA.Keep}
-\title{Remove void and NA values from dataframe.}
+\title{Z.NA.Keep}
 \usage{
 Z.NA.Keep(df, col = NULL, n = 0)
 }
 \arguments{
-\item{df}{# TODO(taranti)}
-
-\item{col}{# TODO(taranti) TODO TODO}
-
-\item{n}{# TODO(taranti)}
-}
-\value{
-describe.
+\item{n}{}
 }
 \description{
 Remove void and NA values from dataframe.
-}
-\details{
 The code is strongly based on the one provide by Jerry T. in
  \link{http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame}.
 }
-\examples{
-TODO
-
-TODO
-
+\note{
+credit: http://stackoverflow.com/a/30461945/2292993
 }
 \seealso{
 \link{http://stackoverflow.com/a/30461945/2292993}.

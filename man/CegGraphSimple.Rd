@@ -2,17 +2,17 @@
 % Please edit documentation in R/lib_funtions.R
 \name{CegGraphSimple}
 \alias{CegGraphSimple}
-\title{Simple ceg structure to be ploted in RGraphviz.}
+\title{CegGraphSimple}
 \usage{
 CegGraphSimple(tree, position, range.color = 1)
 }
 \arguments{
 \item{tree}{list       an object event.tree.
-TODO(taranti)  Verify:: See files 2T.DCEG.ModelSearch.OAHC, CEG.IP.ModelSearch and
-TODO(taranti)  Verify:: CEG.IP.ModelSearch.HS+AHC.}
+TODO(Collazo)  Verify:: See files 2T.DCEG.ModelSearch.OAHC, CEG.IP.ModelSearch and
+TODO(Collazo)  Verify:: CEG.IP.ModelSearch.HS+AHC.}
 
 \item{position}{list       an object ceg.position.
-TODO(taranti)  Verify:: See file Position.Retrieve.}
+TODO(Collazo)  Verify:: See file Position.Retrieve.}
 
 \item{range.color}{numeric    it chooses the color source.}
 }
@@ -32,26 +32,17 @@ list
    }
 }
 \description{
-This function yields a data structure corresponding a simplified CEG to be
-plotted using the package Rgraphviz.
+Simple ceg structure to be ploted in RGraphviz. This function yields a data
+structure corresponding a simplified CEG to be plotted using the package
+Rgraphviz.
 }
-\details{
+\note{
 This function mitigates a limitation from Rgraphviz, which does not support
 plotting multiple edges between two nodes presenting the correct
 edge label for each one. The decision was to merge all edges in one, and
-presenting all labels in this resulting edge.
-
+presenting all labels in this resulting edge.#'
 This approach is temporary and not ideal, since the ceg is no more a
 multi-graph. However, the authors did not find a graphical package
 which provides the needed plotting features.
 Contributions are wellcomed.
-
-This is a inner function, not intended to be exported to users.
-}
-\examples{
-TODO(taranti)
-
-}
-\seealso{
-TODO(taranti)
 }

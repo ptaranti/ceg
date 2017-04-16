@@ -3,9 +3,9 @@
 \docType{class}
 \name{Dirchlet.distribution-class}
 \alias{Dirchlet.distribution-class}
-\title{Title}
+\title{Dirchlet.distribution}
 \description{
-Title
+Dirchlet.distribution
 }
 \section{Slots}{
 

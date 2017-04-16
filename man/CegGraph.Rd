@@ -32,9 +32,6 @@ list
 The function \code{CegGraph} produces a data structure corresponding a CEG
 to be plotted using the package Rgraphviz.
 }
-\examples{
-
-}
 \seealso{
 It uses \code{PositionVector}
 }

@@ -3,7 +3,7 @@
 \docType{class}
 \name{Prior.distribution-class}
 \alias{Prior.distribution-class}
-\title{Title}
+\title{Prior.distribution}
 \description{
-Title
+Prior.distribution
 }
