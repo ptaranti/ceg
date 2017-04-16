@@ -1,15 +1,14 @@
-# TODO(taranti) enforce Google's R style
 # TODO(taranti) documentar
 
 
-#' Title
+#' Model.search.algorithm
 #'
 #'
 #' @return
 #' @export
 #'
 #' @examples
-setClass("ModelSearchAlgorithm"
+setClass("Model.search.algorithm"
          #    representation(score = "numeric", cluster = "list"),
-         #contains = "DistributionOfProbability"
+         #contains = "Distribution.of.probability"
 )

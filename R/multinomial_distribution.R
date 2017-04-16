@@ -1,4 +1,4 @@
-# TODO(taranti) documentar
+
 # TODO(taranti) enforce Google's R style
 
 #' Title
@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-setClass("MultinomialDistribution",
+setClass("Multinomial.distribution",
      #    representation(score = "numeric", cluster = "list"),
-         contains = "DistributionOfProbability"
+         contains = "Distribution.of.probability"
 )

@@ -1,4 +1,3 @@
-# TODO(taranti) enforce Google's R style
 # TODO(taranti) documentar
 
 
@@ -12,7 +11,7 @@
 #' @export
 #'
 #' @examples
-setClass("DirchletDistribution",
+setClass("Dirchlet.distribution",
          #    representation(score = "numeric", cluster = "list"),
-         contains = "DistributionOfProbability"
+         contains = "Distribution.of.probability"
 )

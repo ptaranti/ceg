@@ -2,16 +2,14 @@
 % Please edit documentation in R/ceg_model.R
 \name{CegGraph}
 \alias{CegGraph}
-\title{The function \code{CegGraph} produces a data structure corresponding a CEG
-to be plotted using the package Rgraphviz.}
+\title{CegGraph function}
 \usage{
 CegGraph(event.tree, position, range.color = 1)
 }
 \arguments{
 \item{event.tree}{"Event.tree"       an S4 object}
 
-\item{position}{list       an object ceg.position.
-# TODO(Collazo) DEFINIR MELHOR POSITION}
+\item{position}{list       an object ceg.position.# TODO(Collazo) DEFINIR MELHOR POSITION}
 
 \item{range.color}{numeric    it chooses the color source.}
 }

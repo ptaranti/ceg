@@ -8,49 +8,52 @@
 
 
 
-#' Title  # TODO(taranti)
+
+
+#' Stratified.staged.tree
+#'
+#' #TODO(Collazo) Definir o que é stratified staged.tree
 #'
 #' @include staged_tree.R
-# @include friendly_constructors.R
 #'
-#' @slot event.tree Stratified.event.tree
-#'
-#' @return
+#' #TODO(Collazo) espandir significado dos slots
+#' @slot event.tree Stratified.event.tree.
+#' @slot situation list.
+#' @slot contingency.table list.
+#' @slot stage.structure list.
+#' @slot stage.probability list.
+#' @slot prior.distribution list.
+#' @slot posterior.distribution list.
+#' @slot model.score numeric.
 #' @export
 #'
-#' @examples
 setClass(
   "Stratified.staged.tree",
-representation(    event.tree = "Event.tree",
-    situation = "list",
-    contingency.table = "list",
-    stage.structure = "list",
-    stage.probability = "list",
-    prior.distribution = "list",
-    posterior.distribution = "list",
-    model.score = "numeric"),
+  representation(    event.tree = "Stratified.event.tree",
+                     situation = "list",
+                     contingency.table = "list",
+                     stage.structure = "list",
+                     stage.probability = "list",
+                     prior.distribution = "list",
+                     posterior.distribution = "list",
+                     model.score = "numeric"),
   contains = "Staged.tree"
 )
 
 
-
-
-#' Title
-#' @export
-#'
 setMethod(
   f = "initialize",
   signature = "Stratified.staged.tree",
   definition = function(.Object,
                         event.tree = "Stratified.event.tree",
-                          situation = "list",
-                          contingency.table = "list",
-                          stage.structure = "list",
-                          stage.probability = "list",
-                          prior.distribution = "list",
-                          posterior.distribution = "list",
-                          model.score = "numeric"
-                         ){
+                        situation = "list",
+                        contingency.table = "list",
+                        stage.structure = "list",
+                        stage.probability = "list",
+                        prior.distribution = "list",
+                        posterior.distribution = "list",
+                        model.score = "numeric"
+  ){
     cat("~~~ Stratified.staged.tree: initializator ~~~ \n")
     # Assignment of the slots
     .Object@event.tree <- event.tree
@@ -68,34 +71,51 @@ setMethod(
 
 
 
-
-
-#' Title
+#' Stratified.staged.tree
 #'
-#' @param object An object
-#' @param data Numeric vector or data.frame
-#' @param Fun Function. Default function is \code{sum}
-#' @param ... Extra named arguments passed to FUN
-#' @rdname Stratified.staged.tree
+#' Constructor method to Stratified.staged.tree S4 objects. It accepts different
+#' sets for parameters types.
+#'
+#' @return a Stratified.staged.tree S4 object
 #' @export
+#'
+#'
 setGeneric("Stratified.staged.tree",
            function(x, y, z, ...) standardGeneric("Stratified.staged.tree")
 )
 
-# @rdname Stratified.staged.tree
+#' @rdname Stratified.staged.tree
+#' @param Arguments (missing) \cr
+#'  A call to \code{Stratified.staged.tree( )} with no parameters will return
+#'  an error message for missing argument.
+#'
 setMethod("Stratified.staged.tree",
           signature("missing"),
           function(x, ...) {
             stop("constructor S4 method Stratified.staged.tree not implemented for missing argument")
           })
 
-# @rdname Stratified.staged.tree
+#' @rdname Stratified.staged.tree
+#' @param Arguments (ANY) \cr
+#' A call to \code{Stratified.staged.tree(x, ...)}, x not being a data.frame or
+#' a Event.tree, will return an error message.
+#'
 setMethod("Stratified.staged.tree",
           signature(x = "ANY"),
           function(x, ...) {
-            stop("constructor S4 method Stratified.staged.tree not implemented for this argument")
+            stop("constructor S4 method Stratified.staged.tree not implemented
+                 for this argument")
           })
 
+#' @rdname Stratified.staged.tree
+#' @param Arguments (data.frame, numeric, numeric) , where data.frame is a well
+#' behavioured data set, and the numeric values represent the alpha and
+#' the variable order, respectively.\cr
+#' The implementation admits providing the three arguments, or the first two, or
+#'  even only the data.frame.\cr
+#'  The default variable order is as in the data.frame and the default alpha is
+#'  1L.
+#'
 # @rdname Stratified.staged.tree
 setMethod("Stratified.staged.tree",
           signature( x = "data.frame", y = "numeric", z = "numeric"),
@@ -104,46 +124,66 @@ setMethod("Stratified.staged.tree",
             alpha <- y
             variable.order <- z
 
-              num.variable <- length(data.frame[1, ])
-              # TODO(taranti)  inserir validador de menor valor (maior ou igual a 1)
-              # TODO(taranti)  alterar variable.order para numeric, e converter para vetor depois, se é somente 1 numero.
-              # TODO(taranti)  aparentemente a implementacao esta errada - qualquer valor diferente de 0 apresenta erro.
-              if (variable.order[1] != 0) {
-                data.frame <- data.frame[variable.order]
-              }
+            num.variable <- length(data.frame[1, ])
+            # TODO(taranti)  inserir validador de menor valor (maior ou igual a 1)
+            # TODO(taranti)  alterar variable.order para numeric, e converter para vetor depois, se é somente 1 numero.
+            # TODO(taranti)  aparentemente a implementacao esta errada - qualquer valor diferente de 0 apresenta erro.
+            if (variable.order[1] != 0) {
+              data.frame <- data.frame[variable.order]
+            }
 
-              event.tree <- Stratified.event.tree(data.frame)
-              prior.distribution <- prior.distribution(event.tree, alpha)
-              contingency.table <- cont.table(data.frame, event.tree)
-              stage.structure <- lapply(1:(num.variable), function(x) OAHC(x, prior.distribution, contingency.table, event.tree))
-              model.score <- sum(sapply(1:(num.variable), function(y) stage.structure[[y]]@score))
+            event.tree <- Stratified.event.tree(data.frame)
+            prior.distribution <- PriorDistribution(event.tree, alpha)
+            contingency.table <- ContingencyTable(data.frame, event.tree)
+            stage.structure <- lapply(1:(num.variable), function(x) OAHC(x, prior.distribution, contingency.table, event.tree))
+            model.score <- sum(sapply(1:(num.variable), function(y) stage.structure[[y]]@score))
 
 
-             out <-  new("Stratified.staged.tree",
-                           event.tree,
-                           situation = list(),
-                           contingency.table,
-                           stage.structure,
-                           stage.probability = list(),
-                           prior.distribution,
-                           posterior.distribution = list(),
-                           model.score)
-             return(out)
+            out <-  new("Stratified.staged.tree",
+                        event.tree,
+                        situation = list(),
+                        contingency.table,
+                        stage.structure,
+                        stage.probability = list(),
+                        prior.distribution,
+                        posterior.distribution = list(),
+                        model.score)
+            return(out)
 
           })
+
 
 setMethod("Stratified.staged.tree",
           signature( x = "data.frame", y = "numeric", z = "missing"),
           function(x = "data.frame", y = 1L) {  Stratified.staged.tree(x, y, 0 )}
 )
 
+
 setMethod("Stratified.staged.tree",
           signature( x = "data.frame", y = "missing", z = "missing"),
           function(x = "data.frame") {  Stratified.staged.tree(x, 1, 0 )}
 )
 
-
-# @rdname Stratified.staged.tree
+# TODO(Taranti) a nota nao esta aparecendo na documentacao
+#' @rdname Stratified.staged.tree
+#' @param Arguments (Stratified.event.tree, list) , where datalist.frame is the
+#' stage.structure to be aplied on the provided Stratified.event.tree. \cr
+#' To construct the aforesaid list one must generate the Stratified.event.tree
+#' graph and use the number of each presented node. These numbers will indicate
+#' the nodes that share the same position in a stage \cr
+#' TODO(Collazo) VRF texto
+#' @note{ Consider a stratified.event.tree created using the folloing commands\cr
+#' \code{input <- list(Variable("age",list(Category("old"), Category("medium"),
+#' Category("new"))),Variable("state", list(Category("solid"),
+#' ("liquid"), Category("steam"))), Variable("costumer", list(Category("good"),
+#' Category("average"), Category("very bad"), Category("bad"))))} \cr
+#' \code{et.manual <- Stratified.event.tree(input)} \cr
+#' plot the graph using the command\cr
+#' \code{plot(et.manual)}\cr
+#' Looking the graph, you can create the stage structure, such as follows:\cr
+#' \code{stage.structure <- list(list(c(2,3)), list(c(4,7,12),c(5,8,9)))}}\cr
+#' Finally you can create your sStratified.event.tree:\cr
+#' \code{st.manual <- Stratified.staged.tree(et.manual, stage.structure)}}
 setMethod("Stratified.staged.tree",
           signature(x = "Stratified.event.tree", y = "list" ),
           function(x = "Stratified.event.tree", y = "list") {
@@ -180,10 +220,10 @@ setMethod("Stratified.staged.tree",
 
             PrepareStage <- function(nr.elementos, cluster.list){
               out <- as.list(1:nr.elementos)
-              for(cluster in cluster.list) {
+              for (cluster in cluster.list) {
                 cluster.sorted <- sort(cluster)
                 out[[cluster.sorted[[1]]]] <- cluster.sorted
-                for(x in 2:length(cluster.sorted))
+                for (x in 2:length(cluster.sorted))
                   out[[cluster.sorted[[x]]]] <- NA
               }
               out
@@ -195,7 +235,7 @@ setMethod("Stratified.staged.tree",
 
             out.stages[[1]] <-  new("OAHC", 0, list(1))
 
-            for(nr  in 1:length(stage.structure)){
+            for (nr  in 1:length(stage.structure)) {
 
 
               correction.number <- sum(head(event.tree@num.situation,nr)) - 1
@@ -205,7 +245,7 @@ setMethod("Stratified.staged.tree",
 
 
 
-              out.stages[[nr +1]] <- new("OAHC", 0, PrepareStage(event.tree@num.situation[[nr+1]], temp.stage))
+              out.stages[[nr + 1]] <- new("OAHC", 0, PrepareStage(event.tree@num.situation[[nr + 1]], temp.stage))
 
             }
 
@@ -301,15 +341,15 @@ staged.tree.graph <- function(staged.tree,name=c(), range.color = 1){
   nodes <- NodeSet(staged.tree@eventTree)
   edge.list <- EdgeList(staged.tree@eventTree,nodes)
   node.label <- NodeLabel(staged.tree@eventTree@num.variable,
-                           staged.tree@eventTree@num.situation,
-                           staged.tree@eventTree@num.category,name)
+                          staged.tree@eventTree@num.situation,
+                          staged.tree@eventTree@num.category,name)
   edge.label <- EdgeLabel(staged.tree@eventTree@num.variable,
-                           staged.tree@eventTree@num.situation,
-                           staged.tree@eventTree@label.category)
+                          staged.tree@eventTree@num.situation,
+                          staged.tree@eventTree@label.category)
   node.color <- NodeColor(staged.tree@eventTree@num.variable,
-                           staged.tree@eventTree@num.situation,
-                           staged.tree@eventTree@num.category,
-                           staged.tree@stage.structure,range.color = 1)
+                          staged.tree@eventTree@num.situation,
+                          staged.tree@eventTree@num.category,
+                          staged.tree@stage.structure,range.color = 1)
 
   graph <- list()
   graph$node <- list()
@@ -345,10 +385,10 @@ staged.tree.graph <- function(staged.tree,name=c(), range.color = 1){
 #'
 #' @examples
 NodeColor <- function(num.variable,
-                       num.situation,
-                       num.category,
-                       stage.structure,
-                       range.color) {
+                      num.situation,
+                      num.category,
+                      stage.structure,
+                      range.color) {
   total.node <- cumsum(num.situation)
   result <- rep("white", total.node[num.variable] +
                   num.category[num.variable] * num.situation[num.variable])

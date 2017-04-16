@@ -1,6 +1,7 @@
 # TODO(taranti) enforce Google's R style
 # TODO(taranti) documentar
-
+# TODO(Collazo) a classe prior distribution nao esta sendo usada.
+# A funcao PriorDistribution retorna um vetor e nao um objeto.
 
 #' Title
 #'
@@ -9,16 +10,18 @@
 #' @export
 #'
 #' @examples
-setClass("PriorDistribution"
+setClass("Prior.distribution"
          #    representation(score = "numeric", cluster = "list"),
-          # contains = "ModelSearchAlgorithm"
+          # contains = "Model.search.algorithm"
 )
 
 
 
 
 
-#' \code{prior.distribution} initialises the prior distributions under the
+#' PriorDistribution
+#'
+#' \code{PriorDistribution} initialises the prior distributions under the
 #' conservative and uniform assumptions for the hyperparameter 'alpha' over
 #' the event tree.
 #'
@@ -33,7 +36,7 @@ setClass("PriorDistribution"
 #' @seealso \code{\link{prior.variable}}
 #'
 #' @examples
-prior.distribution <- function(tree, alpha) {
+PriorDistribution <- function(tree, alpha) {
   alpha.edge <- lapply(1:(tree@num.variable), function(x)
     alpha.edge.internal(x, tree, alpha))
   prior <- lapply(1:(tree@num.variable),
@@ -57,7 +60,7 @@ prior.distribution <- function(tree, alpha) {
 # @export
 #'
 #' @examples
-#' @seealso  \code{\link{prior.distribution}} and
+#' @seealso  \code{\link{Prior.distribution}} and
 #'          \code{\link{alpha.edge.internal}}
 #'
 prior.variable <- function(ref, alpha.edge) {

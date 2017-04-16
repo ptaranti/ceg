@@ -168,7 +168,7 @@ setMethod("Stratified.event.tree",
               temp.category.label.vector <- c()
               for (i in 1:length(variable@categories)) {
                 category <- as(variable@categories[[i]], "Category")
-                print(category)
+                # print(category)
 
 
                 temp.category.label.vector[[i]] <- category@label

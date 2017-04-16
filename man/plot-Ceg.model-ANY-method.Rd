@@ -3,23 +3,22 @@
 \docType{methods}
 \name{plot,Ceg.model,ANY-method}
 \alias{plot,Ceg.model,ANY-method}
-\title{Title}
+\title{Ceg.model Plotting}
 \usage{
 \S4method{plot}{Ceg.model,ANY}(x, y, ...)
 }
 \arguments{
-\item{Ceg.model}{a CegModel S4 object.}
+\item{ceg.model}{a Ceg.model S4 object.}
 }
 \value{
 the plot and also a pdf version is saved in the working directory.
 }
 \description{
-Title
-}
-\note{
-The current CEG package implementation depends on \code{Rgraphviz}
-package from Bioconductor
+Method to plot a chain event graph from a Ceg.model S4 object. The current
+\code{ceg} package implementation depends on \code{Rgraphviz} package from
+Bioconductor for plotting.
 }
 \examples{
+plot(ceg.model)
 
 }

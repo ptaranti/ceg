@@ -3,13 +3,27 @@
 \docType{class}
 \name{Stratified.staged.tree-class}
 \alias{Stratified.staged.tree-class}
-\title{Title  # TODO(taranti)}
+\title{Stratified.staged.tree}
 \description{
-Title  # TODO(taranti)
+#TODO(Collazo) Definir o que é stratified staged.tree
 }
 \section{Slots}{
 
 \describe{
-\item{\code{event.tree}}{Stratified.event.tree}
+\item{\code{event.tree}}{Stratified.event.tree.}
+
+\item{\code{situation}}{list.}
+
+\item{\code{contingency.table}}{list.}
+
+\item{\code{stage.structure}}{list.}
+
+\item{\code{stage.probability}}{list.}
+
+\item{\code{prior.distribution}}{list.}
+
+\item{\code{posterior.distribution}}{list.}
+
+\item{\code{model.score}}{numeric.}
 }}
 

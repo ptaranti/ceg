@@ -16,7 +16,7 @@
 setClass("OAHC",
          representation(score = "numeric",
                         cluster = "list"),
-         contains = "HeuristicModelSearchAlgorithm"
+         contains = "Heuristic.model.search.algorithm"
 )
 
 
@@ -54,7 +54,7 @@ setMethod(
 #' @param level  numeric   - level under optimisation
 #' @param prior.distribution  (list of matrices) - see function
 #' prior.distribution
-#' @param contingency.table (list of matrices) - see function cont.table
+#' @param contingency.table (list of matrices) - see function ContingencyTable
 #' @param tree  an object 'event.tree' (see function event.tree)
 #'
 #' @return

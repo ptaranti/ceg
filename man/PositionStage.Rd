@@ -2,9 +2,7 @@
 % Please edit documentation in R/ceg_model.R
 \name{PositionStage}
 \alias{PositionStage}
-\title{\code{PositionStage} function yields the position structure associated with
-a particular
-stage of a CEG.}
+\title{PositionStage}
 \usage{
 PositionStage(stage.vector, num.category, pos.next.level)
 }
@@ -25,9 +23,6 @@ list of vector - Each vector identifies a position.
 \code{PositionStage} function yields the position structure associated with
 a particular
 stage of a CEG.
-}
-\examples{
-
 }
 \seealso{
 \code{\link{PairwisePosition}}

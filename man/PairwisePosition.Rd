@@ -2,8 +2,7 @@
 % Please edit documentation in R/ceg_model.R
 \name{PairwisePosition}
 \alias{PairwisePosition}
-\title{The \code{PairwisePosition } function identifies if two situations are in
-the same position given that they are in the same stage.}
+\title{PairwisePosition}
 \usage{
 PairwisePosition(pair.situation, num.category, pos.next.level)
 }
@@ -22,7 +21,4 @@ boolean
 \description{
 The \code{PairwisePosition } function identifies if two situations are in
 the same position given that they are in the same stage.
-}
-\examples{
-
 }

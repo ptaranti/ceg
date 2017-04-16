@@ -1,14 +1,10 @@
-# TODO(taranti) enforce Google's R style
-# TODO(taranti) documentar
 
-
-#' Title
+#' Dinamic.programming S4 Class
+#'
 #' @include exhaustive_model_search_algorithm.R
 #'
-#' @return
-#' @export
+#' @note Inserted fot future use
 #'
-#' @examples
-setClass("DinamicProgramming",
-        contains = "ExhaustiveModelSearchAlgorithm"
+setClass("Dinamic.programming",
+        contains = "Exhaustive.model.search.algorithm"
 )

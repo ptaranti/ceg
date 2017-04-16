@@ -2,8 +2,7 @@
 % Please edit documentation in R/ceg_model.R
 \name{PositionLevel}
 \alias{PositionLevel}
-\title{This function obtain the position structure associated with a particular
-level of a CEG.}
+\title{PositionLevel}
 \usage{
 PositionLevel(stage.list, num.category, num.situation.next,
   pos.next.level = list())

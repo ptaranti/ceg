@@ -1,4 +1,4 @@
-# TODO(taranti) enforce Google's R style
+
 # TODO(taranti) documentar
 
 
@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-setClass("DistributionOfProbability"
+setClass("Distribution.of.probability"
 #         ,
 #         representation(score = "numeric", cluster = "list")
 )

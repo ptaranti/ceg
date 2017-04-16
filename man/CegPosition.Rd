@@ -2,8 +2,7 @@
 % Please edit documentation in R/ceg_model.R
 \name{CegPosition}
 \alias{CegPosition}
-\title{This function obtain the position structure associated with a particular
-level of a CEG.}
+\title{CegPosition}
 \usage{
 CegPosition(stage, num.category, num.situation)
 }
@@ -24,13 +23,11 @@ list of lists \itemize{
     \item The third list level identifies the positions associated with
           stage 'i' .
           }
+
+ @seealso \code{PositionLevel},  \code{PositionVector},
+ \code{PositionStage}, \code{PairwisePosition}
 }
 \description{
 This function obtain the position structure associated with a particular
 level of a CEG.
-}
-\examples{
- @seealso \\code{PositionLevel},  \\code{PositionVector},
- \\code{PositionStage}, \\code{PairwisePosition}
-
 }

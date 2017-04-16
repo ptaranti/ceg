@@ -1,4 +1,3 @@
-# TODO(taranti) enforce Google's R style
 # TODO(taranti) documentar
 
 

@@ -14,7 +14,7 @@ OAHC(level, prior.distribution, contingency.table, tree)
 \item{prior.distribution}{(list of matrices) - see function
 prior.distribution}
 
-\item{contingency.table}{(list of matrices) - see function cont.table}
+\item{contingency.table}{(list of matrices) - see function ContingencyTable}
 
 \item{tree}{an object 'event.tree' (see function event.tree)}
 }

@@ -1,5 +1,4 @@
 # TODO(taranti) documentar
-# TODO(taranti) enforce Google's R style
 
 #' Title
 #'
@@ -10,7 +9,7 @@
 #' @export
 #'
 #' @examples
-setClass("HeuristicModelSearchAlgorithm",
+setClass("Heuristic.model.search.algorithm",
          #    representation(score = "numeric", cluster = "list"),
-         contains = "ModelSearchAlgorithm"
+         contains = "Model.search.algorithm"
 )

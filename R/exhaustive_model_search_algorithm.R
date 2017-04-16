@@ -1,4 +1,3 @@
-# TODO(taranti) enforce Google's R style
 # TODO(taranti) documentar
 
 
@@ -10,7 +9,7 @@
 #' @export
 #'
 #' @examples
-setClass("ExhaustiveModelSearchAlgorithm",
+setClass("Exhaustive.model.search.algorithm",
          #    representation(score = "numeric", cluster = "list"),
-         contains = "ModelSearchAlgorithm"
+         contains = "Model.search.algorithm"
 )

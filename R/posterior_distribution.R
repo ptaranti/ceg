@@ -12,5 +12,5 @@
 #' @examples
 setClass("PosteriorDistribution"
          #    representation(score = "numeric", cluster = "list"),
-          # contains = "ModelSearchAlgorithm"
+          # contains = "Model.search.algorithm"
 )
