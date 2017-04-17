@@ -14,7 +14,7 @@ setClass(
   "Variable",
   representation(name = "character",
                  categories = "list"
-                 # TODO(taranti)  Hyper_Stage is for future use
+                 # TODO(Collazo)  Hyper_Stage is for future use - essa anotação é valida? devo inserir o atributo?
   ),
   validity = function(object) {
     msg <- NULL

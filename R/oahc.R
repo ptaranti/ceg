@@ -1,4 +1,4 @@
-# TODO(Taranti) desacoplar o codigo do inicialize, criar um construtor limpo.
+
 
 
 #' OAHC S4 Class

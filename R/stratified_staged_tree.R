@@ -162,7 +162,7 @@ setMethod("Stratified.staged.tree",
           function(x = "data.frame") {  Stratified.staged.tree(x, 1, 0 )}
 )
 
-# TODO(Taranti) a nota nao esta aparecendo na documentacao
+
 #' @rdname Stratified.staged.tree
 #' @param Arguments (Stratified.event.tree, list) , where datalist.frame is the
 #' stage.structure to be aplied on the provided Stratified.event.tree. \cr
@@ -170,7 +170,8 @@ setMethod("Stratified.staged.tree",
 #' graph and use the number of each presented node. These numbers will indicate
 #' the nodes that share the same position in a stage \cr
 #' TODO(Collazo) VRF texto
-#' @note{ Consider a stratified.event.tree created using the folloing commands\cr
+#' @note
+#' Consider a stratified.event.tree created using the folloing commands\cr
 #' \code{input <- list(Variable("age",list(Category("old"), Category("medium"),
 #' Category("new"))),Variable("state", list(Category("solid"),
 #' ("liquid"), Category("steam"))), Variable("costumer", list(Category("good"),
@@ -179,9 +180,9 @@ setMethod("Stratified.staged.tree",
 #' plot the graph using the command\cr
 #' \code{plot(et.manual)}\cr
 #' Looking the graph, you can create the stage structure, such as follows:\cr
-#' \code{stage.structure <- list(list(c(2,3)), list(c(4,7,12),c(5,8,9)))}}\cr
+#' \code{stage.structure <- list(list(c(2,3)), list(c(4,7,12),c(5,8,9)))}\cr
 #' Finally you can create your sStratified.event.tree:\cr
-#' \code{st.manual <- Stratified.staged.tree(et.manual, stage.structure)}}
+#' \code{st.manual <- Stratified.staged.tree(et.manual, stage.structure)}
 setMethod("Stratified.staged.tree",
           signature(x = "Stratified.event.tree", y = "list" ),
           function(x = "Stratified.event.tree", y = "list") {

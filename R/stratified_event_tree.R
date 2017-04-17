@@ -85,7 +85,7 @@ setMethod("Stratified.event.tree",
             stop("constructor S4 method Stratified.event.tree not implemented for this argument")
           })
 
-#' @rdname Stratified.staged.tree
+#' @rdname Stratified.event.tree
 #' @param Arguments (data.frame) , where data.frame is a well behavioured data set.\cr
 #'
 setMethod("Stratified.event.tree",
@@ -126,16 +126,18 @@ setMethod("Stratified.event.tree",
           })
 
 
-# TODO(Taranti) a nota nao esta aparecendo na documentacao
+
 #' @rdname Stratified.event.tree
 #' @param Arguments (list) , list of Variable S4 objects, in the expected order
 #' of plotting. \cr
 #' TODO(Collazo) VRF texto
-#' @note{ Consider a stratified.event.tree created using the folloing commands\cr
+#' @note
+#' Consider a stratified.event.tree created using the following commands\cr
 #' \code{input <- list(Variable("age",list(Category("old"), Category("medium"),
 #' Category("new"))),Variable("state", list(Category("solid"),
-#' ("liquid"), Category("steam"))), Variable("costumer", list(Category("good"),
-#' Category("average"), Category("very bad"), Category("bad"))))} \cr
+#' Category("liquid"), Category("steam"))), Variable("costumer",
+#' list(Category("good"), Category("average"), Category("very bad"),
+#' Category("bad"))))} \cr
 #' \code{et.manual <- Stratified.event.tree(input)} \cr
 #'
 setMethod("Stratified.event.tree",
