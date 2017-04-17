@@ -22,3 +22,4 @@ boolean
 The \code{PairwisePosition } function identifies if two situations are in
 the same position given that they are in the same stage.
 }
+

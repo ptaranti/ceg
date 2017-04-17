@@ -33,3 +33,4 @@ level of a CEG.
 \code{\link{PositionVector}}, \code{\link{PositionStage}} and
          \code{\link{PairwisePosition}}
 }
+

@@ -28,3 +28,4 @@ are in levels greater than the target level.
 \seealso{
 \code{\link{TruncatedPath}}
 }
+

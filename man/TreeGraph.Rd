@@ -44,3 +44,4 @@ list: \itemize{
 A function to produce the data structure needed to plot Event and Staged
 trees using \pkg{RGraphviz}.
 }
+

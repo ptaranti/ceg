@@ -14,3 +14,4 @@ StratifiedEventTreeGraph(event.tree)
 \description{
 StratifiedEventTreeGraph
 }
+

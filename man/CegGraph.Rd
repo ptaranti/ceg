@@ -35,3 +35,4 @@ to be plotted using the package Rgraphviz.
 \seealso{
 It uses \code{PositionVector}
 }
+

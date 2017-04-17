@@ -3,10 +3,10 @@
 \docType{methods}
 \name{Stratified.event.tree}
 \alias{Stratified.event.tree}
-\alias{Stratified.event.tree,missing-method}
 \alias{Stratified.event.tree,ANY-method}
 \alias{Stratified.event.tree,data.frame-method}
 \alias{Stratified.event.tree,list-method}
+\alias{Stratified.event.tree,missing-method}
 \title{Stratified.event.tree}
 \usage{
 Stratified.event.tree(x, ...)
@@ -50,3 +50,4 @@ list(Category("good"), Category("average"), Category("very bad"),
 Category("bad"))))} \cr
 \code{et.manual <- Stratified.event.tree(input)} \cr
 }
+

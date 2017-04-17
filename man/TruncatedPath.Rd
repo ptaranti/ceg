@@ -13,3 +13,4 @@ TruncatedPath(ref, k, var, num.category, num.situation, label.category)
 This function identifies the edges arriving at the target level for all
 paths that exist from the root node to each situation in the event tree.
 }
+

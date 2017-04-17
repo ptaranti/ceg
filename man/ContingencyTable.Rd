@@ -23,3 +23,4 @@ in time-slices t_0 or t_k, k>=1.
 \seealso{
 \code{\link{ContingencyTableLevel}} and \code{\link{ContingencyTableVariable}}
 }
+

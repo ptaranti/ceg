@@ -10,3 +10,4 @@ Dinamic.programming S4 Class
 \note{
 Inserted fot future use
 }
+

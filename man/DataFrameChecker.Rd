@@ -19,3 +19,4 @@ data.frame with no void or NA values.
 DataFrameChecker verifies data behaviour and removes NULL and void data from
 a provided data.frame
 }
+

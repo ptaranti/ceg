@@ -31,3 +31,4 @@ list of lists \itemize{
 This function obtain the position structure associated with a particular
 level of a CEG.
 }
+

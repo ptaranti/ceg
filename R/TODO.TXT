@@ -1,0 +1,36 @@
+ceg_model.R:2:# TODO(collazo)  DEFINIR O QUE EH position (slot "list") e o que a difere da estrutura de estagios. Se é igual, o objeto CEG seria descartavel - ele é igual ao staged, os dados são os mesmos. O que muda é o plot.
+ceg_model.R:3:# TODO(collazo)  VRF documentação das funçoes
+ceg_model.R:171:#' @param    position       list       an object ceg.position.# TODO(Collazo) DEFINIR MELHOR POSITION
+cont_table.R:6:#' #TODO(Collazo) definir melhor a funçao  ContingencyTable/ContingencyTableLevel - qual objetivo ou output
+cont_table.R:7:#' @param data (see function DCEG.AHC) # TODO(Collazo) ????
+cont_table.R:32:#' @param data data #TODO(Collazo) definir o que é data (see function DCEG.AHC)
+cont_table.R:68:#' @param data  #TODO(Collazo) definir o que é data
+event_tree.R:10:    #TODO(collazo) indicate needed slots
+lib_funtions.R:50:#'  TODO(Collazo)  Verify:: See files 2T.DCEG.ModelSearch.OAHC, CEG.IP.ModelSearch and
+lib_funtions.R:51:#'  TODO(Collazo)  Verify:: CEG.IP.ModelSearch.HS+AHC.
+lib_funtions.R:53:#' TODO(Collazo)  Verify:: See file Position.Retrieve.
+lib_funtions.R:168:#' #  TODO(Collazo) Retirar a marreta do parâmetro de entrada range.color.
+lib_funtions.R:174:#'   TODO(Collazo)   See files 2T.DCEG.ModelSearch.OAHC,
+lib_funtions.R:175:#'   TODO(Collazo)  CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.
+lib_funtions.R:324:#' @param tree    an object event.tree. # TODO(Collazo)  See files 2T.DCEG.ModelSearch.OAHC,
+lib_funtions.R:390:#' # TODO(Collazo)  dizer que quer usar o recurso, senao  taranti limpar o codigo.
+prior_distribution.R:1:# TODO(Collazo) a classe Prior.distribution nao esta sendo usada : A funcao PriorDistribution retorna um vetor e nao um objeto.
+prior_distribution.R:22:#' @param alpha  # TODO(Collazo)  -- see function DCEG.AHC
+prior_distribution.R:79:#' @param alpha  # TODO(Collazo)
+prior_distribution.R:81:#' @return # TODO(Collazo) descrever retorno, se necessario.
+staged_tree.R:5:#'  #TODO(Collazo) quer descrever algo??? lembrar que estamos usando stratified staged tree
+stratified_ceg_model.R:1:# TODO(Collazo) permanece confusao com position e staged.tree
+stratified_ceg_model.R:40:#' @param StratifiedStagedTree    S4 object    TODO(Collazo)  describe
+stratified_ceg_model.R:41:#' @param stages                  list         TODO(Collazo)  describe
+stratified_ceg_model.R:46:#' TODO(taranti) depois de resolvida a confusao entre stage.structure e position
+stratified_event_tree.R:5:#' # TODO(Collazo) se considerar necessario, explicar o que é Stratified.event.tree
+stratified_event_tree.R:18:    path = "list", # TODO(Collazo) Confirmar remover Path
+stratified_event_tree.R:133:#' TODO(Collazo) VRF texto
+stratified_staged_tree.R:1:# TODO(collazo) invewrsao ordem do df  - para gerar erro:
+stratified_staged_tree.R:14:#' #TODO(Collazo) Definir o que é stratified staged.tree
+stratified_staged_tree.R:18:#' #TODO(Collazo) espandir significado dos slots
+stratified_staged_tree.R:126:            # TODO(Collazo)  inserir validador de menor valor (maior ou igual a 1)
+stratified_staged_tree.R:127:            # TODO(Collazo)  alterar variable.order para numeric, e converter para vetor depois, se é somente 1 numero.
+stratified_staged_tree.R:128:            # TODO(Collaz)  aparentemente a implementacao esta errada - qualquer valor diferente de 0 apresenta erro.
+stratified_staged_tree.R:172:#' TODO(Collazo) VRF texto
+stratified_staged_tree.R:352:#' @param range.color  (numeric) - it chooses the color source. #TODO(Collazo) esclarescer esse item

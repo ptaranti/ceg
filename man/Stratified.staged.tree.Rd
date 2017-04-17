@@ -3,10 +3,10 @@
 \docType{methods}
 \name{Stratified.staged.tree}
 \alias{Stratified.staged.tree}
-\alias{Stratified.staged.tree,missing,ANY,ANY-method}
 \alias{Stratified.staged.tree,ANY,ANY,ANY-method}
-\alias{Stratified.staged.tree,data.frame,numeric,numeric-method}
 \alias{Stratified.staged.tree,Stratified.event.tree,list,ANY-method}
+\alias{Stratified.staged.tree,data.frame,numeric,numeric-method}
+\alias{Stratified.staged.tree,missing,ANY,ANY-method}
 \title{Stratified.staged.tree}
 \usage{
 Stratified.staged.tree(x, y, z, ...)
@@ -68,3 +68,4 @@ Looking the graph, you can create the stage structure, such as follows:\cr
 Finally you can create your sStratified.event.tree:\cr
 \code{st.manual <- Stratified.staged.tree(et.manual, stage.structure)}
 }
+

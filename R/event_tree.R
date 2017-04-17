@@ -1,4 +1,4 @@
-
+# Class defined for future use
 
 #' Event.tree S4 object
 #'

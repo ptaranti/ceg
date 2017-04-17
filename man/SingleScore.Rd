@@ -12,3 +12,4 @@ SingleScore(stage, prior.distribution, contingency.table)
 \description{
 This function calculates the score associated with a particular level.
 }
+

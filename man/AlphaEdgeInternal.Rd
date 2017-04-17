@@ -20,3 +20,4 @@ AlphaEdgeInternal(level, tree, alpha)
 \code{AlphaEdgeInternal} yields the prior distribution for each situation
 in the event tree associated with a particular variable.
 }
+

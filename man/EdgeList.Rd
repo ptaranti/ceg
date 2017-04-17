@@ -19,3 +19,4 @@ edges that emanate from a vertice.
 \description{
 Function EdgeList genereates the list of edges of an event tree.
 }
+

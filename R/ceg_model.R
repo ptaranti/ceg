@@ -1,6 +1,8 @@
 
+# TODO(Taranti) Trasferir todo codigo para stratified
 # TODO(collazo)  DEFINIR O QUE EH position (slot "list") e o que a difere da estrutura de estagios. Se é igual, o objeto CEG seria descartavel - ele é igual ao staged, os dados são os mesmos. O que muda é o plot.
 # TODO(collazo)  VRF documentação das funçoes
+# TODO(Taranti)  mudar função plot para usar positon slot
 
 #' Ceg.model S4 class
 #'
@@ -9,18 +11,14 @@
 
 #'
 #' @slot staged.tree "Staged.Tree"
-#' @slot position list.
+#' @slot position list
 #'
-#' @export
-#'
-#' @examples
 #'
 #'@include staged_tree.R
 setClass("Ceg.model",
          representation(staged.tree = "Staged.tree",
                         position = "list")
 )
-
 
 
 
@@ -63,7 +61,7 @@ setMethod(
 
     position <- CegPosition(x@staged.tree@stage.structure,
                             x@staged.tree@event.tree@num.category,
-                            x@staged.tree@event.tree@num.situation[1:4])
+                            x@staged.tree@event.tree@num.situation) # TODO (Taranti) transferir para construtores e salvar valor no slot position.
 
     ceg.graph.simple <- CegGraphSimple(x@staged.tree@event.tree, position)
 

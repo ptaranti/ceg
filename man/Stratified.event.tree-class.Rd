@@ -7,3 +7,4 @@
 \description{
 # TODO(Collazo) se considerar necessario, explicar o que é Stratified.event.tree
 }
+

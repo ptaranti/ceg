@@ -28,3 +28,4 @@ vector - node colors
 \description{
 This function yields the node colors.
 }
+

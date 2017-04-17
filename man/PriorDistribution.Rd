@@ -24,3 +24,4 @@ the event tree.
 \seealso{
 \code{\link{PriorVariable}}
 }
+

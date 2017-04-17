@@ -24,3 +24,4 @@ The function \code{PriorVariable}  yields the prior distribution for each
 \code{\link{Prior.distribution}} and
          \code{\link{alpha.edge.internal}}
 }
+

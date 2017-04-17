@@ -27,3 +27,4 @@ stage of a CEG.
 \seealso{
 \code{\link{PairwisePosition}}
 }
+

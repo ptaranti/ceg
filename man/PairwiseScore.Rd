@@ -13,3 +13,4 @@ PairwiseScore(stage.1, stage.2, vec.score, prior.distribution,
 \description{
 This function calculates the score asscoiated with a pair of merged stages.
 }
+

@@ -21,3 +21,4 @@ plotting.
 \examples{
 plot(stratified.staged.tree)
 }
+

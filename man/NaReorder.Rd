@@ -12,3 +12,4 @@ NaReorder(x, order.score)
 \description{
 This function reorders a vector that had an element changed to NA.
 }
+

@@ -16,3 +16,4 @@ vector
 \description{
 This function genereates the nodes of an event tree.
 }
+

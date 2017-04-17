@@ -12,3 +12,4 @@ SingleReorder(x, order.score, score, na.count)
 \description{
 This function reorders a vector that had an element changed.
 }
+

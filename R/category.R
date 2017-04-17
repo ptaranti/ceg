@@ -13,7 +13,6 @@ setClass(
   "Category",
   representation(
     label = "character"
-    #TODO(Collazo) Hyper_Stage is for future use
   ))
 
 

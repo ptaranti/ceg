@@ -17,3 +17,4 @@ vector
 \description{
 This function change a list of vectors in a vector.
 }
+

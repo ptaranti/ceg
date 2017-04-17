@@ -27,3 +27,4 @@ TODO(taranti) depois de resolvida a confusao entre stage.structure e position
 \seealso{
 \code{\link{StratifiedCegModel}}
 }
+

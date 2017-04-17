@@ -12,3 +12,4 @@ KeepLexOrder(ref, order.vector, score.vector)
 \description{
 This function keep a lexicographical order of a vector
 }
+

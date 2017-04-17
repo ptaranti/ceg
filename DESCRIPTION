@@ -25,12 +25,12 @@ Depends:
 License: License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1
 Suggests:
     testthat
 URL: https://www.r-project.org, http://www.another.url
 BugReports: https://pkgname.bugtracker.url, rodrigocollazo@gmail.com
-Collate: 
+Collate:
     'category.R'
     'staged_tree.R'
     'ceg_model.R'

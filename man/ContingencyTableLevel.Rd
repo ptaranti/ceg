@@ -21,3 +21,4 @@ a matrix. Each row represents the contigency table of a situation
 This function calculates the contigency tables associated with a specific
 variable in time-slices t_0 or t_k, k>=1.
 }
+
