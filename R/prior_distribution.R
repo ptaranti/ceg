@@ -1,4 +1,4 @@
-# TODO(Collazo) a classe Prior.distribution nao esta sendo usada : A funcao PriorDistribution retorna um vetor e nao um objeto.
+
 
 #' Prior.distribution
 #'
@@ -18,8 +18,9 @@ setClass("Prior.distribution"
 #' conservative and uniform assumptions for the hyperparameter 'alpha' over
 #' the event tree.
 #'
-#' @param tree  "EventTree" a S4 object that represents an event tree.
-#' @param alpha  # TODO(Collazo)  -- see function DCEG.AHC
+#' @param stratified.event.tree  "Stratified.event.tree" a S4 object that represents an event tree.
+#' @param alpha  numeric this represents a phantom sample used to initialize the
+#'  learning process
 #'
 #' @return  prior is a list of matrices. Each matrix is a collection of
 #' vectors that correspond to a prior for each situation associated with
@@ -28,12 +29,11 @@ setClass("Prior.distribution"
 #'
 #' @seealso \code{\link{PriorVariable}}
 #'
-# @examples
-PriorDistribution <- function(tree, alpha) {
-  alpha.edge <- lapply(1:(tree@num.variable), function(x)
-    AlphaEdgeInternal(x, tree, alpha))
-  prior <- lapply(1:(tree@num.variable),
-                  function(x) PriorVariable(tree@num.situation[x],
+PriorDistribution <- function(stratified.event.tree, alpha) {
+  alpha.edge <- lapply(1:(stratified.event.tree@num.variable), function(x)
+    AlphaEdgeInternal(x, stratified.event.tree, alpha))
+  prior <- lapply(1:(stratified.event.tree@num.variable),
+                  function(x) PriorVariable(stratified.event.tree@num.situation[x],
                                              alpha.edge[[x]]))
   return(prior)
 }
@@ -52,11 +52,8 @@ PriorDistribution <- function(tree, alpha) {
 #' @return   a matrix. The number of rows is equal to the number of situations
 #' associated with a particular variable.
 #'
-# @export
-#'
-# @examples
-#' @seealso  \code{\link{Prior.distribution}} and
-#'          \code{\link{alpha.edge.internal}}
+#' @seealso  \code{Prior.distribution} and
+#'          \code{AlphaEdgeInternal}
 #'
 PriorVariable <- function(ref, alpha.edge) {
   if (ref < 1)
@@ -75,23 +72,23 @@ PriorVariable <- function(ref, alpha.edge) {
 #' in the event tree associated with a particular variable.
 #'
 #' @param level "numeric" controls the number of descendent situations
-#' @param tree  "EventTree" a S4 object that represents an event tree.
-#' @param alpha  # TODO(Collazo)
+#' @param stratified.event.tree  "Stratified.event.tree" a S4 object that
+#' represents an event tree.
+#' @param alpha  numeric this represents a phantom sample used to initialize the
+#'  learning process
 #'
-#' @return # TODO(Collazo) descrever retorno, se necessario.
-# @export
+#' @return numeric It is the hyperparameter of the Dirichlet prior distribution
+#'  for each situation in the event tree associated with a particular variable.
 #'
-# @examples
-#'
-AlphaEdgeInternal <- function(level, tree, alpha) {
-  if (level <= tree@num.variable) {
+AlphaEdgeInternal <- function(level, stratified.event.tree, alpha) {
+  if (level <= stratified.event.tree@num.variable) {
     variable <- level
-    result <- rep(alpha / (tree@num.category[variable] * tree@num.situation[level]),
-                  tree@num.category[variable])
+    result <- rep(alpha / (stratified.event.tree@num.category[variable] * stratified.event.tree@num.situation[level]),
+                  stratified.event.tree@num.category[variable])
   } else {
-    variable <- level - tree@num.variable
-    result <- rep(alpha / (tree@num.category[variable] * tree@num.situation[level]),
-                  tree@num.category[variable]) * (tree@num.slice - 1)
+    variable <- level - stratified.event.tree@num.variable
+    result <- rep(alpha / (stratified.event.tree@num.category[variable] * stratified.event.tree@num.situation[level]),
+                  stratified.event.tree@num.category[variable]) * (stratified.event.tree@num.slice - 1)
   }
   return(result)
 }

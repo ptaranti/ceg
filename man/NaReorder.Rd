@@ -7,7 +7,9 @@
 NaReorder(x, order.score)
 }
 \arguments{
-\item{order.score}{}
+\item{x}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{order.score}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }
 \description{
 This function reorders a vector that had an element changed to NA.

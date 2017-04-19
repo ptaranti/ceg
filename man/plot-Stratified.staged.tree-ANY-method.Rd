@@ -5,10 +5,10 @@
 \alias{plot,Stratified.staged.tree,ANY-method}
 \title{Staged.tree Plotting}
 \usage{
-\S4method{plot}{Stratified.staged.tree,ANY}(x, y, ...)
+\S4method{plot}{Stratified.staged.tree,ANY}(x)
 }
 \arguments{
-\item{Staged.tree}{}
+\item{x}{Stratified.staged.tree S4 object}
 }
 \value{
 the plot and also a pdf version is saved in the working directory.
@@ -19,6 +19,6 @@ implementation depends on \code{Rgraphviz} package from Bioconductor for
 plotting.
 }
 \examples{
-plot(stratified.staged.tree)
+\dontrun{plot(stratified.staged.tree)}
 }
 

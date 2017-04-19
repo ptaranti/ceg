@@ -4,21 +4,24 @@
 \alias{ContingencyTable}
 \title{ContingencyTable}
 \usage{
-ContingencyTable(data, event.tree)
+ContingencyTable(data, stratified.event.tree)
 }
 \arguments{
-\item{data}{(see function DCEG.AHC) # TODO(Collazo) ????}
+\item{data}{a data.frame structure  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{event.tree}{an object of type "Event.tree"}
+\item{stratified.event.tree}{an object of type "Stratified.event.tree"}
 }
 \value{
 a list of matrices. Each matrix is the contigency table associate
         with a particular variable.
 }
 \description{
-This function calculates the contigency tables associated with each variable
-in time-slices t_0 or t_k, k>=1.
-#TODO(Collazo) definir melhor a funçao  ContingencyTable/ContingencyTableLevel - qual objetivo ou output
+This function calculates the contigency tables associated with each variable.
+This enables us to calculate the number of units that visit each situation
+in an Stratified.event.tree.
+This function is used to generate a stratified.staged.tree when a well
+behavioured data.frame is provided as an argument to Stratified.staged.tree()
+constructor.
 }
 \seealso{
 \code{\link{ContingencyTableLevel}} and \code{\link{ContingencyTableVariable}}

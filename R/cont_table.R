@@ -1,11 +1,15 @@
 
 #' ContingencyTable
 #'
-#' This function calculates the contigency tables associated with each variable
-#' in time-slices t_0 or t_k, k>=1.
-#' #TODO(Collazo) definir melhor a funçao  ContingencyTable/ContingencyTableLevel - qual objetivo ou output
-#' @param data (see function DCEG.AHC) # TODO(Collazo) ????
-#' @param event.tree an object of type "Event.tree"
+#' This function calculates the contigency tables associated with each variable.
+#' This enables us to calculate the number of units that visit each situation
+#' in an Stratified.event.tree.
+#' This function is used to generate a stratified.staged.tree when a well
+#' behavioured data.frame is provided as an argument to Stratified.staged.tree()
+#' constructor.
+#'
+#' @param data a data.frame structure  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param stratified.event.tree an object of type "Stratified.event.tree"
 #'
 #' @return a list of matrices. Each matrix is the contigency table associate
 #'         with a particular variable.
@@ -15,10 +19,10 @@
 #'
 #' @seealso \code{\link{ContingencyTableLevel}} and \code{\link{ContingencyTableVariable}}
 #'
-ContingencyTable <- function(data, event.tree) {
+ContingencyTable <- function(data, stratified.event.tree) {
   contingency.table <-
-    lapply(1:(event.tree@num.variable), function(x)
-      ContingencyTableLevel(x, data, event.tree))
+    lapply(1:(stratified.event.tree@num.variable), function(x)
+      ContingencyTableLevel(x, data, stratified.event.tree))
   return(contingency.table)
 }
 
@@ -26,32 +30,29 @@ ContingencyTable <- function(data, event.tree) {
 #' ContingencyTableLevel
 #'
 #' This function calculates the contigency tables associated with a specific
-#' variable in time-slices t_0 or t_k, k>=1.
+#' variable.
 #'
 #' @param level numeric - identifies the level in the infinite event tree.
-#' @param data data #TODO(Collazo) definir o que é data (see function DCEG.AHC)
-#' @param tree  an "Event.tree" S4 object
+#' @param data a data.frame structure  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param stratified.event.tree  a Stratified.event.tree S4 object
 #'
 #' @return  a matrix. Each row represents the contigency table of a situation
-#'       k associate with a particular variable in time-slice t_0 or t_k, k>=1.
-#  @export
+#'       k associate with a particular variable.
 #'
-# @examples
-
-ContingencyTableLevel <- function(level, data, event.tree) {
-  if (level <= event.tree@num.variable) {
+ContingencyTableLevel <- function(level, data, stratified.event.tree) {
+  if (level <= stratified.event.tree@num.variable) {
     variable <- level
-    result <- ContingencyTableVariable(variable, data, event.tree)
+    result <- ContingencyTableVariable(variable, data, stratified.event.tree)
   } else {
-    variable <- level - event.tree@num.variable
-    aux <- variable + event.tree@num.variable
+    variable <- level - stratified.event.tree@num.variable
+    aux <- variable + stratified.event.tree@num.variable
     result <-
-      sapply(1:(event.tree@num.slice - 1), function(x)
+      sapply(1:(stratified.event.tree@num.slice - 1), function(x)
         ContingencyTableVariable(aux,
-                            data[, (1 + (x - 1) * event.tree@num.variable):(variable + x * event.tree@num.variable)], event.tree))
+                            data[, (1 + (x - 1) * stratified.event.tree@num.variable):(variable + x * stratified.event.tree@num.variable)], stratified.event.tree))
     result <- apply(result, 1, sum)
     dim(result) <-
-      c(event.tree@num.situation[aux], event.tree@num.category[variable])
+      c(stratified.event.tree@num.situation[aux], stratified.event.tree@num.category[variable])
   }
   return(result)
 }
@@ -64,19 +65,17 @@ ContingencyTableLevel <- function(level, data, event.tree) {
 #' This function calculates the contigency tables associated with a specific
 #' variable according to a time-slice.
 #'
-#' @param variable numeric
-#' @param data  #TODO(Collazo) definir o que é data
-#' @param tree an object of type 'event.tree' (see function event.tree)
+#' @param variable numeric  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param data  a data.frame structure  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param stratified.event.tree an object of type Stratified.event.tree
 #'
 #' @return  a matrix. Each row represents the contigency table of a situation
 #'          k associate with a particular variable.
-# TODO (Collazo) VRF texto: It is the same function of CEG_IP_ModelSearch and CEG_IP_ModelSearch_HS+AHC.
-#
-#
-ContingencyTableVariable <- function(variable, data, tree) {
-  contingency.table.var <- ftable(data[, 1:variable])
+#'
+ContingencyTableVariable <- function(variable, data, stratified.event.tree) {
+  contingency.table.var <- stats::ftable(data[, 1:variable])
   contingency.table.var <-
-    sapply(seq_len(tree@num.situation[variable]), function(x)
+    sapply(seq_len(stratified.event.tree@num.situation[variable]), function(x)
       contingency.table.var[x,])
   # contingency_table_var<-lapply(seq_len(tree@num_situation[variable]),function(x)
   #   contingency_table_var[x,]) To return a list.

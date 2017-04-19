@@ -5,13 +5,15 @@
 #'
 #'  @include heuristic_model_search_algorithm.R
 #'
-#' @slot score numeric.
-#' @slot cluster list.
+#' @slot score numeric  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot cluster list  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
-#' @return
-#' @export
+# @return
+# @export
 #'
-#' @examples
+#'
+#'
+# @examples
 setClass("OAHC",
          representation(score = "numeric",
                         cluster = "list"),
@@ -42,12 +44,12 @@ setMethod(
 #'
 #' @param level  numeric   - level under optimisation
 #' @param prior.distribution  (list of matrices) - see function
-#' prior.distribution
+#' \code{prior.distribution}
 #' @param contingency.table (list of matrices) - see function ContingencyTable
-#' @param tree  an object 'event.tree' (see function event.tree)
+#' @param tree  an object 'Event.tree'
 #'
 #' @return a OAHC S4 object
-#' @export
+# @export
 #'
 #' @seealso SingleScore,  PairwiseScore, SingleReorder, NaReorder, KeepLexOrder
 # It is required the following functions:
@@ -263,10 +265,10 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
 #'
 #' This function reorders a vector that had an element changed.
 #'
-#' @param x
-#' @param order.score
-#' @param score
-#' @param na.count
+#' @param x TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param order.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param na.count TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 SingleReorder <- function(x, order.score, score, na.count) {
   const <- length(score) - na.count
@@ -300,9 +302,9 @@ SingleReorder <- function(x, order.score, score, na.count) {
 #' This function keep a lexicographical order of a vector
 #  that have had one element
 #'
-#' @param ref
-#' @param order.vector
-#' @param score.vector
+#' @param ref TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param order.vector TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param score.vector TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 #'
 KeepLexOrder <- function(ref, order.vector, score.vector) {
@@ -328,11 +330,11 @@ KeepLexOrder <- function(ref, order.vector, score.vector) {
 #'
 #' This function calculates the score asscoiated with a pair of merged stages.
 #'
-#' @param stage.1
-#' @param stage.2
-#' @param vec.score
-#' @param prior.distribution
-#' @param contingency.table
+#' @param stage.1 TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param stage.2 TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param vec.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param prior.distribution TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param contingency.table TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 #'
 PairwiseScore <- function(stage.1, stage.2, vec.score, prior.distribution,
@@ -355,9 +357,9 @@ PairwiseScore <- function(stage.1, stage.2, vec.score, prior.distribution,
 #'
 #' This function calculates the score associated with a particular level.
 #'
-#' @param stage
-#' @param prior.distribution
-#' @param contingency.table
+#' @param stage TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param prior.distribution TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param contingency.table TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 SingleScore <- function(stage, prior.distribution, contingency.table) {
   alpha <- prior.distribution[stage,]
@@ -372,8 +374,8 @@ SingleScore <- function(stage, prior.distribution, contingency.table) {
 #'
 #' This function reorders a vector that had an element changed to NA.
 #'
-#' @param x
-#' @param order.score
+#' @param x TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param order.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 NaReorder <- function(x, order.score) {
   flag <- which(order.score == x)

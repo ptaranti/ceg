@@ -20,7 +20,9 @@ NodeColor(num.variable, num.situation, num.category, stage.structure,
 \item  list of vectors - stage structure
 }}
 
-\item{range.color}{(numeric) - it chooses the color source. #TODO(Collazo) esclarescer esse item}
+\item{range.color}{(numeric) - it chooses the color source. Default value 1L
+a 8 color pallete will be used. Any other value will leads to a 501 colors
+pallete usage.}
 }
 \value{
 vector - node colors

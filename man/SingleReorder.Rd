@@ -7,7 +7,13 @@
 SingleReorder(x, order.score, score, na.count)
 }
 \arguments{
-\item{na.count}{}
+\item{x}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{order.score}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{score}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{na.count}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }
 \description{
 This function reorders a vector that had an element changed.

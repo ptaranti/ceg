@@ -15,7 +15,7 @@ setClass(
     label.category = "list",
     num.situation = "numeric",
     num.slice = "numeric",
-    path = "list", # TODO(Collazo) Confirmar remover Path
+    merged.list = "list",
     hyper.stage = "list"),
   contains = "Event.tree"
   #prototype(  )
@@ -31,7 +31,7 @@ setMethod(
                         label.category,
                         num.situation,
                         num.slice,
-                        path,
+                        merged.list,
                         hyper.stage){
     cat("~~~ Stratified.event.tree: initializator ~~~ \n")
     # Assignment of the slots
@@ -40,7 +40,7 @@ setMethod(
     .Object@label.category <- label.category
     .Object@num.situation <- num.situation
     .Object@num.slice <- num.slice
-    .Object@path <- path
+    .Object@merged.list = merged.list
     .Object@hyper.stage <- hyper.stage
     return(.Object)
     # return of the object
@@ -94,6 +94,11 @@ setMethod("Stratified.event.tree",
 
             data.frame <- x
 
+            if (!CheckForCleanData(data.frame)) {
+              stop("Consider using CheckAndCleanData() function")
+            }
+
+
             num.variable <- length(data.frame[1, ])
 
             num.slice <- ncol(data.frame) / num.variable
@@ -130,7 +135,7 @@ setMethod("Stratified.event.tree",
 #' @rdname Stratified.event.tree
 #' @param Arguments (list) , list of Variable S4 objects, in the expected order
 #' of plotting. \cr
-#' TODO(Collazo) VRF texto
+#'
 #' @note
 #' Consider a stratified.event.tree created using the following commands\cr
 #' \code{input <- list(Variable("age",list(Category("old"), Category("medium"),
@@ -150,7 +155,7 @@ setMethod("Stratified.event.tree",
             if (length(variable.list) == 0)
               cat("list coul not be void")
             for (variable in variable.list) {
-              if (!is(variable, "Variable"))
+              if (!methods::is(variable, "Variable"))
                 stop(" the input must be a list of ceg::Variable S4 objects")
             }
 
@@ -165,16 +170,10 @@ setMethod("Stratified.event.tree",
             # }
             for (x in 1:num.variable) {
 
-
-              variable <- as(variable.list[[x]], "Variable")
-
-
+              variable <- methods::as(variable.list[[x]], "Variable")
               temp.category.label.vector <- c()
               for (i in 1:length(variable@categories)) {
-                category <- as(variable@categories[[i]], "Category")
-                # print(category)
-
-
+                category <- methods::as(variable@categories[[i]], "Category")
                 temp.category.label.vector[[i]] <- category@label
               }
               label.category[[x]] <- temp.category.label.vector
@@ -194,7 +193,7 @@ setMethod("Stratified.event.tree",
             })
 
             hyper.stage <- list()
-            path <- list()
+            mergedlist <- list()
 
             return(
               new(
@@ -204,7 +203,7 @@ setMethod("Stratified.event.tree",
                 label.category,
                 num.situation,
                 num.slice,
-                path,
+                mergedlist,
                 hyper.stage
               )
             )
@@ -218,12 +217,12 @@ setMethod("Stratified.event.tree",
 #' that exist from the root node to each situation in the event tree that
 #' are in levels greater than the target level.
 #'
-#' @param    k    numeric
-#' @param    num.variable
-#' @param    num.situation
-#' @param    label.category
-#' @param    num.category
-#' @return   label   a vector
+#' @param    k    numeric TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param    num.variable TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param    num.situation TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param    label.category TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param    num.category TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @return   label   a vector TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 # @examples
 #
@@ -265,12 +264,12 @@ LabelStage <-
 #' This function identifies the edges arriving at the target level for all
 #' paths that exist from the root node to each situation in the event tree.
 #'
-#' @param ref
-#' @param k
-#' @param var
-#' @param num.category
-#' @param num.situation
-#' @param label.category
+#' @param ref TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param k TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param var TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param num.category TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param num.situation TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param label.category TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 # @return
 # @export
@@ -299,22 +298,27 @@ TruncatedPath <- function(ref,
 #' implementation depends on \code{Rgraphviz} package from Bioconductor for
 #' plotting.
 #'
-#' @param Stratified.event.tree
+#' @param x Stratified.event.tree S4 object
 #'
 #' @return the plot and also a pdf version is saved in the working directory.
 #' @export
 #'
 #' @examples
-#' plot(stratified.event.tree)
+#' \dontrun{plot(stratified.event.tree)}
 setMethod(
   f = "plot",
   signature = "Stratified.event.tree",
-  definition = function(x,y,...){
+  definition = function(x){
 
     stratified.event.tree.graph <- StratifiedEventTreeGraph(x)
 
 
-    g <- new("graphNEL", nodes = stratified.event.tree.graph$node$nodes, edgeL = stratified.event.tree.graph$edge$edges, edgemode = "directed")
+    g <- new(
+      "graphNEL",
+      nodes = stratified.event.tree.graph$node$nodes,
+      edgeL = stratified.event.tree.graph$edge$edges,
+      edgemode = "directed"
+      )
 
     # 1.  Atributos do Grafico - Gerais
     attrsAtt <- list()
@@ -326,7 +330,7 @@ setMethod(
     #  2.  atributos de nós
     # mudando o nome de nós
     nodes.label.list <- stratified.event.tree.graph$node$nodes
-    names(nodes.label.list) <- nodes(g)
+    names(nodes.label.list) <- graph::nodes(g)
     nAttrs <- list()
     #nAttrs$label <- c("s0"="rooooooot", "s2"="test")
     nAttrs$label <- nodes.label.list
@@ -336,20 +340,20 @@ setMethod(
     #opção 1 - atribuindo todos os nomes usando lista ordenada das arestas para atribuição
     #edgesLabelList <-c("nome-01", "nome-02","nome-03","nome-04","nome-05","nome-06","nome-07","nome-08","nome-09", "nome-10","nome-11", "nome-12","nome-13","nome-14","nome-15","nome-16","nome-17","nome-18","nome-19", "nome-20","nome-21", "nome-22","nome-23","nome-24","nome-25","nome-26","nome-27","nome-28","nome-29", "nome-30","nome-31", "nome-32","nome-33","nome-34","nome-35","nome-36","nome-37","nome-38","nome-39", "nome-40","nome-41", "nome-42")
     edges.label.list <- stratified.event.tree.graph$edge$label
-    names(edges.label.list) <- edgeNames(g)
+    names(edges.label.list) <- graph::edgeNames(g)
     eAttrs <- list()
     eAttrs$label <- edges.label.list
 
     # Inserindo cores
     nAttrs$fillcolor <- stratified.event.tree.graph$node$color
-    names(nAttrs$fillcolor) <- nodes(g)
-    graphics.off()
-    par("mar")
-    par(mar=c(1,1,1,1))
+    names(nAttrs$fillcolor) <- graph::nodes(g)
+    grDevices::graphics.off()
+    graphics::par("mar")
+    graphics::par(mar = c(1, 1, 1, 1))
     Rgraphviz::plot(g, main = "Stratified Event Tree Graph", nodeAttrs = nAttrs, edgeAttrs = eAttrs, attrs = attrsAtt)
-    pdf("./stratified-event-tree-plot.pdf",  width = 8, height = 6, title = "")
+    grDevices::pdf("./stratified-event-tree-plot.pdf",  width = 8, height = 6, title = "")
     Rgraphviz::plot(g, main = "Stratified Event Tree Graph", nodeAttrs = nAttrs, edgeAttrs = eAttrs, attrs = attrsAtt)
-    dev.off()
+    grDevices::dev.off()
   }
 )
 

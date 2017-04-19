@@ -5,10 +5,10 @@
 \alias{plot,Stratified.event.tree,ANY-method}
 \title{Stratified.event.tree Plotting}
 \usage{
-\S4method{plot}{Stratified.event.tree,ANY}(x, y, ...)
+\S4method{plot}{Stratified.event.tree,ANY}(x)
 }
 \arguments{
-\item{Stratified.event.tree}{}
+\item{x}{Stratified.event.tree S4 object}
 }
 \value{
 the plot and also a pdf version is saved in the working directory.
@@ -19,6 +19,6 @@ implementation depends on \code{Rgraphviz} package from Bioconductor for
 plotting.
 }
 \examples{
-plot(stratified.event.tree)
+\dontrun{plot(stratified.event.tree)}
 }
 

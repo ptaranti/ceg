@@ -5,19 +5,11 @@
 \alias{Staged.tree-class}
 \title{Staged.tree}
 \description{
-#TODO(Collazo) quer descrever algo??? lembrar que estamos usando stratified staged tree
+Staged.tree
 }
 \section{Slots}{
 
 \describe{
 \item{\code{event.tree}}{Event.tree.}
-
-\item{\code{prior.distribution}}{list.}
-
-\item{\code{contingency.table}}{list.}
-
-\item{\code{stage.structure}}{list.}
-
-\item{\code{model.core}}{numeric.}
 }}
 

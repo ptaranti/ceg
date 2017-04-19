@@ -7,7 +7,17 @@
 TruncatedPath(ref, k, var, num.category, num.situation, label.category)
 }
 \arguments{
-\item{label.category}{}
+\item{ref}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{k}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{var}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{num.category}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{num.situation}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{label.category}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }
 \description{
 This function identifies the edges arriving at the target level for all

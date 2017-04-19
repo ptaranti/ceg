@@ -10,8 +10,8 @@ Dirchlet.distribution
 \section{Slots}{
 
 \describe{
-\item{\code{score}}{numeric.}
+\item{\code{score}}{numeric.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{\code{cluster}}{list.}
+\item{\code{cluster}}{list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }}
 

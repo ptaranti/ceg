@@ -46,11 +46,10 @@ MergeLabels <- function(edge.list,edge,level){
 #' which provides the needed plotting features.
 #' Contributions are wellcomed.
 #'
-#' @param    tree           list       an object event.tree.
-#'  TODO(Collazo)  Verify:: See files 2T.DCEG.ModelSearch.OAHC, CEG.IP.ModelSearch and
-#'  TODO(Collazo)  Verify:: CEG.IP.ModelSearch.HS+AHC.
+#' @param    stratified.event.tree   stratified.event.tree S4 object
+#'
 #' @param    position       list       an object ceg.position.
-#' TODO(Collazo)  Verify:: See file Position.Retrieve.
+#'
 #' @param    range.color    numeric    it chooses the color source.
 #'
 #' @return   list
@@ -67,7 +66,7 @@ MergeLabels <- function(edge.list,edge,level){
 #'    \item weight (vector) - edge weight.
 #'    }
 #'
-CegGraphSimple <- function(tree, position, range.color = 1) {
+CegGraphSimple <- function(stratified.event.tree, position, range.color = 1) {
   node.vector <- c()
   node.variable <- c()
   node.color <- c()
@@ -78,63 +77,63 @@ CegGraphSimple <- function(tree, position, range.color = 1) {
   count.pos <- -1
 
   if (range.color == 1) {
-    color <- palette()
+    color <- grDevices::palette()
     color[1] <- "white"
   } else {
     color <- colors(1)
     color <- color[-21]
   }
 
-  for (var in 1:(tree@num.variable - 1)) {
+  for (var in 1:(stratified.event.tree@num.variable - 1)) {
     start.pos <- count.pos
     edge.var.list <- c()
     num.situation <- length(position[[var]])
     for (stage in 1:num.situation) {
       num.pos <- length(position[[var]][[stage]])
-      pos.next.var <- PositionVector(tree@num.situation[var + 1],
-                                      position[[var + 1]])
+      pos.next.var <- PositionVector(stratified.event.tree@num.situation[var + 1],
+                                     position[[var + 1]])
       for (pos in 1:num.pos) {
         count.pos <- count.pos + 1
         node.vector <- c(node.vector, paste0("w", count.pos))
         node.variable <- c(node.variable, var)
         if (num.pos == 1) node.color <- c(node.color, color[1])
         else node.color <- c(node.color, color[count.color])
-        aux <- (position[[var]][[stage]][[pos]][1] - 1) * tree@num.category[var]
-        aux <- (aux + 1):(aux + tree@num.category[var])
+        aux <- (position[[var]][[stage]][[pos]][1] - 1) * stratified.event.tree@num.category[var]
+        aux <- (aux + 1):(aux + stratified.event.tree@num.category[var])
         edge.var.list <- c(edge.var.list, pos.next.var[aux])
-        edge.weight <- c(edge.weight, rep(round(1 / tree@num.category[var], 2),
-                                          tree@num.category[var]))
+        edge.weight <- c(edge.weight, rep(round(1 / stratified.event.tree@num.category[var], 2),
+                                          stratified.event.tree@num.category[var]))
       }
       if (num.pos != 1) count.color <- count.color + 1
     }
     edge.var.list <- edge.var.list + count.pos
-    dim(edge.var.list) <- c(tree@num.category[var], length(edge.var.list) /
-                              tree@num.category[var])
+    dim(edge.var.list) <- c(stratified.event.tree@num.category[var], length(edge.var.list) /
+                              stratified.event.tree@num.category[var])
     edge.var.list <- as.matrix(edge.var.list)
     for (pos in start.pos:(count.pos - 1)) {
       edge.list[[pos + 2]] <- list()
       aux.edge.var.list <- unique(edge.var.list[,pos - start.pos + 1])
       edge.label <- c(edge.label,sapply(1:length(aux.edge.var.list),
-                                      function(x) MergeLabels(
-                                        edge.var.list[,pos - start.pos + 1],
-                                        aux.edge.var.list[x],
-                                        tree@label.category[[var]])))
+                                        function(x) MergeLabels(
+                                          edge.var.list[,pos - start.pos + 1],
+                                          aux.edge.var.list[x],
+                                          stratified.event.tree@label.category[[var]])))
       edge.list[[pos + 2]]$edges <- paste0("w",aux.edge.var.list)
     }
   }
 
-  var <- tree@num.variable
+  var <- stratified.event.tree@num.variable
   num.pos <- length(position[[var]])
   node.vector <- c(node.vector, paste0("w", count.pos + 1:num.pos))
   node.variable <- c(node.variable, rep(var, num.pos))
   node.color <- c(node.color, rep(color[1], num.pos))
-  aux.label <- tree@label.category[[var]][1]
-  for (i in 2:tree@num.category[var]) {
-    aux.label <- paste0(aux.label,"-",tree@label.category[[var]][i])
+  aux.label <- stratified.event.tree@label.category[[var]][1]
+  for (i in 2:stratified.event.tree@num.category[var]) {
+    aux.label <- paste0(aux.label,"-",stratified.event.tree@label.category[[var]][i])
   }
   edge.label <- c(edge.label,rep(aux.label,num.pos))
-  edge.weight <- c(edge.weight, rep(rep(round(1 / tree@num.category[var], 2),
-                                        tree@num.category[var]), num.pos))
+  edge.weight <- c(edge.weight, rep(rep(round(1 / stratified.event.tree@num.category[var], 2),
+                                        stratified.event.tree@num.category[var]), num.pos))
   ref <- count.pos + num.pos + 1
   for (pos in 1:num.pos) {
     edge.list[[pos + count.pos + 1]] <- list()
@@ -165,14 +164,12 @@ CegGraphSimple <- function(tree, position, range.color = 1) {
 
 
 #' TreeGraph
-#' #  TODO(Collazo) Retirar a marreta do parâmetro de entrada range.color.
 #'
 #' A function to produce the data structure needed to plot Event and Staged
 #' trees using \pkg{RGraphviz}.
 #'
-#' @param tree (list) - an S4 object \code{\link{EventTree}}
-#'   TODO(Collazo)   See files 2T.DCEG.ModelSearch.OAHC,
-#'   TODO(Collazo)  CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.
+#' @param tree (list) - an S4 object \code{Event.tree}
+#'
 #' @param solution  list with two components:
 #' \itemize{
 #' \item numeric - score associated with a level
@@ -213,11 +210,11 @@ TreeGraph <- function(tree, solution = list(), name = c(), range.color = 1){
   nodes <- NodeSet(tree)
   edgeList <- EdgeList(tree,nodes)
   node.label <- NodeLabel(tree@num.variable,tree@num.situation,
-                           tree@num.category,name)
+                          tree@num.category,name)
   edge.label <- EdgeLabel(tree@num.variable,tree@num.situation,
-                           tree@label.category)
+                          tree@label.category)
   node.color <- NodeColor(tree@num.variable,tree@num.situation,
-                           tree@num.category,solution,range.color)
+                          tree@num.category,solution,range.color)
   graph <- list()
   graph$node <- list()
   graph$node$nodes <- nodes
@@ -279,8 +276,8 @@ NodeLabel <- function(num.variable, num.situation, num.category, label) {
 #'
 #' This function change a list of vectors in a vector.
 #'
-#' @param x list of vectors
-#' @param n numeric
+#' @param x list of vectors TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param n numeric TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 #' @return vector
 #'
@@ -321,22 +318,22 @@ EdgeLabel <- function(num.variable, num.situation, label) {
 #'
 #' Function EdgeList genereates the list of edges of an event tree.
 #'
-#' @param tree    an object event.tree. # TODO(Collazo)  See files 2T.DCEG.ModelSearch.OAHC,
-#' CEG.IP.ModelSearch and TODO CEG.IP.ModelSearch.HS+AHC.
+#' @param stratified.event.tree    Stratified.event.tree
+#'
 #' @param node    (vector) - an object generated by the function node.list
 #'
 #' @return list of lists - each list component is a vector that represents the
 #' edges that emanate from a vertice.
 #'
-EdgeList <- function(tree, node) {
-  start.situation <- cumsum(tree@num.situation)
-  max <- sum(tree@num.situation) +
-    tree@num.situation[tree@num.variable] * tree@num.category[tree@num.variable]
+EdgeList <- function(stratified.event.tree, node) {
+  start.situation <- cumsum(stratified.event.tree@num.situation)
+  max <- sum(stratified.event.tree@num.situation) +
+    stratified.event.tree@num.situation[stratified.event.tree@num.variable] * stratified.event.tree@num.category[stratified.event.tree@num.variable]
   start.situation <- start.situation + 1
   start.situation <- c(1, start.situation)
   edge.list <-
     lapply(1:max, function(x)
-      EdgeSituation(x, start.situation, tree@num.category))
+      EdgeSituation(x, start.situation, stratified.event.tree@num.category))
   names(edge.list) <- node
   return(edge.list)
 }
@@ -377,81 +374,47 @@ EdgeSituation <- function(situation, start.situation, num.category) {
 
 
 
-#' DataFrameChecker
+#' CheckAndCleanData
 #'
-#' DataFrameChecker verifies data behaviour and removes NULL and void data from
-#' a provided data.frame
+#' RemoveRowsWithNAandVoid remove all rows with NA and void ("") values data
+#' from a data.frame
 #'
 #' @param data.frame  a data frame to be used to create stratified event/staged
 #' trees
 #'
 #' @return data.frame with no void or NA values.
 #'
-#' # TODO(Collazo)  dizer que quer usar o recurso, senao  taranti limpar o codigo.
+#' @export
 #'
-DataFrameChecker <- function(data.frame) {
-  if (!is(data.frame, "data.frame")) {
+CheckAndCleanData <- function(data.frame) {
+  if (!methods::is(data.frame, "data.frame")) {
     message("Input is not a data frame, prease check it")
     return(NULL)
   }
 
-  message("data.frame is ready!")
+  # change any "" or "   "  to NA
+  data.frame <- as.data.frame(apply(data.frame,2,function(x)gsub("^\\s*$", NA,x)))
 
-  data.frame[data.frame == ""] <- NA
 
-  if (!anyNA(data.frame)) return(data.frame)
+  if (anyNA(data.frame)) {
+    message("The data frame have rows with <NA> or absent values (\"\")")
+    message("All these rows were removed")
+  }
+  else message("Your data do not contain rows with <NA>, absent, or whitespace  values")
 
-  message("All rows with <NA> or absent values were removed")
-
-  return(Z.NA.Keep(data.frame))
+  out  <- data.frame[!(rowSums(is.na(data.frame))),]
+  return(out)
 }
 
 
-#' Z.NA.Keep
-#'
-#' Remove void and NA values from dataframe.
-#' The code is strongly based on the one provide by Jerry T. in
-#'  \link{http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame}.
-#'
-#' @seealso
-#' \link{http://stackoverflow.com/a/30461945/2292993}.
-#'
-#'
-#' @param df
-#' @param col
-#' @param n
-#'
-#' @note credit: http://stackoverflow.com/a/30461945/2292993
-#'
-Z.NA.Keep <- function(df, col = NULL, n = 0) {
-  if (!is.null(col)) {
-    df.temp = df[, col]
-  } else {
-    df.temp = df
+CheckForCleanData <- function(data.frame) {
+  out <- TRUE
+  data.frame <- as.data.frame(apply(data.frame,2,function(x)gsub("^\\s*$", NA,x)))
+  if (anyNA(data.frame)) {
+    message("Your data contain rows with <NA>, absent, or whitespace  values")
+    out <- FALSE
   }
-
-  if (length(n) == 1) {
-    if (n == 0) {
-      # simply call complete.cases which might be faster
-      result = df[complete.cases(df.temp), ]
-    } else {
-      # credit: http://stackoverflow.com/a/30461945/2292993
-      log <- apply(df.temp, 2, is.na)
-      logindex <- apply(log, 1, function(x)
-        sum(x) == n)
-      result = df[logindex,]
-    }
-  }
-
-  if (length(n) == 2) {
-    min = n[1]
-    max = n[2]
-    log <- apply(df.temp, 2, is.na)
-    logindex <-
-      apply(log, 1, function(x) {
-        sum(x) >= min && sum(x) <= max
-      })
-    result = df[logindex,]
-  }
-  return(result)
+  return(out)
 }
+
+

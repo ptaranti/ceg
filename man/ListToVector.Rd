@@ -7,9 +7,9 @@
 ListToVector(x, n)
 }
 \arguments{
-\item{x}{list of vectors}
+\item{x}{list of vectors TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{n}{numeric}
+\item{n}{numeric TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }
 \value{
 vector

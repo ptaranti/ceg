@@ -13,6 +13,6 @@ of Categories. It is used to construct Stratified.vent.tree objects.
 \describe{
 \item{\code{name}}{character.}
 
-\item{\code{categories}}{list of Category S4 objects}
+\item{\code{categories}}{list of Category S4 objects.}
 }}
 

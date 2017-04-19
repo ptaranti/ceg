@@ -5,25 +5,25 @@
 \alias{Stratified.staged.tree-class}
 \title{Stratified.staged.tree}
 \description{
-#TODO(Collazo) Definir o que é stratified staged.tree
+#TODO(Collazo) Definir o que é stratified.staged.tree
 }
 \section{Slots}{
 
 \describe{
 \item{\code{event.tree}}{Stratified.event.tree.}
 
-\item{\code{situation}}{list.}
+\item{\code{situation}}{list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{\code{contingency.table}}{list.}
+\item{\code{contingency.table}}{list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{\code{stage.structure}}{list.}
+\item{\code{stage.structure}}{list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{\code{stage.probability}}{list.}
+\item{\code{stage.probability}}{list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{\code{prior.distribution}}{list.}
+\item{\code{prior.distribution}}{list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{\code{posterior.distribution}}{list.}
+\item{\code{posterior.distribution}}{list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{\code{model.score}}{numeric.}
+\item{\code{model.score}}{numeric.   TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }}
 

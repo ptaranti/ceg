@@ -1,22 +1,15 @@
 # Class defined for future use
 
+
 #' Staged.tree
 #'
 #' @slot event.tree Event.tree.
-#' @slot prior.distribution list.
-#' @slot contingency.table list.
-#' @slot stage.structure list.
-#' @slot model.core numeric.
 #'
-#'
+#'@include event_tree.R
+
 setClass(
   "Staged.tree",
   representation(
-
+    event.tree = "Event.tree"
   )
 )
-
-
-
-
-

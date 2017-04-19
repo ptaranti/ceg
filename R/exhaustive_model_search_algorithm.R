@@ -5,7 +5,7 @@
 #'
 #' @include model_search_algorithm.R
 #'
-#' @export
+# @export
 #'
 setClass("Exhaustive.model.search.algorithm",
          #    representation(score = "numeric", cluster = "list"),

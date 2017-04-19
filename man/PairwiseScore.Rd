@@ -8,7 +8,15 @@ PairwiseScore(stage.1, stage.2, vec.score, prior.distribution,
   contingency.table)
 }
 \arguments{
-\item{contingency.table}{}
+\item{stage.1}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{stage.2}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{vec.score}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{prior.distribution}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{contingency.table}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }
 \description{
 This function calculates the score asscoiated with a pair of merged stages.

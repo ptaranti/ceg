@@ -7,7 +7,7 @@
 Category(label)
 }
 \arguments{
-\item{label}{caracter, the category name}
+\item{label}{character the category name}
 }
 \value{
 a \code{\link{Category}} S4 object
@@ -19,8 +19,8 @@ to construct S4 Variable objects, which, in turn, aim to be parameter in
 Stratified.event.tree objects manual constructions.
 }
 \examples{
-cat <- Category(category.name)
-Category(category.name2)
+\dontrun{cat <- Category(category.name)}
+\dontrun{Category(category.name2)}
 
 
 }

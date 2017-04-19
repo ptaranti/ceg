@@ -3,10 +3,10 @@
 \docType{class}
 \name{Stratified.ceg.model-class}
 \alias{Stratified.ceg.model-class}
-\title{The \code{Stratified.ceg.model} is a S4 class thar extends \code{\link{Ceg.model}}. Its
- objects represents a CEG model derived from a Stratified.staged.tree.}
+\title{Stratified.ceg.model}
 \description{
-The \code{Stratified.ceg.model} is a S4 class thar extends \code{\link{Ceg.model}}. Its
- objects represents a CEG model derived from a Stratified.staged.tree.
+The \code{Stratified.ceg.model} is a S4 class thar extends
+\code{Ceg.model}. Its objects represents a CEG model derived from a
+Stratified.staged.tree.
 }
 

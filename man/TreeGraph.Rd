@@ -2,15 +2,12 @@
 % Please edit documentation in R/lib_funtions.R
 \name{TreeGraph}
 \alias{TreeGraph}
-\title{TreeGraph
-#  TODO(Collazo) Retirar a marreta do parâmetro de entrada range.color.}
+\title{TreeGraph}
 \usage{
 TreeGraph(tree, solution = list(), name = c(), range.color = 1)
 }
 \arguments{
-\item{tree}{(list) - an S4 object \code{\link{EventTree}}
-TODO(Collazo)   See files 2T.DCEG.ModelSearch.OAHC,
-TODO(Collazo)  CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.}
+\item{tree}{(list) - an S4 object \code{Event.tree}}
 
 \item{solution}{list with two components:
 \itemize{

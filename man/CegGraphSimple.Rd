@@ -4,15 +4,12 @@
 \alias{CegGraphSimple}
 \title{CegGraphSimple}
 \usage{
-CegGraphSimple(tree, position, range.color = 1)
+CegGraphSimple(stratified.event.tree, position, range.color = 1)
 }
 \arguments{
-\item{tree}{list       an object event.tree.
-TODO(Collazo)  Verify:: See files 2T.DCEG.ModelSearch.OAHC, CEG.IP.ModelSearch and
-TODO(Collazo)  Verify:: CEG.IP.ModelSearch.HS+AHC.}
+\item{stratified.event.tree}{stratified.event.tree S4 object}
 
-\item{position}{list       an object ceg.position.
-TODO(Collazo)  Verify:: See file Position.Retrieve.}
+\item{position}{list       an object ceg.position.}
 
 \item{range.color}{numeric    it chooses the color source.}
 }

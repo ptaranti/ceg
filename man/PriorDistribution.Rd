@@ -4,12 +4,13 @@
 \alias{PriorDistribution}
 \title{PriorDistribution}
 \usage{
-PriorDistribution(tree, alpha)
+PriorDistribution(stratified.event.tree, alpha)
 }
 \arguments{
-\item{tree}{"EventTree" a S4 object that represents an event tree.}
+\item{stratified.event.tree}{"Stratified.event.tree" a S4 object that represents an event tree.}
 
-\item{alpha}{# TODO(Collazo)  -- see function DCEG.AHC}
+\item{alpha}{numeric this represents a phantom sample used to initialize the
+learning process}
 }
 \value{
 prior is a list of matrices. Each matrix is a collection of

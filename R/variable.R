@@ -6,7 +6,7 @@
 #' of Categories. It is used to construct Stratified.vent.tree objects.
 #'
 #' @slot name character.
-#' @slot categories list of Category S4 objects
+#' @slot categories list of Category S4 objects.
 #'
 #' @export
 
@@ -17,10 +17,12 @@ setClass(
   ),
   validity = function(object) {
     msg <- NULL
-    if(is.null(name)) stop("Variable must have a name")
-    if (is.null(categories)) stop("each Variable must have one category or more")
-    for (category in categories) {
-      if (!is(category, "Category"))
+    if (is.null(object@name)) stop("Variable must have a name")
+    if (object@name == "") stop("Variable@name cannot be void")
+    if (grepl("^\\s*$", object@name)) stop("Variable@name cannot be only blanc spaces")
+    if (is.null(object@categories)) stop("each Variable must have one category or more")
+    for (category in object@categories) {
+      if (!methods::is(category, "Category"))
         msg <-
           c(msg, "'@categories' must be a list of CEG::Category S4 objects")
     }
@@ -43,6 +45,7 @@ setMethod(
     # Assignment of the slots
     .Object@name <- name
     .Object@categories <- categories
+    methods::validObject(.Object)
     return(.Object)
     # return of the object
   }
@@ -57,7 +60,7 @@ setMethod(
 #' S4 object. Variable S4 class contains two slots with the Variable name and a
 #' list of Categories. It is used to construct Stratified.vent.tree objects.
 #'
-#' @param name caracter, the Variable name
+#' @param name character, the Variable name
 #' @param list a list of S4 Category objects.
 #'
 #' @return a \code{\link{Variable}} S4 object
@@ -65,8 +68,8 @@ setMethod(
 #' @export
 #'
 #' @examples
-#' var <- Variable(variable.name, list.of.categories)
-#' Variable(variable.name, list.of.categories)
+#' \dontrun{var <- Variable(variable.name, list.of.categories)}
+#' \dontrun{Variable(variable.name, list.of.categories)}
 #'
 #'
 Variable <- function(name, categories){

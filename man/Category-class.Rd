@@ -11,6 +11,6 @@ to construct Stratified.event.tree objects.
 \section{Slots}{
 
 \describe{
-\item{\code{label}}{character}
+\item{\code{label}}{character   TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }}
 

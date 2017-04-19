@@ -7,7 +7,7 @@
 Variable(name, categories)
 }
 \arguments{
-\item{name}{caracter, the Variable name}
+\item{name}{character, the Variable name}
 
 \item{list}{a list of S4 Category objects.}
 }
@@ -20,8 +20,8 @@ S4 object. Variable S4 class contains two slots with the Variable name and a
 list of Categories. It is used to construct Stratified.vent.tree objects.
 }
 \examples{
-var <- Variable(variable.name, list.of.categories)
-Variable(variable.name, list.of.categories)
+\dontrun{var <- Variable(variable.name, list.of.categories)}
+\dontrun{Variable(variable.name, list.of.categories)}
 
 
 }

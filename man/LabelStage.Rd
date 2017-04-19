@@ -7,18 +7,18 @@
 LabelStage(k, num.variable, num.situation, label.category, num.category)
 }
 \arguments{
-\item{k}{numeric}
+\item{k}{numeric TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{num.variable}{}
+\item{num.variable}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{num.situation}{}
+\item{num.situation}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{label.category}{}
+\item{label.category}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{num.category}{}
+\item{num.category}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }
 \value{
-label   a vector
+label   a vector TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 }
 \description{
 This function identifies the edges arriving at the target level for paths

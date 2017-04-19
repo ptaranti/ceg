@@ -4,17 +4,20 @@
 \alias{AlphaEdgeInternal}
 \title{AlphaEdgeInternal}
 \usage{
-AlphaEdgeInternal(level, tree, alpha)
+AlphaEdgeInternal(level, stratified.event.tree, alpha)
 }
 \arguments{
 \item{level}{"numeric" controls the number of descendent situations}
 
-\item{tree}{"EventTree" a S4 object that represents an event tree.}
+\item{stratified.event.tree}{"Stratified.event.tree" a S4 object that
+represents an event tree.}
 
-\item{alpha}{# TODO(Collazo)}
+\item{alpha}{numeric this represents a phantom sample used to initialize the
+learning process}
 }
 \value{
-# TODO(Collazo) descrever retorno, se necessario.
+numeric It is the hyperparameter of the Dirichlet prior distribution
+ for each situation in the event tree associated with a particular variable.
 }
 \description{
 \code{AlphaEdgeInternal} yields the prior distribution for each situation

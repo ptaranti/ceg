@@ -2,29 +2,21 @@
 % Please edit documentation in R/stratified_ceg_model.R
 \name{Stratified.ceg.model}
 \alias{Stratified.ceg.model}
-\title{StratifiedCegModel constructor.}
+\title{Stratified.ceg.model constructor.}
 \usage{
-Stratified.ceg.model(Stratified.staged.tree, stages)
+Stratified.ceg.model(stratified.staged.tree)
 }
 \arguments{
-\item{stages}{list         TODO(Collazo)  describe}
-
-\item{StratifiedStagedTree}{S4 object    TODO(Collazo)  describe}
+\item{Stratified.staged.tree}{S4 object    TODO(Collazo)  describe}
 }
 \value{
-a StratifiedCegModel S4 object.
+a Stratified.ceg.model S4 object.
 }
 \description{
-S3 function to friendly construct S4  StratifiedCegModel.
-}
-\details{
-The \code{stratified.ceg.model} returns a S4 StratifiedCegModel.
+S3 function to friendly construct S4  Stratified.ceg.model.
 }
 \examples{
-TODO(taranti) depois de resolvida a confusao entre stage.structure e position
+\dontrun{stratified.ceg.model <- Stratified.ceg.model(stratified.staged.tree, position)}
 
-}
-\seealso{
-\code{\link{StratifiedCegModel}}
 }
 

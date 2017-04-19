@@ -11,11 +11,8 @@
 \section{Slots}{
 
 \describe{
-\item{\code{staged.tree}}{"Staged.Tree"}
+\item{\code{staged.tree}}{"Staged.tree"}
 
-\item{\code{position}}{list.}
+\item{\code{position}}{list  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }}
-\examples{
-
-}
 

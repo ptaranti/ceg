@@ -4,14 +4,14 @@
 \alias{ContingencyTableVariable}
 \title{ContingencyTableVariable}
 \usage{
-ContingencyTableVariable(variable, data, tree)
+ContingencyTableVariable(variable, data, stratified.event.tree)
 }
 \arguments{
-\item{variable}{numeric}
+\item{variable}{numeric  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{data}{#TODO(Collazo) definir o que é data}
+\item{data}{a data.frame structure  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{tree}{an object of type 'event.tree' (see function event.tree)}
+\item{stratified.event.tree}{an object of type Stratified.event.tree}
 }
 \value{
 a matrix. Each row represents the contigency table of a situation

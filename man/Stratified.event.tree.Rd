@@ -31,8 +31,7 @@ a list, will return an error message.}
 \item{Arguments}{(data.frame) , where data.frame is a well behavioured data set.\cr}
 
 \item{Arguments}{(list) , list of Variable S4 objects, in the expected order
-of plotting. \cr
-TODO(Collazo) VRF texto}
+of plotting. \cr}
 }
 \value{
 a Stratified.event.tree S4 object

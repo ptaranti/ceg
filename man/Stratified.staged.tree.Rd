@@ -5,6 +5,8 @@
 \alias{Stratified.staged.tree}
 \alias{Stratified.staged.tree,ANY,ANY,ANY-method}
 \alias{Stratified.staged.tree,Stratified.event.tree,list,ANY-method}
+\alias{Stratified.staged.tree,data.frame,missing,missing-method}
+\alias{Stratified.staged.tree,data.frame,numeric,missing-method}
 \alias{Stratified.staged.tree,data.frame,numeric,numeric-method}
 \alias{Stratified.staged.tree,missing,ANY,ANY-method}
 \title{Stratified.staged.tree}
@@ -20,6 +22,13 @@ Stratified.staged.tree(x, y, z, ...)
   y = 1L, z = 0L)
 
 
+  \S4method{Stratified.staged.tree}{data.frame,numeric,missing}(x = "data.frame",
+  y = 1L)
+
+
+  \S4method{Stratified.staged.tree}{data.frame,missing,missing}(x = "data.frame")
+
+
   \S4method{Stratified.staged.tree}{Stratified.event.tree,list,ANY}(x = "Stratified.event.tree",
   y = "list")
 }
@@ -32,7 +41,7 @@ an error message for missing argument.}
 A call to \code{Stratified.staged.tree(x, ...)}, x not being a data.frame or
 a Event.tree, will return an error message.}
 
-\item{Arguments}{(data.frame, numeric, numeric) , where data.frame is a well
+\item{Arguments}{(data.frame, alpha, variable.order) , where data.frame is a well
 behavioured data set, and the numeric values represent the alpha and
 the variable order, respectively.\cr
 The implementation admits providing the three arguments, or the first two, or
@@ -40,12 +49,10 @@ The implementation admits providing the three arguments, or the first two, or
  The default variable order is as in the data.frame and the default alpha is
  1L.}
 
-\item{Arguments}{(Stratified.event.tree, list) , where datalist.frame is the
-stage.structure to be aplied on the provided Stratified.event.tree. \cr
-To construct the aforesaid list one must generate the Stratified.event.tree
-graph and use the number of each presented node. These numbers will indicate
-the nodes that share the same position in a stage \cr
-TODO(Collazo) VRF texto}
+\item{Arguments}{(Stratified.event.tree, list)
+The list represents the stage.structure. To construct it, the user must plot
+the Stratified.event.tree graph and use the labelled number of each node. \cr
+An example is provided in the note.}
 }
 \value{
 a Stratified.staged.tree S4 object

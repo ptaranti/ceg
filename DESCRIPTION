@@ -1,7 +1,7 @@
 Package: ceg
 Title: Chain Event Graph (CEG)
-Date: 2017-04-07
-Version: 0.0.1
+Date: 2017-04-17
+Version: 0.1
 Authors@R: c(
              person("Rodrigo", "Collazo", email = "rodrigocollazo@gmail.com",
              role = c("aut" , "cre")),
@@ -20,18 +20,26 @@ Description: This package has functionalities that allow us to create and learn
     language. CEGs have been a useful class of graphical model especially to
     capture context-specific conditional independences.
 Depends:
-    R (>= 3.2.2),
+    R (>= 3.2.2)
+Imports:
+    graph,
+    grDevices,
+    graphics,
+    methods,
+    stats,
+    utils,
     Rgraphviz
-License: License: GPL (>= 2)
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
 Suggests:
     testthat
-URL: https://www.r-project.org, http://www.another.url
-BugReports: https://pkgname.bugtracker.url, rodrigocollazo@gmail.com
+BugReports: rodrigocollazo@gmail.com
 Collate:
     'category.R'
+    'ceg.R'
+    'event_tree.R'
     'staged_tree.R'
     'ceg_model.R'
     'cont_table.R'
@@ -41,14 +49,13 @@ Collate:
     'distribution_of_probability.R'
     'dirchlet_distribution.R'
     'dirchlet_mpnl_distribution.R'
-    'event_tree.R'
     'heuristic_model_search_algorithm.R'
     'lib_funtions.R'
     'multinomial_distribution.R'
     'oahc.R'
     'posterior_distribution.R'
     'prior_distribution.R'
-    'stratified_ceg_model.R'
     'stratified_event_tree.R'
     'stratified_staged_tree.R'
+    'stratified_ceg_model.R'
     'variable.R'

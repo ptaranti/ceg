@@ -4,21 +4,21 @@
 \alias{ContingencyTableLevel}
 \title{ContingencyTableLevel}
 \usage{
-ContingencyTableLevel(level, data, event.tree)
+ContingencyTableLevel(level, data, stratified.event.tree)
 }
 \arguments{
 \item{level}{numeric - identifies the level in the infinite event tree.}
 
-\item{data}{data #TODO(Collazo) definir o que é data (see function DCEG.AHC)}
+\item{data}{a data.frame structure  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 
-\item{tree}{an "Event.tree" S4 object}
+\item{stratified.event.tree}{a Stratified.event.tree S4 object}
 }
 \value{
 a matrix. Each row represents the contigency table of a situation
-      k associate with a particular variable in time-slice t_0 or t_k, k>=1.
+      k associate with a particular variable.
 }
 \description{
 This function calculates the contigency tables associated with a specific
-variable in time-slices t_0 or t_k, k>=1.
+variable.
 }
 

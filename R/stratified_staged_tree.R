@@ -11,32 +11,38 @@
 
 #' Stratified.staged.tree
 #'
-#' #TODO(Collazo) Definir o que é stratified staged.tree
+#' #TODO(Collazo) Definir o que é stratified.staged.tree
 #'
-#' @include staged_tree.R
+#' @include staged_tree.R event_tree.R stratified_event_tree.R
 #'
 #' #TODO(Collazo) espandir significado dos slots
 #' @slot event.tree Stratified.event.tree.
-#' @slot situation list.
-#' @slot contingency.table list.
-#' @slot stage.structure list.
-#' @slot stage.probability list.
-#' @slot prior.distribution list.
-#' @slot posterior.distribution list.
-#' @slot model.score numeric.
+#' @slot situation list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot contingency.table list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot stage.structure list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot stage.probability list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot prior.distribution list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot posterior.distribution list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot model.score numeric.   TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #' @export
 #'
 setClass(
   "Stratified.staged.tree",
-  representation(    event.tree = "Stratified.event.tree",
-                     situation = "list",
+  representation(    situation = "list",
                      contingency.table = "list",
                      stage.structure = "list",
                      stage.probability = "list",
                      prior.distribution = "list",
                      posterior.distribution = "list",
                      model.score = "numeric"),
-  contains = "Staged.tree"
+  contains = "Staged.tree",
+  validity = function(object) {
+    if (!methods::is(object@event.tree, "Stratified.event.tree"))
+      stop("an instance of Stratified.event.tree S4 object must be provided to
+           Stratified.staged.tree@event.tree slot ")
+    else
+      TRUE
+  }
 )
 
 
@@ -44,7 +50,7 @@ setMethod(
   f = "initialize",
   signature = "Stratified.staged.tree",
   definition = function(.Object,
-                        event.tree = "Stratified.event.tree",
+                        event.tree = "Event.tree",
                         situation = "list",
                         contingency.table = "list",
                         stage.structure = "list",
@@ -63,6 +69,7 @@ setMethod(
     .Object@prior.distribution <- prior.distribution
     .Object@posterior.distribution <- posterior.distribution
     .Object@model.score <- model.score
+    methods::validObject(.Object)
     return(.Object)
     # return of the object
   }
@@ -107,7 +114,7 @@ setMethod("Stratified.staged.tree",
           })
 
 #' @rdname Stratified.staged.tree
-#' @param Arguments (data.frame, numeric, numeric) , where data.frame is a well
+#' @param Arguments (data.frame, alpha, variable.order) , where data.frame is a well
 #' behavioured data set, and the numeric values represent the alpha and
 #' the variable order, respectively.\cr
 #' The implementation admits providing the three arguments, or the first two, or
@@ -122,10 +129,12 @@ setMethod("Stratified.staged.tree",
             alpha <- y
             variable.order <- z
 
+            if (!CheckForCleanData(data.frame)) {
+              stop("Consider using CheckAndCleanData() function")
+            }
+
             num.variable <- length(data.frame[1, ])
-            # TODO(Collazo)  inserir validador de menor valor (maior ou igual a 1)
-            # TODO(Collazo)  alterar variable.order para numeric, e converter para vetor depois, se é somente 1 numero.
-            # TODO(Collaz)  aparentemente a implementacao esta errada - qualquer valor diferente de 0 apresenta erro.
+            # TODO(Taranti)  inserir validador de menor valor alpha (maior ou igual a 0)
             if (variable.order[1] != 0) {
               data.frame <- data.frame[variable.order]
             }
@@ -150,13 +159,13 @@ setMethod("Stratified.staged.tree",
 
           })
 
-
+#' @rdname Stratified.staged.tree
 setMethod("Stratified.staged.tree",
           signature( x = "data.frame", y = "numeric", z = "missing"),
           function(x = "data.frame", y = 1L) {  Stratified.staged.tree(x, y, 0 )}
 )
 
-
+#' @rdname Stratified.staged.tree
 setMethod("Stratified.staged.tree",
           signature( x = "data.frame", y = "missing", z = "missing"),
           function(x = "data.frame") {  Stratified.staged.tree(x, 1, 0 )}
@@ -164,12 +173,10 @@ setMethod("Stratified.staged.tree",
 
 
 #' @rdname Stratified.staged.tree
-#' @param Arguments (Stratified.event.tree, list) , where datalist.frame is the
-#' stage.structure to be aplied on the provided Stratified.event.tree. \cr
-#' To construct the aforesaid list one must generate the Stratified.event.tree
-#' graph and use the number of each presented node. These numbers will indicate
-#' the nodes that share the same position in a stage \cr
-#' TODO(Collazo) VRF texto
+#' @param Arguments (Stratified.event.tree, list)
+#' The list represents the stage.structure. To construct it, the user must plot
+#' the Stratified.event.tree graph and use the labelled number of each node. \cr
+#' An example is provided in the note.
 #' @note
 #' Consider a stratified.event.tree created using the folloing commands\cr
 #' \code{input <- list(Variable("age",list(Category("old"), Category("medium"),
@@ -237,7 +244,7 @@ setMethod("Stratified.staged.tree",
             for (nr  in 1:length(stage.structure)) {
 
 
-              correction.number <- sum(head(event.tree@num.situation,nr)) - 1
+              correction.number <- sum(utils::head(event.tree@num.situation,nr)) - 1
 
               temp.stage <- lapply(stage.structure[[nr]], function(x) x - correction.number)
 
@@ -277,22 +284,28 @@ setMethod("Stratified.staged.tree",
 #' implementation depends on \code{Rgraphviz} package from Bioconductor for
 #' plotting.
 #'
-#' @param Staged.tree
+#' @param x Stratified.staged.tree S4 object
 #'
 #' @return the plot and also a pdf version is saved in the working directory.
 #' @export
 #'
 #' @examples
-#' plot(stratified.staged.tree)
+  #' \dontrun{plot(stratified.staged.tree)}
 setMethod(
   f = "plot",
   signature = "Stratified.staged.tree",
-  definition = function(x,y,...){
+  definition = function(x){
     #staged.tree.graph <- tree.graph(x)
     staged.tree.graph <- TreeGraph(x@event.tree, x@stage.structure)
 
 
-    g <- new("graphNEL", nodes = staged.tree.graph$node$nodes, edgeL = staged.tree.graph$edge$edges , edgemode = "directed")
+    g <- new(
+      "graphNEL",
+      nodes = staged.tree.graph$node$nodes,
+      edgeL = staged.tree.graph$edge$edges ,
+      edgemode = "directed"
+      )
+
     # 1.  Atributos do Grafico - Gerais
     attrsAtt <- list()
     graphAtt <- list(rankdir = "LR", size = "18.0,24.0", bgcolor = "white")  # o LR é que muda orientaçao
@@ -303,7 +316,7 @@ setMethod(
     #  2.  atributos de nós
     # mudando o nome de nós
     nodesLabelList <- staged.tree.graph$node$nodes
-    names(nodesLabelList) <- nodes(g)
+    names(nodesLabelList) <- graph::nodes(g)
     nAttrs <- list()
     #nAttrs$label <- c("s0"="rooooooot", "s2"="test")
     nAttrs$label <- nodesLabelList
@@ -314,18 +327,18 @@ setMethod(
     #opção 1 - atribuindo todos os nomes usando lista ordenada das arestas para atribuição
     #edgesLabelList <-c("nome-01", "nome-02","nome-03","nome-04","nome-05","nome-06","nome-07","nome-08","nome-09", "nome-10","nome-11", "nome-12","nome-13","nome-14","nome-15","nome-16","nome-17","nome-18","nome-19", "nome-20","nome-21", "nome-22","nome-23","nome-24","nome-25","nome-26","nome-27","nome-28","nome-29", "nome-30","nome-31", "nome-32","nome-33","nome-34","nome-35","nome-36","nome-37","nome-38","nome-39", "nome-40","nome-41", "nome-42")
     edgesLabelList <- staged.tree.graph$edge$label
-    names(edgesLabelList) <- edgeNames(g)
+    names(edgesLabelList) <- graph::edgeNames(g)
     eAttrs <- list()
     eAttrs$label <- edgesLabelList
 
     # Inserindo cores
     nAttrs$fillcolor <- staged.tree.graph$node$color
-    names(nAttrs$fillcolor) <- nodes(g)
+    names(nAttrs$fillcolor) <- graph::nodes(g)
 
     Rgraphviz::plot(g, main = "Staged Tree Graph", nodeAttrs = nAttrs, edgeAttrs = eAttrs, attrs = attrsAtt)
-    pdf("./staged.tree.graph.pdf",  width = 8, height = 6, title = "")
+    grDevices::pdf("./staged.tree.graph.pdf",  width = 8, height = 6, title = "")
     Rgraphviz::plot(g, main = "Staged Tree Graph", nodeAttrs = nAttrs, edgeAttrs = eAttrs, attrs = attrsAtt)
-    dev.off()
+    grDevices::dev.off()
   }
 )
 
@@ -349,11 +362,12 @@ setMethod(
 #'     \item  numeric - score associated with a level
 #'     \item  list of vectors - stage structure
 #'     }
-#' @param range.color  (numeric) - it chooses the color source. #TODO(Collazo) esclarescer esse item
-# ?????  1 - palette (8 colors) ??????  Any other value - colors(1) (501 colors)
+#' @param range.color  (numeric) - it chooses the color source. Default value 1L
+#' a 8 color pallete will be used. Any other value will leads to a 501 colors
+#' pallete usage.
 #'
 #' @return  vector - node colors
-#' @export
+# @export
 #'
 NodeColor <- function(num.variable,
                       num.situation,
@@ -365,10 +379,10 @@ NodeColor <- function(num.variable,
                   num.category[num.variable] * num.situation[num.variable])
   count <- 2
   if (range.color == 1) {
-    color <- palette()
+    color <- grDevices::palette()
     color[1] <- "white"
   } else {
-    color <- colors(1)
+    color <- grDevices::colors(1)
     color <- color[-21]
   }
   for (i in 2:num.variable) {

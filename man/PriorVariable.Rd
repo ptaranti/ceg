@@ -21,7 +21,7 @@ The function \code{PriorVariable}  yields the prior distribution for each
   situation in the event tree associated with a particular variable.
 }
 \seealso{
-\code{\link{Prior.distribution}} and
-         \code{\link{alpha.edge.internal}}
+\code{Prior.distribution} and
+         \code{AlphaEdgeInternal}
 }
 

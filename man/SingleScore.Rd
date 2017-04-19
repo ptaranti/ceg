@@ -7,7 +7,11 @@
 SingleScore(stage, prior.distribution, contingency.table)
 }
 \arguments{
-\item{contingency.table}{}
+\item{stage}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{prior.distribution}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+
+\item{contingency.table}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
 }
 \description{
 This function calculates the score associated with a particular level.
