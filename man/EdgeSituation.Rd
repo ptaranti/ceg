@@ -25,4 +25,3 @@ EdgeSituation identifies the edges from a situation (node).
 This function identifies the edges that emanate from a particular situation
 in an EventTree.
 }
-

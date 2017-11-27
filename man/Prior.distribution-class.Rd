@@ -7,4 +7,3 @@
 \description{
 Prior.distribution
 }
-

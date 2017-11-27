@@ -7,28 +7,27 @@
 StratifiedCegPosition(stage, num.category, num.situation)
 }
 \arguments{
-\item{stage}{(list) - stage structure associated with a particular level.}
+\item{stage}{(list) - stage structure associated with a particular variable.}
 
-\item{num.category}{(vector) - number of edges that unfolds from situations
-in each level.}
+\item{num.category}{(vector) - number of edges that unfold from stages
+associated with a particular variable.}
 
 \item{num.situation}{(vector) - number of situations associated with each
-level.}
+variable.}
 }
 \value{
 list of lists \itemize{
-    \item First list level identifies a level 'l'.
-    \item Second list level identifies the stage 'a' associated with
-          level 'l'.
+    \item First list level identifies a variable 'v'.
+    \item Second list level identifies a stage 'a' associated with
+          a variable 'v'.
     \item The third list level identifies the positions associated with
-          stage 'i' .
+          a stage 'a' .
           }
 
  @seealso \code{PositionLevel},  \code{PositionVector},
  \code{PositionStage}, \code{PairwisePosition}
 }
 \description{
-This function obtain the position structure associated with a particular
-level of a CEG.
+This function obtains the position structure associated with
+a stratified CEG.
 }
-

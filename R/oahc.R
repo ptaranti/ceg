@@ -5,15 +5,16 @@
 #'
 #'  @include heuristic_model_search_algorithm.R
 #'
-#' @slot score numeric  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @slot cluster list  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot score numeric
+# TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot cluster list
+# TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 # @return
 # @export
 #'
 #'
 #'
-# @examples
 setClass("OAHC",
          representation(score = "numeric",
                         cluster = "list"),
@@ -71,24 +72,30 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
   vec.score <-
     sapply(1:tree@num.situation[level], function(x)
       SingleScore(x, prior.distribution[[level]], contingency.table[[level]]))
+
   # To calculate the score asscociated with each stage of the finest partition.
   cluster <- lapply(1:tree@num.situation[level], function(x)
     x)
+
   # To create a list to track the clusters of situation that constitute stages.
   pair.score <- sapply(1:(tree@num.situation[level] - 1), function(x)
     sapply((x + 1):tree@num.situation[level], function(y)
       PairwiseScore(x, y, vec.score, prior.distribution[[level]],
                      contingency.table[[level]])))
+
   # List of vectors. Each vector records the pairwise score for stages (i,j),
   # where i<j according to lexicographical order.
   order.pair.score <-
     sapply(1:(tree@num.situation[level] - 1), function(x)
       order(pair.score[[x]], decreasing = TRUE))
+
   #List of vectors. Each vector orders its corresponding vector in pair.score.
   max.score <- sapply(1:(tree@num.situation[level] - 1), function(x)
     pair.score[[x]][order.pair.score[[x]][1]])
+
   #Vector that records that maximum score of each component of pair.score.
   order.max.score <- order(max.score, decreasing = TRUE)
+
   #Vector that records the order of the vector max.score.
   if (level > tree@num.variable)
     variable <- level - tree@num.variable
@@ -96,12 +103,13 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
     variable <- level
   aux.na <- rep(NA, tree@num.category[variable])
   count <- 0
+
   #To track the total number of stages merged
   count.na <- rep(0, (tree@num.situation[level] - 1))
   while ((max.score[order.max.score[1]] > 0) &&
          (count < (tree@num.situation[level] - 1))) {
     aux.1 <- order.max.score[1]
-    #order.max.score[1] identifies the first stage to be merged.
+        #order.max.score[1] identifies the first stage to be merged.
     aux.2 <-
       order.max.score[1] + order.pair.score[[order.max.score[1]]][1]
     #aux identifies the second stage to be merged
@@ -110,21 +118,23 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
 
     vec.score[c(aux.1, aux.2)] <- c(max.score[aux.1] +
                                       sum(vec.score[c(aux.1, aux.2)]), NA)
-    #To update the score w.r.t. this new stage configuration
 
+    #To update the score w.r.t. this new stage configuration
     prior.distribution[[level]][aux.1, ] <-
       prior.distribution[[level]][aux.1, ] + prior.distribution[[level]][aux.2,]
+
     #To update the prior.distribution tables
     prior.distribution[[level]][aux.2, ] <- aux.na
-
     contingency.table[[level]][aux.1, ] <-
       contingency.table[[level]][aux.1, ] + contingency.table[[level]][aux.2, ]
+
     #To update the contingency.table tables
     contingency.table[[level]][aux.2, ] <- aux.na
     pair.score[[aux.1]] <-
       sapply((aux.1 + 1):tree@num.situation[level], function(x)
         PairwiseScore(aux.1, x, vec.score, prior.distribution[[level]],
                        contingency.table[[level]]))
+
     #To update the score w.r.t. the first merged stage
     order.pair.score[[aux.1]] <-
       order(pair.score[[aux.1]], decreasing = TRUE)
@@ -143,6 +153,13 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
       order.pair.score[aux.1] <- NA
       count <- count + 1
     } else {
+      # TODO(Collazo) the next lines are presenting NA in the vector.
+      # it is necessary to check why NA was inserted and avoid this
+      # only removing NA by hands doesn't solve (I tried.. using the following
+      # technic: vec <- vec[!is.na(vec)]     .....   :(
+
+
+      #  problematic lines - findInterval
       ref <- tree@num.situation[level] -
         findInterval(max.score[aux.1], max.score[order.max.score[
           (tree@num.situation[level] - count - 1):2]]) - count - 1
@@ -260,16 +277,16 @@ OAHC <- function(level, prior.distribution, contingency.table, tree) {
 }
 
 
-
-#' SingleReorder
-#'
-#' This function reorders a vector that had an element changed.
-#'
-#' @param x TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param order.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param na.count TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#'
+# TODO(Collazo) documentar
+# SingleReorder
+#
+# This function reorders a vector that had an element changed.
+#
+# @param x TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param order.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param na.count TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#
 SingleReorder <- function(x, order.score, score, na.count) {
   const <- length(score) - na.count
   if (const == 1)
@@ -283,7 +300,10 @@ SingleReorder <- function(x, order.score, score, na.count) {
   } else {
     order.score <- order.score[c(1:(flag - 1), (flag + 1):const)]
   }
+
+
   ref <- const - findInterval(score[x], score[rev(order.score)])
+
   if (ref != const) {
     order.score[(ref + 1):(const + 1)] <- order.score[ref:const]
     order.score[ref] <- x
@@ -302,9 +322,12 @@ SingleReorder <- function(x, order.score, score, na.count) {
 #' This function keep a lexicographical order of a vector
 #  that have had one element
 #'
-#' @param ref TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param order.vector TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param score.vector TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param ref numeric
+# TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param order.vector vector
+# TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @param score.vector vector
+# TODO(Colazzo) Ampliar com tipo de dado e significado semantico
 #'
 #'
 KeepLexOrder <- function(ref, order.vector, score.vector) {
@@ -325,18 +348,18 @@ KeepLexOrder <- function(ref, order.vector, score.vector) {
   return(order.vector)
 }
 
-
-#' PairwiseScore
-#'
-#' This function calculates the score asscoiated with a pair of merged stages.
-#'
-#' @param stage.1 TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param stage.2 TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param vec.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param prior.distribution TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param contingency.table TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#'
-#'
+# TODO(Collazo) - documentar
+# PairwiseScore
+#
+# This function calculates the score asscoiated with a pair of merged stages.
+#
+# @param stage.1 TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param stage.2 TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param vec.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param prior.distribution TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param contingency.table TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#
+#
 PairwiseScore <- function(stage.1, stage.2, vec.score, prior.distribution,
                            contingency.table) {
   if (is.na(vec.score[stage.1]) || is.na(vec.score[stage.2]))
@@ -352,15 +375,15 @@ PairwiseScore <- function(stage.1, stage.2, vec.score, prior.distribution,
 
 
 
-
-#' SingleScore
-#'
-#' This function calculates the score associated with a particular level.
-#'
-#' @param stage TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param prior.distribution TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param contingency.table TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#'
+# TODO(Collazo) Documentar
+# SingleScore
+#
+# This function calculates the score associated with a particular level.
+#
+# @param stage TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param prior.distribution TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param contingency.table TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#
 SingleScore <- function(stage, prior.distribution, contingency.table) {
   alpha <- prior.distribution[stage,]
   N <- contingency.table[stage,]
@@ -369,14 +392,14 @@ SingleScore <- function(stage, prior.distribution, contingency.table) {
   return(score)
 }
 
-
-#' NaReorder
-#'
-#' This function reorders a vector that had an element changed to NA.
-#'
-#' @param x TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @param order.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#'
+# TODO(COllazo) documentar
+# NaReorder
+#
+# This function reorders a vector that had an element changed to NA.
+#
+# @param x TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# @param order.score TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#
 NaReorder <- function(x, order.score) {
   flag <- which(order.score == x)
   const <- length(order.score)

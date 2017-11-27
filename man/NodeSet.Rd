@@ -7,8 +7,7 @@
 NodeSet(tree)
 }
 \arguments{
-\item{tree}{an object event.tree. See files 2T.DCEG.ModelSearch.OAHC,
-CEG.IP.ModelSearch and CEG.IP.ModelSearch.HS+AHC.}
+\item{tree}{Event.tree S4 object}
 }
 \value{
 vector
@@ -16,4 +15,3 @@ vector
 \description{
 This function genereates the nodes of an event tree.
 }
-

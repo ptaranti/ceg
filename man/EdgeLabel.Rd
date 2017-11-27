@@ -22,4 +22,3 @@ vector - edge labels
 This function yields the edge labels. The edges are labeled accordingly the
 original data provided.
 }
-

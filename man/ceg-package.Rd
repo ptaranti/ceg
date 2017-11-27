@@ -32,4 +32,20 @@ the user will use the following classes:
 These classes are implemented as S4 classes and have constructor methods with
 the same name as the class. A \code{plot} method is also provided.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/ptaranti/ceg}
+  \item Report bugs at \url{https://github.com/ptaranti/ceg/issues}
+}
 
+}
+\author{
+\strong{Maintainer}: Pier Taranti \email{ptaranti@gmail.com}
+
+Authors:
+\itemize{
+  \item Rodrigo Collazo \email{rodrigocollazo@gmail.com}
+}
+
+}

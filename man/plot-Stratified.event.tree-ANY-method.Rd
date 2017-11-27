@@ -19,6 +19,6 @@ implementation depends on \code{Rgraphviz} package from Bioconductor for
 plotting.
 }
 \examples{
-\dontrun{plot(stratified.event.tree)}
-}
+plot(set)
 
+}

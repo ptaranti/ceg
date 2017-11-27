@@ -28,4 +28,3 @@ label for each one.
 The authors did not find a graphical package providing this capability.
 Contributions are wellcomed.
 }
-

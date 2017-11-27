@@ -7,18 +7,17 @@
 LabelStage(k, num.variable, num.situation, label.category, num.category)
 }
 \arguments{
-\item{k}{numeric TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{k}{numeric}
 
-\item{num.variable}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{num.variable}{numeric}
 
-\item{num.situation}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{num.situation}{numeric}
 
-\item{label.category}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{label.category}{list}
 
-\item{num.category}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
-}
-\value{
-label   a vector TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+\item{num.category}{list
+
+ @return   label   a vector}
 }
 \description{
 This function identifies the edges arriving at the target level for paths
@@ -28,4 +27,3 @@ are in levels greater than the target level.
 \seealso{
 \code{\link{TruncatedPath}}
 }
-

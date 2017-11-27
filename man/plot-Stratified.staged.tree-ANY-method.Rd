@@ -3,7 +3,7 @@
 \docType{methods}
 \name{plot,Stratified.staged.tree,ANY-method}
 \alias{plot,Stratified.staged.tree,ANY-method}
-\title{Staged.tree Plotting}
+\title{Stratified.staged.tree Plotting}
 \usage{
 \S4method{plot}{Stratified.staged.tree,ANY}(x)
 }
@@ -11,14 +11,13 @@
 \item{x}{Stratified.staged.tree S4 object}
 }
 \value{
-the plot and also a pdf version is saved in the working directory.
+the plot. A pdf version is also saved in the working directory.
 }
 \description{
-Method to plot a Staged.tree S4 object. The current \code{ceg} package
-implementation depends on \code{Rgraphviz} package from Bioconductor for
-plotting.
+Method to plot a Staged.tree S4 object. The current  package \code{ceg}
+depends on \code{Rgraphviz} package from Bioconductor to draw graphs.
 }
 \examples{
-\dontrun{plot(stratified.staged.tree)}
-}
+plot(sst)
 
+}

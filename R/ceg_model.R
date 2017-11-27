@@ -1,17 +1,14 @@
 
-# TODO(Taranti) Trasferir todo codigo para stratified
-# TODO(collazo)  DEFINIR O QUE EH position (slot "list") e o que a difere da estrutura de estagios. Se é igual, o objeto CEG seria descartavel - ele é igual ao staged, os dados são os mesmos. O que muda é o plot.
-# TODO(collazo)  VRF documentação das funçoes
-# TODO(Taranti)  mudar função plot para usar positon slot
+
 
 #' Ceg.model S4 class
 #'
-#' \code{Ceg.model} is a S4 class which objects represents a Chain-Event Graph
-#' (CEG) model, which is composed by a Staged Tree and its stages structure.
+#' \code{Ceg.model} is a S4 class whose objects represent a Chain-Event Graph
+#' (CEG) model, which is composed by a Staged Tree object and its corresponding staged structure.
 
 #'
-#' @slot staged.tree "Staged.tree"
-#' @slot position list  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot staged.tree Staged.tree S4 object
+#' @slot position list
 #'
 #'
 #'@include staged_tree.R

@@ -7,7 +7,7 @@ setClass(
   "Event.tree",
   representation(
 
-    #TODO(collazo) indicate needed slots
+# TODO(collazo) indicate needed slots
   )
 )
 

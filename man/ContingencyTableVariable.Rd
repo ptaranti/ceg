@@ -7,18 +7,21 @@
 ContingencyTableVariable(variable, data, stratified.event.tree)
 }
 \arguments{
-\item{variable}{numeric  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{variable}{numeric}
 
-\item{data}{a data.frame structure  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{data}{data.frame whose columns depict variables and rows correspond
+to units that are observed in the system}
 
-\item{stratified.event.tree}{an object of type Stratified.event.tree}
+\item{stratified.event.tree}{Stratified.event.tree S4 object}
 }
 \value{
-a matrix. Each row represents the contigency table of a situation
-         k associate with a particular variable.
+a matrix that presents the counts of each combination of the categories  
+      of the variables that precede the target variable in the event tree according  
+         to the categories of the target variable. The combinations of the categories
+      of the upstream variables are displayed on the rows and represents a situation associated with the target variable.
+      The categories of the target variable are represented on the columns and corresponds to each event that can unfold 
+      from a situation associated with the target variable.
 }
 \description{
-This function calculates the contigency tables associated with a specific
-variable according to a time-slice.
+This function calculates the contigency table associated with a specific variable.
 }
-

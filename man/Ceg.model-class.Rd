@@ -5,14 +5,14 @@
 \alias{Ceg.model-class}
 \title{Ceg.model S4 class}
 \description{
-\code{Ceg.model} is a S4 class which objects represents a Chain-Event Graph
-(CEG) model, which is composed by a Staged Tree and its stages structure.
+\code{Ceg.model} is a S4 class whose objects represent a Chain-Event Graph
+(CEG) model, which is composed by a Staged Tree object and its corresponding staged structure.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{staged.tree}}{"Staged.tree"}
+\item{\code{staged.tree}}{Staged.tree S4 object}
 
-\item{\code{position}}{list  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{\code{position}}{list}
 }}
 

@@ -9,8 +9,9 @@ PriorDistribution(stratified.event.tree, alpha)
 \arguments{
 \item{stratified.event.tree}{"Stratified.event.tree" a S4 object that represents an event tree.}
 
-\item{alpha}{numeric this represents a phantom sample used to initialize the
-learning process}
+\item{alpha}{numeric It plays a role of a phantom sample to construct 
+the prior probability distribution and reprssents 
+the prior knowledge about the process.}
 }
 \value{
 prior is a list of matrices. Each matrix is a collection of
@@ -25,4 +26,3 @@ the event tree.
 \seealso{
 \code{\link{PriorVariable}}
 }
-

@@ -3,21 +3,20 @@
 \name{PositionVector}
 \alias{PositionVector}
 \title{\code{PositionVector} function rewrites a position structure associated with
-      a particular level: from a list to a vector.}
+      a particular variable: from a list to a vector.}
 \usage{
 PositionVector(num.situation, pos.list)
 }
 \arguments{
-\item{num.situation}{(numeric) - number of situation in a particular level.}
+\item{num.situation}{(numeric) - number of situation associated with a particular variable.}
 
-\item{pos.list}{(list) - stage structure of the level that follows the level
-of our target position.}
+\item{pos.list}{(list) - stage structure associated with a particular variable that follows
+the variable associated with our target position.}
 }
 \value{
 vector
 }
 \description{
 \code{PositionVector} function rewrites a position structure associated with
-      a particular level: from a list to a vector.
+      a particular variable: from a list to a vector.
 }
-

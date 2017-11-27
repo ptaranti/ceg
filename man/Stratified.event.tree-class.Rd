@@ -5,6 +5,6 @@
 \alias{Stratified.event.tree-class}
 \title{Stratified.event.tree S4 Class}
 \description{
-# TODO(Collazo) se considerar necessario, explicar o que é Stratified.event.tree
+An event tree is called stratified if the set of events that unfold from all situations,
+which are at the same distance of edges from the initial situation, are identical.
 }
-

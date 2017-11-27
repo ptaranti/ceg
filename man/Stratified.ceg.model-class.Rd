@@ -5,8 +5,7 @@
 \alias{Stratified.ceg.model-class}
 \title{Stratified.ceg.model}
 \description{
-The \code{Stratified.ceg.model} is a S4 class thar extends
-\code{Ceg.model}. Its objects represents a CEG model derived from a
-Stratified.staged.tree.
+The \code{Stratified.ceg.model} is a S4 class that extends \code{Ceg.model}.
+ The object represents a CEG model derived from its supporting Stratified.staged.tree
+ using some graphical transformation rules.
 }
-

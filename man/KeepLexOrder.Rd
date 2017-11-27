@@ -7,13 +7,12 @@
 KeepLexOrder(ref, order.vector, score.vector)
 }
 \arguments{
-\item{ref}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{ref}{numeric}
 
-\item{order.vector}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{order.vector}{vector}
 
-\item{score.vector}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{score.vector}{vector}
 }
 \description{
 This function keep a lexicographical order of a vector
 }
-

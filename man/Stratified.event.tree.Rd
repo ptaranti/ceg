@@ -3,10 +3,10 @@
 \docType{methods}
 \name{Stratified.event.tree}
 \alias{Stratified.event.tree}
+\alias{Stratified.event.tree,missing-method}
 \alias{Stratified.event.tree,ANY-method}
 \alias{Stratified.event.tree,data.frame-method}
 \alias{Stratified.event.tree,list-method}
-\alias{Stratified.event.tree,missing-method}
 \title{Stratified.event.tree}
 \usage{
 Stratified.event.tree(x, ...)
@@ -20,18 +20,10 @@ Stratified.event.tree(x, ...)
 \S4method{Stratified.event.tree}{list}(x = "list")
 }
 \arguments{
-\item{Arguments}{(missing) \cr
-A call to \code{Stratified.event.tree( )} with no parameters will return
-an error message for missing argument.}
+\item{x}{(data.frame) , where data.frame is a well behavioured data set; or\cr
+(list) , list of Variable S4 objects, in the expected order of plotting. \cr}
 
-\item{Arguments}{(ANY) \cr
-A call to \code{Stratified.event.tree(x, ...)}, x not being a data.frame or
-a list, will return an error message.}
-
-\item{Arguments}{(data.frame) , where data.frame is a well behavioured data set.\cr}
-
-\item{Arguments}{(list) , list of Variable S4 objects, in the expected order
-of plotting. \cr}
+\item{...}{(not used)}
 }
 \value{
 a Stratified.event.tree S4 object
@@ -41,12 +33,20 @@ Constructor method to Stratified.event.tree S4 objects. It accepts different
 sets for parameters types.
 }
 \note{
-Consider a stratified.event.tree created using the following commands\cr
-\code{input <- list(Variable("age",list(Category("old"), Category("medium"),
-Category("new"))),Variable("state", list(Category("solid"),
+A Stratified.event.tree may be manualy created (see examles)\cr
+A call to \code{Stratified.event.tree( )} with no parameters will return
+ an error message for missing argument. \cr
+ A call to \code{Stratified.event.tree(x, ...)}, x not being a data.frame or
+a list, will return an error message.
+}
+\examples{
+set <- Stratified.event.tree(artificial.chds)
+
+set.manual <- Stratified.event.tree(list(Variable("age",list(Category("old"),
+Category("medium"), Category("new"))),Variable("state", list(Category("solid"),
 Category("liquid"), Category("steam"))), Variable("costumer",
 list(Category("good"), Category("average"), Category("very bad"),
-Category("bad"))))} \cr
-\code{et.manual <- Stratified.event.tree(input)} \cr
-}
+Category("bad")))))
 
+
+}

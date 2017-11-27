@@ -7,7 +7,9 @@
 Stratified.ceg.model(stratified.staged.tree)
 }
 \arguments{
-\item{Stratified.staged.tree}{S4 object    TODO(Collazo)  describe}
+\item{stratified.staged.tree}{Stratified.staged.tree S4 object    A staged tree is called stratified if
+its supporting event tree is stratified and all vertices which are in the same stage
+are also at the same distance of edges from the root.}
 }
 \value{
 a Stratified.ceg.model S4 object.
@@ -16,7 +18,6 @@ a Stratified.ceg.model S4 object.
 S3 function to friendly construct S4  Stratified.ceg.model.
 }
 \examples{
-\dontrun{stratified.ceg.model <- Stratified.ceg.model(stratified.staged.tree, position)}
+scm <- Stratified.ceg.model(sst)
 
 }
-

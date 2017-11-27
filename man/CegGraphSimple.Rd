@@ -11,7 +11,8 @@ CegGraphSimple(stratified.event.tree, position, range.color = 1)
 
 \item{position}{list       an object ceg.position.}
 
-\item{range.color}{numeric    it chooses the color source.}
+\item{range.color}{numeric    it chooses the palette.
+If 1, it is used a 8-color palette. If 2, it is used a 501-color palette.}
 }
 \value{
 list
@@ -43,4 +44,3 @@ multi-graph. However, the authors did not find a graphical package
 which provides the needed plotting features.
 Contributions are wellcomed.
 }
-

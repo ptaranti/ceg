@@ -61,15 +61,15 @@ setMethod(
 #' list of Categories. It is used to construct Stratified.vent.tree objects.
 #'
 #' @param name character, the Variable name
-#' @param list a list of S4 Category objects.
+#' @param categories a list of S4 Category objects.
 #'
 #' @return a \code{\link{Variable}} S4 object
 #'
 #' @export
 #'
 #' @examples
-#' \dontrun{var <- Variable(variable.name, list.of.categories)}
-#' \dontrun{Variable(variable.name, list.of.categories)}
+#' var <- Variable("variable.name", list(Category("cat1"), Category("cat2"),
+#' Category("cat3")))
 #'
 #'
 Variable <- function(name, categories){

@@ -14,13 +14,12 @@
 the plot and also a pdf version is saved in the working directory.
 }
 \description{
-Method to plot a chain event graph from a Stratified.ceg.model S4 object.
+This Method is used to plot a chain event graph from a Stratified.ceg.model S4 object.
 The current \code{ceg} package implementation depends on \code{Rgraphviz}
-package from Bioconductor for plotting.
+package from Bioconductor to draw the CEG graph.
 }
 \examples{
-\dontrun{plot(stratified.ceg.model)}
+plot(scm)
 
 
 }
-

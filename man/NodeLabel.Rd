@@ -25,4 +25,3 @@ vector - node labels
 This function yields the node labels. The nodes are labeled accordingly, to
 indicate diferente positions.
 }
-

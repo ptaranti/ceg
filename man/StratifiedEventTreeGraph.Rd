@@ -9,9 +9,8 @@ StratifiedEventTreeGraph(event.tree)
 \arguments{
 \item{event.tree}{"Event.tree" S4 object
 
- @return list contains a data structure to be used in a plot}
+ @return list with a data structure that is adequate to plot an event tree}
 }
 \description{
 StratifiedEventTreeGraph
 }
-

@@ -7,23 +7,19 @@
 ContingencyTable(data, stratified.event.tree)
 }
 \arguments{
-\item{data}{a data.frame structure  TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{data}{data.frame whose columns depict variables and rows correspond
+to units that are observed in the system}
 
-\item{stratified.event.tree}{an object of type "Stratified.event.tree"}
+\item{stratified.event.tree}{Stratified.event.tree S4 object}
 }
 \value{
-a list of matrices. Each matrix is the contigency table associate
-        with a particular variable.
+a list of matrices that represent the contigency tables associated with each variable in the event tree. 
+        The matrix corresponding to a particular variable presents the counts of each combination of the categories  
+     of the variables that precede it in the event tree according to its categories. The combinations of the categories
+     of the upstream variables are displayed on the rows and represent the situations associated with the target variable.
+     The categories of the target variable are represented on the columns and corresponds to each event that can unfold 
+     from a situation associated with the target variable.
 }
 \description{
-This function calculates the contigency tables associated with each variable.
-This enables us to calculate the number of units that visit each situation
-in an Stratified.event.tree.
-This function is used to generate a stratified.staged.tree when a well
-behavioured data.frame is provided as an argument to Stratified.staged.tree()
-constructor.
+This function creates the contigency tables associated with each variable in the event tree.
 }
-\seealso{
-\code{\link{ContingencyTableLevel}} and \code{\link{ContingencyTableVariable}}
-}
-

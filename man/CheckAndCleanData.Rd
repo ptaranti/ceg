@@ -17,4 +17,3 @@ data.frame with no void or NA values.
 RemoveRowsWithNAandVoid remove all rows with NA and void ("") values data
 from a data.frame
 }
-

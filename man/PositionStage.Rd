@@ -13,8 +13,9 @@ particular stage}
 \item{num.category}{(numeric) - number of edges that unfolds from the
 situations}
 
-\item{pos.next.level}{(vector) - It identifies the positions for all
-situations in the next level.#'}
+\item{pos.next.level}{(vector) - It identifies the positions corresponding to
+all situations that are children of situations associated with the variable
+spanning our target stage.}
 }
 \value{
 list of vector - Each vector identifies a position.
@@ -27,4 +28,3 @@ stage of a CEG.
 \seealso{
 \code{\link{PairwisePosition}}
 }
-

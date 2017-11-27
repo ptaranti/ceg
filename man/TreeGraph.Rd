@@ -7,7 +7,7 @@
 TreeGraph(tree, solution = list(), name = c(), range.color = 1)
 }
 \arguments{
-\item{tree}{(list) - an S4 object \code{Event.tree}}
+\item{tree}{Event.tree S4 object}
 
 \item{solution}{list with two components:
 \itemize{
@@ -17,8 +17,8 @@ TreeGraph(tree, solution = list(), name = c(), range.color = 1)
 
 \item{name}{vector of strings  - variable names}
 
-\item{range.color}{(numeric) - it chooses the color source -> 1 - palette (8
-colors); and any other value - colors(1) (501 colors)}
+\item{range.color}{(numeric) - it chooses the palette. If 1, it is used a 8-color palette.
+If 2, it is used a 501-color palette.}
 }
 \value{
 list: \itemize{
@@ -41,4 +41,3 @@ list: \itemize{
 A function to produce the data structure needed to plot Event and Staged
 trees using \pkg{RGraphviz}.
 }
-

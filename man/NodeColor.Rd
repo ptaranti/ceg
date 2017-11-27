@@ -20,9 +20,8 @@ NodeColor(num.variable, num.situation, num.category, stage.structure,
 \item  list of vectors - stage structure
 }}
 
-\item{range.color}{(numeric) - it chooses the color source. Default value 1L
-a 8 color pallete will be used. Any other value will leads to a 501 colors
-pallete usage.}
+\item{range.color}{(numeric) - it chooses the palette. If 1, it is used a 8-color palette.
+If 2, it is used a 501-color palette.}
 }
 \value{
 vector - node colors
@@ -30,4 +29,3 @@ vector - node colors
 \description{
 This function yields the node colors.
 }
-

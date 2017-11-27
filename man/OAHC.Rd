@@ -27,4 +27,3 @@ This function calculates the best stage configuration of a hyperstage
 \seealso{
 SingleScore,  PairwiseScore, SingleReorder, NaReorder, KeepLexOrder
 }
-

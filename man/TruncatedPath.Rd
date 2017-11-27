@@ -7,20 +7,19 @@
 TruncatedPath(ref, k, var, num.category, num.situation, label.category)
 }
 \arguments{
-\item{ref}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{ref}{numeric}
 
-\item{k}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{k}{numeric}
 
-\item{var}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{var}{numeric}
 
-\item{num.category}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{num.category}{list}
 
-\item{num.situation}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{num.situation}{list}
 
-\item{label.category}{TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{label.category}{list}
 }
 \description{
-This function identifies the edges arriving at the target level for all
-paths that exist from the root node to each situation in the event tree.
+This internal function yields a vector that contains the edges arriving at situations associated with a particular variable
+for all paths that emanate from the root node and pass through these situations in the event tree.
 }
-

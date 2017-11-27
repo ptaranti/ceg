@@ -3,12 +3,12 @@
 \docType{methods}
 \name{Stratified.staged.tree}
 \alias{Stratified.staged.tree}
-\alias{Stratified.staged.tree,ANY,ANY,ANY-method}
-\alias{Stratified.staged.tree,Stratified.event.tree,list,ANY-method}
-\alias{Stratified.staged.tree,data.frame,missing,missing-method}
-\alias{Stratified.staged.tree,data.frame,numeric,missing-method}
-\alias{Stratified.staged.tree,data.frame,numeric,numeric-method}
 \alias{Stratified.staged.tree,missing,ANY,ANY-method}
+\alias{Stratified.staged.tree,ANY,ANY,ANY-method}
+\alias{Stratified.staged.tree,data.frame,numeric,numeric-method}
+\alias{Stratified.staged.tree,data.frame,numeric,missing-method}
+\alias{Stratified.staged.tree,data.frame,missing,missing-method}
+\alias{Stratified.staged.tree,Stratified.event.tree,list,ANY-method}
 \title{Stratified.staged.tree}
 \usage{
 Stratified.staged.tree(x, y, z, ...)
@@ -33,26 +33,15 @@ Stratified.staged.tree(x, y, z, ...)
   y = "list")
 }
 \arguments{
-\item{Arguments}{(missing) \cr
-A call to \code{Stratified.staged.tree( )} with no parameters will return
-an error message for missing argument.}
+\item{x}{(data.frame) is a well behavioured data set or (Stratified.event.tree)}
 
-\item{Arguments}{(ANY) \cr
-A call to \code{Stratified.staged.tree(x, ...)}, x not being a data.frame or
-a Event.tree, will return an error message.}
+\item{y}{(numeric) alpha or (list) that represents the stage.structure.
+To construct it, the user must plot the Stratified.event.tree graph and use
+the labelled number of each node.}
 
-\item{Arguments}{(data.frame, alpha, variable.order) , where data.frame is a well
-behavioured data set, and the numeric values represent the alpha and
-the variable order, respectively.\cr
-The implementation admits providing the three arguments, or the first two, or
- even only the data.frame.\cr
- The default variable order is as in the data.frame and the default alpha is
- 1L.}
+\item{z}{(numeric) variable.order}
 
-\item{Arguments}{(Stratified.event.tree, list)
-The list represents the stage.structure. To construct it, the user must plot
-the Stratified.event.tree graph and use the labelled number of each node. \cr
-An example is provided in the note.}
+\item{...}{(not used)}
 }
 \value{
 a Stratified.staged.tree S4 object
@@ -62,17 +51,28 @@ Constructor method to Stratified.staged.tree S4 objects. It accepts different
 sets for parameters types.
 }
 \note{
-Consider a stratified.event.tree created using the folloing commands\cr
-\code{input <- list(Variable("age",list(Category("old"), Category("medium"),
-Category("new"))),Variable("state", list(Category("solid"),
-("liquid"), Category("steam"))), Variable("costumer", list(Category("good"),
-Category("average"), Category("very bad"), Category("bad"))))} \cr
-\code{et.manual <- Stratified.event.tree(input)} \cr
-plot the graph using the command\cr
-\code{plot(et.manual)}\cr
-Looking the graph, you can create the stage structure, such as follows:\cr
-\code{stage.structure <- list(list(c(2,3)), list(c(4,7,12),c(5,8,9)))}\cr
-Finally you can create your sStratified.event.tree:\cr
-\code{st.manual <- Stratified.staged.tree(et.manual, stage.structure)}
-}
+The implementation admits providing the three arguments, or the first two, or
+ even only the data.frame.\cr
+ The default variable order is as in the data.frame and the default alpha is
+ 1L.\cr
+ To manualy create a stratified.event.tree from a stratified.event.tree:\cr
+ \describe{
+ \item{1st}{plot the stratified.event.tree - \code{plot(set)}}
+ \item{2nd}{Looking the graph, you can create the stage structure,
+ such as: \code{stage.structure <- list(list(c(2,3)), list(c(4,7,12),c(5,8,9)))}}
+ \item{3rd}{Finally you can create your Stratified.event.tree:
+ \code{st.manual<- Stratified.staged.tree(set, stage.structure)}}
+ }
 
+A call to \code{Stratified.staged.tree( )} with no parameters will return
+ an error message for missing argument. \cr
+A call to \code{Stratified.staged.tree(x, ...)}, x not being a data.frame or
+a Event.tree, will return an error message.
+}
+\examples{
+sst <- Stratified.staged.tree(artificial.chds)
+
+stt.manual <- Stratified.staged.tree(set.manual,
+list(list(c(2,3)), list(c(4,7,12),c(5,8,9))))
+
+}

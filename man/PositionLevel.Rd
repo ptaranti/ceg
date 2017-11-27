@@ -9,16 +9,16 @@ PositionLevel(stage.list, num.category, num.situation.next,
 }
 \arguments{
 \item{stage.list}{(list) - stage structure associated with a particular
-level.}
+variable.}
 
-\item{num.category}{(vector) - number of edges that unfolds from the
-situations}
+\item{num.category}{(vector) - number of edges that unfolds from each position
+asscoiated with our target variable}
 
-\item{num.situation.next}{(numeric) - number of situation in the level
-that follows our target level.}
+\item{num.situation.next}{(numeric) - number of situations associated with the variable
+that follows our target variable in the event tree.}
 
 \item{pos.next.level}{(list) - position structure associated with the
-level that follows our target level (see function PositionLevel)}
+variable that follows our target variable in the event tree (see function PositionLevel)}
 }
 \value{
 list of lists - The first list level identifies a stage 'i' and the
@@ -26,11 +26,10 @@ list of lists - The first list level identifies a stage 'i' and the
          stage 'i'.
 }
 \description{
-This function obtain the position structure associated with a particular
-level of a CEG.
+This function obtains the position structure associated with a particular
+variable of a CEG.
 }
 \seealso{
 \code{\link{PositionVector}}, \code{\link{PositionStage}} and
          \code{\link{PairwisePosition}}
 }
-

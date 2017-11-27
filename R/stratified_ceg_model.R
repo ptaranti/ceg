@@ -1,11 +1,8 @@
-# TODO(Collazo) permanece confusao com position e staged.structure
-#
-
 #' Stratified.ceg.model
 #'
-#' The \code{Stratified.ceg.model} is a S4 class thar extends
-#' \code{Ceg.model}. Its objects represents a CEG model derived from a
-#' Stratified.staged.tree.
+#' The \code{Stratified.ceg.model} is a S4 class that extends \code{Ceg.model}.
+#'  The object represents a CEG model derived from its supporting Stratified.staged.tree
+#'  using some graphical transformation rules.
 #'
 #' @include ceg_model.R stratified_staged_tree.R
 #' @export
@@ -48,12 +45,14 @@ setMethod(
 #'
 #' S3 function to friendly construct S4  Stratified.ceg.model.
 #'
-#' @param Stratified.staged.tree    S4 object    TODO(Collazo)  describe
-#'
+#' @param stratified.staged.tree    Stratified.staged.tree S4 object    A staged tree is called stratified if
+#'    its supporting event tree is stratified and all vertices which are in the same stage
+#'    are also at the same distance of edges from the root.
+#
 #' @return a Stratified.ceg.model S4 object.
 #'
 #' @examples
-#' \dontrun{stratified.ceg.model <- Stratified.ceg.model(stratified.staged.tree, position)}
+#' scm <- Stratified.ceg.model(sst)
 #'
 #' @export
 #'
@@ -61,6 +60,8 @@ setMethod(
 #'
 Stratified.ceg.model <- function(stratified.staged.tree)
 {
+  # TODO(Collazo) o codigo mstra o que era position
+
   position <- StratifiedCegPosition(stratified.staged.tree@stage.structure,
                           stratified.staged.tree@event.tree@num.category,
                           stratified.staged.tree@event.tree@num.situation)
@@ -72,9 +73,9 @@ Stratified.ceg.model <- function(stratified.staged.tree)
 
 #' Stratified.ceg.model Plotting
 #'
-#' Method to plot a chain event graph from a Stratified.ceg.model S4 object.
+#' This Method is used to plot a chain event graph from a Stratified.ceg.model S4 object.
 #' The current \code{ceg} package implementation depends on \code{Rgraphviz}
-#' package from Bioconductor for plotting.
+#' package from Bioconductor to draw the CEG graph.
 #'
 #' @param x  Stratified.ceg.model S4 object.
 #'
@@ -82,7 +83,7 @@ Stratified.ceg.model <- function(stratified.staged.tree)
 #' @export
 #'
 #' @examples
-#' \dontrun{plot(stratified.ceg.model)}
+#' plot(scm)
 #'
 #'
 setMethod(
@@ -102,7 +103,7 @@ setMethod(
         edgemode = "directed"
       )
 
-    # 1.  setting general graphics attributes
+    # 1.  To set general graphical attributes
     attrsAtt <- list()
     graphAtt <-
       list(rankdir = "LR",
@@ -119,17 +120,17 @@ setMethod(
 
 
     #  2.  Nodes attributes
-    # changing nodes names
+    # To change node names
     nodes.label.list <- ceg.graph.simple$node$nodes
     names(nodes.label.list) <- graph::nodes(g)
     nAttrs <- list()
     nAttrs$label <- nodes.label.list
 
     #  3.  edges attributes
-    # changing the edges names (default is no-name)
+    # To change the edge names (default is no-name)
 
 
-    #1st option - using edges ordered list to name edges
+    #1st option - Use edges ordered list to name edges
     edges.label.list <- ceg.graph.simple$edge$label
     names(edges.label.list) <- graph::edgeNames(g)
     eAttrs <- list()
@@ -194,21 +195,21 @@ setMethod(
 
 #' StratifiedCegPosition
 #'
-#' This function obtain the position structure associated with a particular
-#' level of a CEG.
+#' This function obtains the position structure associated with
+#' a stratified CEG.
 #'
-#' @param stage  (list) - stage structure associated with a particular level.
-#' @param num.category (vector) - number of edges that unfolds from situations
-#'        in each level.
+#' @param stage  (list) - stage structure associated with a particular variable.
+#' @param num.category (vector) - number of edges that unfold from stages
+#'        associated with a particular variable.
 #' @param num.situation (vector) - number of situations associated with each
-#'        level.
+#'        variable.
 #'
 #' @return list of lists \itemize{
-#'     \item First list level identifies a level 'l'.
-#'     \item Second list level identifies the stage 'a' associated with
-#'           level 'l'.
+#'     \item First list level identifies a variable 'v'.
+#'     \item Second list level identifies a stage 'a' associated with
+#'           a variable 'v'.
 #'     \item The third list level identifies the positions associated with
-#'           stage 'i' .
+#'           a stage 'a' .
 #'           }
 #'
 #'  @seealso \code{PositionLevel},  \code{PositionVector},
@@ -235,17 +236,17 @@ StratifiedCegPosition <- function(stage, num.category, num.situation) {
 
 #' PositionLevel
 #'
-#' This function obtain the position structure associated with a particular
-#' level of a CEG.
+#' This function obtains the position structure associated with a particular
+#' variable of a CEG.
 #'
 #' @param stage.list  (list) - stage structure associated with a particular
-#'        level.
-#' @param num.category (vector) - number of edges that unfolds from the
-#'        situations
-#' @param num.situation.next (numeric) - number of situation in the level
-#'        that follows our target level.
+#'        variable.
+#' @param num.category (vector) - number of edges that unfolds from each position
+#'        asscoiated with our target variable
+#' @param num.situation.next (numeric) - number of situations associated with the variable
+#'        that follows our target variable in the event tree.
 #' @param pos.next.level  (list) - position structure associated with the
-#'        level that follows our target level (see function PositionLevel)
+#'        variable that follows our target variable in the event tree (see function PositionLevel)
 #'
 #' @return  list of lists - The first list level identifies a stage 'i' and the
 #'          second list level identifies the positions associated with this
@@ -276,16 +277,13 @@ PositionLevel <- function(stage.list,
 
 
 #' \code{PositionVector} function rewrites a position structure associated with
-#'       a particular level: from a list to a vector.
+#'       a particular variable: from a list to a vector.
 #'
-#' @param num.situation  (numeric) - number of situation in a particular level.
-#' @param pos.list  (list) - stage structure of the level that follows the level
-#'        of our target position.
+#' @param num.situation  (numeric) - number of situation associated with a particular variable.
+#' @param pos.list  (list) - stage structure associated with a particular variable that follows
+#'        the variable associated with our target position.
 #'
 #' @return  vector
-# @export
-#'
-# @examples
 #'
 PositionVector <- function(num.situation, pos.list) {
   num.situation <- length(pos.list)
@@ -310,8 +308,10 @@ PositionVector <- function(num.situation, pos.list) {
 #'        particular stage
 #' @param num.category (numeric) - number of edges that unfolds from the
 #'        situations
-#' @param pos.next.level (vector) - It identifies the positions for all
-#'        situations in the next level.#'
+#' @param pos.next.level (vector) - It identifies the positions corresponding to
+#'        all situations that are children of situations associated with the variable
+#'        spanning our target stage.
+#'
 #' @return  list of vector - Each vector identifies a position.
 #'
 #' @seealso  \code{\link{PairwisePosition}}
@@ -357,8 +357,9 @@ PositionStage <- function(stage.vector, num.category, pos.next.level) {
 #' @param pair.situation (vector) - situations to be analysed
 #' @param num.category  (numeric) - number of edges that unfolds from the
 #'        situations
-#' @param pos.next.level  (vector) - It identifies the positions for all
-#'        situations in the next level.
+#' @param pos.next.level  (vector) - It identifies the positions corresponding to
+#'        all situations that are children of situations associated with the variable
+#'        spanning our target stage.
 #'
 #' @return  boolean
 #'

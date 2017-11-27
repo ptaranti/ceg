@@ -19,14 +19,13 @@ setClass("Prior.distribution"
 #' the event tree.
 #'
 #' @param stratified.event.tree  "Stratified.event.tree" a S4 object that represents an event tree.
-#' @param alpha  numeric this represents a phantom sample used to initialize the
-#'  learning process
+#' @param alpha  numeric It plays a role of a phantom sample to construct 
+#'                        the prior probability distribution and reprssents 
+#'                        the prior knowledge about the process.
 #'
 #' @return  prior is a list of matrices. Each matrix is a collection of
 #' vectors that correspond to a prior for each situation associated with
 #' a particular variable.
-#
-#'
 #' @seealso \code{\link{PriorVariable}}
 #'
 PriorDistribution <- function(stratified.event.tree, alpha) {
@@ -42,15 +41,15 @@ PriorDistribution <- function(stratified.event.tree, alpha) {
 
 #'   PriorVariable
 #'
-#'   The function \code{PriorVariable}  yields the prior distribution for each
-#'   situation in the event tree associated with a particular variable.
+#'   The function \code{PriorVariable}  yields the prior distributions for
+#'   all situations associated with a particular variable in the event tree.
 #'
-#' @param ref         "numeric"  - variable order
-#' @param alpha.edge  "vector"   - the values of hyperparameters associated with
-#' each edge of a situation corresponding to a particular variable.
+#' @param ref         numeric  - It indicates the variable.
+#' @param alpha.edge  vector   - Dirichlet hyperparameter vector of a situation
+#'                                 associated with a particular variable.
 #'
-#' @return   a matrix. The number of rows is equal to the number of situations
-#' associated with a particular variable.
+#' @return   a matrix. Each row represents the Dirichlet hyperparameter vector of a 
+#'                     situation associated with a particular variable in the event tree.
 #'
 #' @seealso  \code{Prior.distribution} and
 #'          \code{AlphaEdgeInternal}
@@ -68,17 +67,17 @@ PriorVariable <- function(ref, alpha.edge) {
 
 #' AlphaEdgeInternal
 #'
-#' \code{AlphaEdgeInternal} yields the prior distribution for each situation
-#' in the event tree associated with a particular variable.
+#' \code{AlphaEdgeInternal} yields a possible objective prior distribution for each situation
+#' associated with a particular variable in the event tree.
 #'
-#' @param level "numeric" controls the number of descendent situations
-#' @param stratified.event.tree  "Stratified.event.tree" a S4 object that
-#' represents an event tree.
-#' @param alpha  numeric this represents a phantom sample used to initialize the
-#'  learning process
+#' @param level numeric - It indicates the level in the event tree.
+#' @param stratified.event.tree  Stratified.event.tree - S4 object that represents an event tree.
+#' @param alpha numeric - It plays a role of a phantom sample to construct 
+#'               the prior probability distribution of a situation associated
+#'               with a particular variable in the event tree.
 #'
-#' @return numeric It is the hyperparameter of the Dirichlet prior distribution
-#'  for each situation in the event tree associated with a particular variable.
+#' @return "vector"  - Dirichlet hyperparameter vector of a situation
+#'                     associated with a particular variable.
 #'
 AlphaEdgeInternal <- function(level, stratified.event.tree, alpha) {
   if (level <= stratified.event.tree@num.variable) {

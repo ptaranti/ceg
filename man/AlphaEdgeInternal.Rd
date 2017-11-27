@@ -7,20 +7,19 @@
 AlphaEdgeInternal(level, stratified.event.tree, alpha)
 }
 \arguments{
-\item{level}{"numeric" controls the number of descendent situations}
+\item{level}{numeric - It indicates the level in the event tree.}
 
-\item{stratified.event.tree}{"Stratified.event.tree" a S4 object that
-represents an event tree.}
+\item{stratified.event.tree}{Stratified.event.tree - S4 object that represents an event tree.}
 
-\item{alpha}{numeric this represents a phantom sample used to initialize the
-learning process}
+\item{alpha}{numeric - It plays a role of a phantom sample to construct 
+the prior probability distribution of a situation associated
+with a particular variable in the event tree.}
 }
 \value{
-numeric It is the hyperparameter of the Dirichlet prior distribution
- for each situation in the event tree associated with a particular variable.
+"vector"  - Dirichlet hyperparameter vector of a situation
+                    associated with a particular variable.
 }
 \description{
-\code{AlphaEdgeInternal} yields the prior distribution for each situation
-in the event tree associated with a particular variable.
+\code{AlphaEdgeInternal} yields a possible objective prior distribution for each situation
+associated with a particular variable in the event tree.
 }
-

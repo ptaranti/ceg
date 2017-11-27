@@ -1,4 +1,4 @@
-# TODO(collazo) invewrsao ordem do df  - para gerar erro:
+# TODO(collazo) inversao ordem do df  - para gerar erro:
 #   df <- read.csv("./R/CHDS.latentexample1.csv")
 #   df1 <- df[c(4,3,2,1)]
 #   st  <- Stratified.staged.tree(df1)
@@ -11,19 +11,30 @@
 
 #' Stratified.staged.tree
 #'
-#' #TODO(Collazo) Definir o que é stratified.staged.tree
+#' A stratified staged tree is a staged tree whose supporting event tree is stratified
+#' and all vertices which are in the same stage are also at the same distance of edges
+#' from the root.
 #'
 #' @include staged_tree.R event_tree.R stratified_event_tree.R
 #'
-#' #TODO(Collazo) espandir significado dos slots
-#' @slot event.tree Stratified.event.tree.
-#' @slot situation list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @slot contingency.table list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @slot stage.structure list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @slot stage.probability list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @slot prior.distribution list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @slot posterior.distribution list.  TODO(Colazzo) Ampliar com tipo de dado e significado semantico
-#' @slot model.score numeric.   TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+# TODO(Taranti) Verificar definição de situação.
+#' @slot event.tree Stratified.event.tree. An stratified event tree is an event tree whose set of events that unfold from all situations,
+#' which are at the same distance of edges from the initial situation, are identical.
+#' @slot situation list.
+#' @slot contingency.table list of matrices that represent the contigency tables associated with each variable in the event tree.
+#' @slot stage.structure list in which each component is a list associated with a variable in the staged tree that has the following data structure:
+#'    \itemize{
+#'    \item $score - numeric. This is the logarithmic form of the marginal likelihood associated with a particular variable.
+#'    \item $cluster - list whose components are vectors. Each vector represents a stage associated with a particular variable.
+#'    }
+#' @slot stage.probability list in which each component is a list associated with a variable in the staged tree.
+#'       Each component of this sublist is a vector that represents the probability distribution associated with
+#'       a particular stage of the target variable.
+#' @slot prior.distribution list of matrices. Each matrix is a collection of vectors that correspond t
+#'       a prior distribution for each situation associated with a particular variable.
+#' @slot posterior.distribution list of matrices. Each matrix is a collection of vectors that correspond t
+#'       a prior distribution for each situation associated with a particular variable.
+#' @slot model.score numeric. This is the logarithmic form of the marginal likelihood.
 #' @export
 #'
 setClass(
@@ -82,19 +93,48 @@ setMethod(
 #' Constructor method to Stratified.staged.tree S4 objects. It accepts different
 #' sets for parameters types.
 #'
-#' @return a Stratified.staged.tree S4 object
-#' @export
+#' @param x (data.frame) is a well behavioured data set or (Stratified.event.tree)
+#' @param y (numeric) alpha or (list) that represents the stage.structure.
+#' To construct it, the user must plot the Stratified.event.tree graph and use
+#' the labelled number of each node.
+#' @param z (numeric) variable.order
+#' @param ... (not used)
 #'
+#' @return a Stratified.staged.tree S4 object
+#'
+#' @examples
+#' sst <- Stratified.staged.tree(artificial.chds)
+#'
+#' @examples
+#' stt.manual <- Stratified.staged.tree(set.manual,
+#' list(list(c(2,3)), list(c(4,7,12),c(5,8,9))))
+#'
+#' @note
+#' The implementation admits providing the three arguments, or the first two, or
+#'  even only the data.frame.\cr
+#'  The default variable order is as in the data.frame and the default alpha is
+#'  1L.\cr
+#'  To manualy create a stratified.event.tree from a stratified.event.tree:\cr
+#'  \describe{
+#'  \item{1st}{plot the stratified.event.tree - \code{plot(set)}}
+#'  \item{2nd}{Looking the graph, you can create the stage structure,
+#'  such as: \code{stage.structure <- list(list(c(2,3)), list(c(4,7,12),c(5,8,9)))}}
+#'  \item{3rd}{Finally you can create your Stratified.event.tree:
+#'  \code{st.manual<- Stratified.staged.tree(set, stage.structure)}}
+#'  }
+#'
+#' A call to \code{Stratified.staged.tree( )} with no parameters will return
+#'  an error message for missing argument. \cr
+#' A call to \code{Stratified.staged.tree(x, ...)}, x not being a data.frame or
+#' a Event.tree, will return an error message.
+#'
+#'@export
 #'
 setGeneric("Stratified.staged.tree",
            function(x, y, z, ...) standardGeneric("Stratified.staged.tree")
 )
 
 #' @rdname Stratified.staged.tree
-#' @param Arguments (missing) \cr
-#'  A call to \code{Stratified.staged.tree( )} with no parameters will return
-#'  an error message for missing argument.
-#'
 setMethod("Stratified.staged.tree",
           signature("missing"),
           function(x, ...) {
@@ -102,10 +142,6 @@ setMethod("Stratified.staged.tree",
           })
 
 #' @rdname Stratified.staged.tree
-#' @param Arguments (ANY) \cr
-#' A call to \code{Stratified.staged.tree(x, ...)}, x not being a data.frame or
-#' a Event.tree, will return an error message.
-#'
 setMethod("Stratified.staged.tree",
           signature(x = "ANY"),
           function(x, ...) {
@@ -114,14 +150,6 @@ setMethod("Stratified.staged.tree",
           })
 
 #' @rdname Stratified.staged.tree
-#' @param Arguments (data.frame, alpha, variable.order) , where data.frame is a well
-#' behavioured data set, and the numeric values represent the alpha and
-#' the variable order, respectively.\cr
-#' The implementation admits providing the three arguments, or the first two, or
-#'  even only the data.frame.\cr
-#'  The default variable order is as in the data.frame and the default alpha is
-#'  1L.
-#'
 setMethod("Stratified.staged.tree",
           signature( x = "data.frame", y = "numeric", z = "numeric"),
           function(x = "data.frame", y = 1L, z = 0L ) {
@@ -173,23 +201,6 @@ setMethod("Stratified.staged.tree",
 
 
 #' @rdname Stratified.staged.tree
-#' @param Arguments (Stratified.event.tree, list)
-#' The list represents the stage.structure. To construct it, the user must plot
-#' the Stratified.event.tree graph and use the labelled number of each node. \cr
-#' An example is provided in the note.
-#' @note
-#' Consider a stratified.event.tree created using the folloing commands\cr
-#' \code{input <- list(Variable("age",list(Category("old"), Category("medium"),
-#' Category("new"))),Variable("state", list(Category("solid"),
-#' ("liquid"), Category("steam"))), Variable("costumer", list(Category("good"),
-#' Category("average"), Category("very bad"), Category("bad"))))} \cr
-#' \code{et.manual <- Stratified.event.tree(input)} \cr
-#' plot the graph using the command\cr
-#' \code{plot(et.manual)}\cr
-#' Looking the graph, you can create the stage structure, such as follows:\cr
-#' \code{stage.structure <- list(list(c(2,3)), list(c(4,7,12),c(5,8,9)))}\cr
-#' Finally you can create your sStratified.event.tree:\cr
-#' \code{st.manual <- Stratified.staged.tree(et.manual, stage.structure)}
 setMethod("Stratified.staged.tree",
           signature(x = "Stratified.event.tree", y = "list" ),
           function(x = "Stratified.event.tree", y = "list") {
@@ -211,7 +222,7 @@ setMethod("Stratified.staged.tree",
 
 
 
-            #para cada nnivel, ver numero de nos,
+            #para cada nivel, ver numero de nos,
             #  para cada vetor
             #    ver se nao excede,
             #     crias lista de inteiro com N elementos com valores int = N
@@ -278,19 +289,19 @@ setMethod("Stratified.staged.tree",
 
 
 
-#' Staged.tree Plotting
+#' Stratified.staged.tree Plotting
 #'
-#' Method to plot a Staged.tree S4 object. The current \code{ceg} package
-#' implementation depends on \code{Rgraphviz} package from Bioconductor for
-#' plotting.
+#' Method to plot a Staged.tree S4 object. The current  package \code{ceg}
+#' depends on \code{Rgraphviz} package from Bioconductor to draw graphs.
 #'
 #' @param x Stratified.staged.tree S4 object
 #'
-#' @return the plot and also a pdf version is saved in the working directory.
+#' @return the plot. A pdf version is also saved in the working directory.
 #' @export
 #'
 #' @examples
-  #' \dontrun{plot(stratified.staged.tree)}
+#' plot(sst)
+#'
 setMethod(
   f = "plot",
   signature = "Stratified.staged.tree",
@@ -308,7 +319,7 @@ setMethod(
 
     # 1.  Atributos do Grafico - Gerais
     attrsAtt <- list()
-    graphAtt <- list(rankdir = "LR", size = "18.0,24.0", bgcolor = "white")  # o LR é que muda orientaçao
+    graphAtt <- list(rankdir = "LR", size = "18.0,24.0", bgcolor = "white")  # o LR muda orientacao do grafico
     edgeAtt   <- list(color = "cyan")
     nodeAtt  <- list(fillcolor = "lightgreen", shape = "ellipse", fixedsize = FALSE)
     attrsAtt <- list(node = nodeAtt, edge = edgeAtt, graph = graphAtt)
@@ -318,14 +329,12 @@ setMethod(
     nodesLabelList <- staged.tree.graph$node$nodes
     names(nodesLabelList) <- graph::nodes(g)
     nAttrs <- list()
-    #nAttrs$label <- c("s0"="rooooooot", "s2"="test")
     nAttrs$label <- nodesLabelList
 
     #  3.  atributos de arestas
-    # mudando o nome de arestas (default é em branco)
+    # mudando o nome de arestas (default branco)
 
     #opção 1 - atribuindo todos os nomes usando lista ordenada das arestas para atribuição
-    #edgesLabelList <-c("nome-01", "nome-02","nome-03","nome-04","nome-05","nome-06","nome-07","nome-08","nome-09", "nome-10","nome-11", "nome-12","nome-13","nome-14","nome-15","nome-16","nome-17","nome-18","nome-19", "nome-20","nome-21", "nome-22","nome-23","nome-24","nome-25","nome-26","nome-27","nome-28","nome-29", "nome-30","nome-31", "nome-32","nome-33","nome-34","nome-35","nome-36","nome-37","nome-38","nome-39", "nome-40","nome-41", "nome-42")
     edgesLabelList <- staged.tree.graph$edge$label
     names(edgesLabelList) <- graph::edgeNames(g)
     eAttrs <- list()
@@ -343,13 +352,6 @@ setMethod(
 )
 
 
-
-
-
-
-
-
-
 #' NodeColor
 #'
 #' This function yields the node colors.
@@ -362,12 +364,11 @@ setMethod(
 #'     \item  numeric - score associated with a level
 #'     \item  list of vectors - stage structure
 #'     }
-#' @param range.color  (numeric) - it chooses the color source. Default value 1L
-#' a 8 color pallete will be used. Any other value will leads to a 501 colors
-#' pallete usage.
+#' @param range.color  (numeric) - it chooses the palette. If 1, it is used a 8-color palette.
+#'  If 2, it is used a 501-color palette.
 #'
 #' @return  vector - node colors
-# @export
+#'
 #'
 NodeColor <- function(num.variable,
                       num.situation,
@@ -379,11 +380,13 @@ NodeColor <- function(num.variable,
                   num.category[num.variable] * num.situation[num.variable])
   count <- 2
   if (range.color == 1) {
-    color <- grDevices::palette()
+    color <- palette()
     color[1] <- "white"
   } else {
-    color <- grDevices::colors(1)
-    color <- color[-21]
+    if (range.color == 2) {
+	    color <- colors(1)
+    	    color <- color[-21]
+    }
   }
   for (i in 2:num.variable) {
     for (j in 1:num.situation[i]) {
@@ -399,4 +402,5 @@ NodeColor <- function(num.variable,
   }
   return(result)
 }
+
 

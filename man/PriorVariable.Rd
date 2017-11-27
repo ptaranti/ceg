@@ -7,21 +7,20 @@
 PriorVariable(ref, alpha.edge)
 }
 \arguments{
-\item{ref}{"numeric"  - variable order}
+\item{ref}{numeric  - It indicates the variable.}
 
-\item{alpha.edge}{"vector"   - the values of hyperparameters associated with
-each edge of a situation corresponding to a particular variable.}
+\item{alpha.edge}{vector   - Dirichlet hyperparameter vector of a situation
+associated with a particular variable.}
 }
 \value{
-a matrix. The number of rows is equal to the number of situations
-associated with a particular variable.
+a matrix. Each row represents the Dirichlet hyperparameter vector of a 
+                    situation associated with a particular variable in the event tree.
 }
 \description{
-The function \code{PriorVariable}  yields the prior distribution for each
-  situation in the event tree associated with a particular variable.
+The function \code{PriorVariable}  yields the prior distributions for
+  all situations associated with a particular variable in the event tree.
 }
 \seealso{
 \code{Prior.distribution} and
          \code{AlphaEdgeInternal}
 }
-

@@ -5,12 +5,12 @@
 \alias{Category-class}
 \title{Category S4 Class}
 \description{
-Category S4 class contains a sigle slot with the category label. It is used
+Category S4 class contains a single slot with the category label. It is used
 to construct Stratified.event.tree objects.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{label}}{character   TODO(Colazzo) Ampliar com tipo de dado e significado semantico}
+\item{\code{label}}{character}
 }}
 

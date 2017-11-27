@@ -7,4 +7,3 @@
 \description{
 Posterior.distribution
 }
-

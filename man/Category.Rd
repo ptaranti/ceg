@@ -7,21 +7,21 @@
 Category(label)
 }
 \arguments{
-\item{label}{character the category name}
+\item{label}{caracter, the category name}
 }
 \value{
 a \code{\link{Category}} S4 object
 }
 \description{
 Category(label) is a function that act as constructor to Category S4 object.
-Category S4 class contains a sigle slot with the category label. It is used
-to construct S4 Variable objects, which, in turn, aim to be parameter in
+Category S4 class contains a single slot with the category labels. It is used
+to construct S4 Variable objects, which, in turn, aim at being parameters in
 Stratified.event.tree objects manual constructions.
 }
 \examples{
-\dontrun{cat <- Category(category.name)}
-\dontrun{Category(category.name2)}
+cat <- Category("category.name")
+
+Category("category.name2")
 
 
 }
-

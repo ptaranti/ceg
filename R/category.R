@@ -2,10 +2,10 @@
 
 #' Category S4 Class
 #'
-#' Category S4 class contains a sigle slot with the category label. It is used
+#' Category S4 class contains a single slot with the category label. It is used
 #' to construct Stratified.event.tree objects.
 #'
-#' @slot label character   TODO(Colazzo) Ampliar com tipo de dado e significado semantico
+#' @slot label character
 #'
 #' @export
 #'
@@ -39,19 +39,21 @@ setMethod(
 #' Category(label)
 #'
 #' Category(label) is a function that act as constructor to Category S4 object.
-#' Category S4 class contains a sigle slot with the category label. It is used
-#' to construct S4 Variable objects, which, in turn, aim to be parameter in
+#' Category S4 class contains a single slot with the category labels. It is used
+#' to construct S4 Variable objects, which, in turn, aim at being parameters in
 #' Stratified.event.tree objects manual constructions.
 #'
-#' @param label character the category name
+#' @param label caracter, the category name
 #'
 #' @return a \code{\link{Category}} S4 object
 #'
 #' @export
 #'
 #' @examples
-#' \dontrun{cat <- Category(category.name)}
-#' \dontrun{Category(category.name2)}
+#' cat <- Category("category.name")
+#'
+#' @examples
+#' Category("category.name2")
 #'
 #'
 Category <- function(label){

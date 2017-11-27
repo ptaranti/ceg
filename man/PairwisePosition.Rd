@@ -12,8 +12,9 @@ PairwisePosition(pair.situation, num.category, pos.next.level)
 \item{num.category}{(numeric) - number of edges that unfolds from the
 situations}
 
-\item{pos.next.level}{(vector) - It identifies the positions for all
-situations in the next level.}
+\item{pos.next.level}{(vector) - It identifies the positions corresponding to
+all situations that are children of situations associated with the variable
+spanning our target stage.}
 }
 \value{
 boolean
@@ -22,4 +23,3 @@ boolean
 The \code{PairwisePosition } function identifies if two situations are in
 the same position given that they are in the same stage.
 }
-
